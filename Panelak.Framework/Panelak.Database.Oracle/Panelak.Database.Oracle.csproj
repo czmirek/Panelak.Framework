@@ -4,12 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>2.0.0</Version>
     <Authors>Miroslav Bartl</Authors>
-    <Description>Database adapter for accessing Oracle database and executing SQL queries.</Description>
+    <Description>ORM for Oracle database</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
     <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
-    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
     <PackageReleaseNotes>Minor bugfixed, refreshed dependency</PackageReleaseNotes>
     <Product>Panelak.Database.Oracle</Product>
     <PackageId>Panelak.Database.Oracle</PackageId>

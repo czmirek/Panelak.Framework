@@ -8,7 +8,7 @@
     <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
-    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
     <PackageReleaseNotes>Renamed Dto attribute</PackageReleaseNotes>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Product>Panelak.Database</Product>
@@ -38,7 +38,7 @@
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Sql" Version="1.0.0.1" />
+    <PackageReference Include="Panelak.Sql" Version="1.0.1" />
   </ItemGroup>
   
   <ItemGroup>

@@ -5,17 +5,19 @@
     <Description>Models, interfaces and abstractions for working with parsed SQL queries</Description>
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReleaseNotes>Library generated as a strong named assembly + added XML documentation with comments</PackageReleaseNotes>
     <Product>Panelak.Sql</Product>
     <PackageId>Panelak.Sql</PackageId>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.1</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Sql.pfx</AssemblyOriginatorKeyFile>
+    <FileVersion>1.0.1</FileVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
   </PropertyGroup>
 </Project>

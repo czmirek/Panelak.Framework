@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Panelak.Drawing</name>
+    </assembly>
+    <members>
+        <member name="T:Panelak.Drawing.GeometryCanvas">
+            <summary>
+            Drawing canvas for geometry instances
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.PointDiameter">
+            <summary>
+            Size of the circle diameter representing a geometry <see cref="T:Panelak.Geometry.Point"/>
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.PointRadius">
+            <summary>
+            Radius of the circle representing a geometry <see cref="T:Panelak.Geometry.Point"/>
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.BrushWidth">
+            <summary>
+            Drawing pen brush width
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.canvasWidth">
+            <summary>
+            Canvas width
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.canvasHeight">
+            <summary>
+            Canvas height
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.backgroundColor">
+            <summary>
+            Canvas background color
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.brushColor">
+            <summary>
+            Brush color for geometry shapes
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.drawingPen">
+            <summary>
+            Drawing pen
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.shapes">
+            <summary>
+            List of geometric shapes in the canvas
+            </summary>
+        </member>
+        <member name="F:Panelak.Drawing.GeometryCanvas.graphics">
+            <summary>
+            <see cref="T:System.Drawing.Graphics"/> instance for drawing.
+            </summary>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Drawing.GeometryCanvas"/> class.
+            </summary>
+            <param name="width">Width of the canvas in pixels</param>
+            <param name="height">Height of the canvas in pixels</param>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.AddShape(Panelak.Geometry.Geometry)">
+            <summary>
+            Adds a geometry shape to the canvas
+            </summary>
+            <param name="geometry">Geometry shape to be drawn</param>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.CreatePng">
+            <summary>
+            Returns a PNG picture
+            </summary>
+            <returns>PNG picture in byte array</returns>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.CreateJpg">
+            <summary>
+            Returns a JPEG picture
+            </summary>
+            <returns>JPEG picture in byte array</returns>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.CreateImage(System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Creates a picture from current shapes in given format
+            </summary>
+            <param name="imageFormat">Image format</param>
+            <returns>Picture in byte array</returns>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.CreatePerpendicularLineInBox(Panelak.Geometry.Line)">
+            <summary>
+            Returns a line perpendicular to the line. The start and end
+            of this line is at the borders of the canvas.
+            </summary>
+            <param name="line">Input line</param>
+            <returns>Perpendicular line to the input line</returns>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.FindIntersection(Panelak.Geometry.Line,Panelak.Geometry.Line)">
+            <summary>
+            Returns a point where two input lines intersect.
+            </summary>
+            <param name="p1">First line</param>
+            <param name="p2">Second line</param>
+            <returns>Intersection point</returns>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.GetAngle(Panelak.Geometry.Point,Panelak.Geometry.Point)">
+            <summary>
+            Returns an angle of the point on circle <paramref name="onCircle"/>
+            with the <paramref name="center"/>. The angle is measured in degrees 
+            clockwise from the x-axis.
+            </summary>
+            <param name="center">Center of the circle</param>
+            <param name="onCircle">Point on the circle</param>
+            <returns>Angle measured in degrees clockwise from the x-axis.</returns>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawCircularCurve(Panelak.Geometry.CircularCurve)">
+            <summary>
+            Draws a circular curve geometry shape.
+            </summary>
+            <param name="circularCurve">Circular curve geometry shape.</param>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawPath(Panelak.Geometry.Path)">
+            <summary>
+            Draws a path geometry
+            </summary>
+            <param name="path">Path geometry</param>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawLine(Panelak.Geometry.Line)">
+            <summary>
+            Draws a line geometry
+            </summary>
+            <param name="line">Line geometry</param>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawStraightLine(Panelak.Geometry.Line)">
+            <summary>
+            Draws a straight line geometry
+            </summary>
+            <param name="line">Straight line geometry</param>
+        </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawPoint(Panelak.Geometry.Point)">
+            <summary>
+            Draws a point geometry
+            </summary>
+            <param name="p">Point geometry</param>
+        </member>
+    </members>
+</doc>

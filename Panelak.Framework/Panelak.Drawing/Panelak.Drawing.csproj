@@ -9,7 +9,7 @@
     <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
-    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
     <PackageReleaseNotes>Added a geometric canvas for drawing simple geometric shapes</PackageReleaseNotes>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>
@@ -21,6 +21,10 @@
     <Company>Panelak.Drawing</Company>
     <Authors>Panelak.Drawing</Authors>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Drawing\Panelak.Drawing.xml</DocumentationFile>
+  </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
@@ -30,7 +34,7 @@
     <PackageReference Include="Panelak.Geometry" Version="1.0.1" />
   </ItemGroup>
   
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
   </ItemGroup>
 </Project>
