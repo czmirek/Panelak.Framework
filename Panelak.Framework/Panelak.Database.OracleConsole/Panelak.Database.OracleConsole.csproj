@@ -9,16 +9,16 @@
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
-    <PackageReleaseNotes>Updated geometry reference, added XML docs</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated geometry reference</PackageReleaseNotes>
     <Product>Panelak.Database.OracleConsole</Product>
     <PackageId>Panelak.Database.OracleConsole</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Database.OracleConsole</Company>
     <Authors>Panelak.Database.OracleConsole</Authors>
-    <FileVersion>2.0.0</FileVersion>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.1</FileVersion>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Database.OracleConsole\Panelak.Database.OracleConsole.xml</DocumentationFile>
@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Release'">
     <PackageReference Include="Panelak.Database.Oracle" Version="2.0.0" />
-    <PackageReference Include="Panelak.Geometry" Version="2.0.0" />
+    <PackageReference Include="Panelak.Geometry" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Panelak.Database.Oracle\Panelak.Database.Oracle.csproj" />

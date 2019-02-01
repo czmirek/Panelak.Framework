@@ -22,6 +22,12 @@
             Gets the middle arc point
             </summary>
         </member>
+        <member name="M:Panelak.Geometry.CircularCurve.ToString">
+            <summary>
+            Returns string representation of points in geometric object
+            </summary>
+            <returns>String representation of points in geometric object</returns>
+        </member>
         <member name="T:Panelak.Geometry.Geometry">
             <summary>
             Geometry shape
@@ -54,6 +60,12 @@
             Gets the end point
             </summary>
         </member>
+        <member name="M:Panelak.Geometry.Line.ToString">
+            <summary>
+            Returns string representation of points in geometric object
+            </summary>
+            <returns>String representation of points in geometric object</returns>
+        </member>
         <member name="T:Panelak.Geometry.Path">
             <summary>
             Path geometry consisting of multiple lines.
@@ -69,6 +81,12 @@
             <summary>
             Gets the list of line geometries
             </summary>
+        </member>
+        <member name="M:Panelak.Geometry.Path.ToString">
+            <summary>
+            Returns string representation of points in geometric object
+            </summary>
+            <returns>String representation of points in geometric object</returns>
         </member>
         <member name="T:Panelak.Geometry.Point">
             <summary>
@@ -91,6 +109,12 @@
             <summary>
             Gets the Y
             </summary>
+        </member>
+        <member name="M:Panelak.Geometry.Point.ToString">
+            <summary>
+            Returns string representation of points in geometric object
+            </summary>
+            <returns>String representation of points in geometric object</returns>
         </member>
         <member name="T:Panelak.Geometry.StraightLine">
             <summary>

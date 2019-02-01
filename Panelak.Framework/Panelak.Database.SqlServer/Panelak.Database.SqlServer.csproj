@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0</Version>
+    <Version>3.0.1</Version>
     <Authors>Miroslav Bartl</Authors>
     <Description>ORM for Sql Server</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
@@ -15,10 +15,10 @@
     <Product>Panelak.Database.SqlServer</Product>
     <PackageId>Panelak.Database.SqlServer</PackageId>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <FileVersion>3.0.0</FileVersion>
+    <FileVersion>3.0.1</FileVersion>
     <Deterministic>False</Deterministic>
     <Company>Miroslav Bartl</Company>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.1</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.SqlServer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -33,7 +33,7 @@
 
   <ItemGroup Condition="'$(Configuration)'=='Release'">
     <PackageReference Include="Panelak.Database" Version="2.0.0" />
-    <PackageReference Include="Panelak.Geometry" Version="2.0.0" />
+    <PackageReference Include="Panelak.Geometry" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
