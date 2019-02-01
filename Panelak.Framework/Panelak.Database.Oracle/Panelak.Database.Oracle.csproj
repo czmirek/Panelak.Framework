@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>2.0.0</Version>
+    <Authors>Miroslav Bartl</Authors>
+    <Description>Database adapter for accessing Oracle database and executing SQL queries.</Description>
+    <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
+    <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
+    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <PackageReleaseNotes>Minor bugfixed, refreshed dependency</PackageReleaseNotes>
+    <Product>Panelak.Database.Oracle</Product>
+    <PackageId>Panelak.Database.Oracle</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <FileVersion>2.0.0</FileVersion>
+    <Company>Miroslav Bartl</Company>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <Deterministic>False</Deterministic>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Panelak.Database.Oracle.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;5125</NoWarn>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.18.3" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Panelak.Database" Version="2.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Panelak.Database\Panelak.Database.csproj" />
+  </ItemGroup>
+</Project>

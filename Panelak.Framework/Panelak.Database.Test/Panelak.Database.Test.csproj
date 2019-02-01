@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Configurations>Debug</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>1701;1702;NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Panelak.Database.OracleConsole\Panelak.Database.OracleConsole.csproj" />
+    <ProjectReference Include="..\Panelak.Database.Oracle\Panelak.Database.Oracle.csproj" />
+    <ProjectReference Include="..\Panelak.Database.SqlServer\Panelak.Database.SqlServer.csproj" />
+    <ProjectReference Include="..\Panelak.Sql.Parsing\Panelak.Sql.Parsing.csproj" />
+  </ItemGroup>
+</Project>

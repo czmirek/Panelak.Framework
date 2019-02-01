@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Panelak.Database.OracleConsole.pfx</AssemblyOriginatorKeyFile>
+    <Description>.NET Standard ORM for accessing Oracle database through the named pipe to the .NET Framework console executable "odac.client.x86.Console". Useful for using UDTs in .NET Core.</Description>
+    <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
+    <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
+    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <PackageReleaseNotes>Initial publish.</PackageReleaseNotes>
+    <Product>Panelak.Database.OracleConsole</Product>
+    <PackageId>Panelak.Database.OracleConsole</PackageId>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Panelak.Database.OracleConsole</Company>
+    <Authors>Panelak.Database.OracleConsole</Authors>
+    <FileVersion>1.0.1</FileVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Newtonsoft.Json.dll" Pack="true" PackagePath="lib/netstandard2.0/Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Newtonsoft.Json.pdb" Pack="true" PackagePath="lib/netstandard2.0/Newtonsoft.Json.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Newtonsoft.Json.xml" Pack="true" PackagePath="lib/netstandard2.0/Newtonsoft.Json.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oci.dll" Pack="true" PackagePath="lib/netstandard2.0/oci.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="odac.client.x86.Console.exe" Pack="true" PackagePath="lib/netstandard2.0/odac.client.x86.Console.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="odac.client.x86.Console.exe.config" Pack="true" PackagePath="lib/netstandard2.0/odac.client.x86.Console.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="odac.client.x86.Console.pdb" Pack="true" PackagePath="lib/netstandard2.0/odac.client.x86.Console.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oracle.DataAccess.dll" Pack="true" PackagePath="lib/netstandard2.0/Oracle.DataAccess.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oracle.Web.dll" Pack="true" PackagePath="lib/netstandard2.0/Oracle.Web.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="orannzsbb11.dll" Pack="true" PackagePath="lib/netstandard2.0/orannzsbb11.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oraociicus11.dll" Pack="true" PackagePath="lib/netstandard2.0/oraociicus11.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="OraOps11w.dll" Pack="true" PackagePath="lib/netstandard2.0/OraOps11w.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Panelak.Database.Oracle" Version="2.0.0" />
+    <PackageReference Include="Panelak.Geometry" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Panelak.Database.Oracle\Panelak.Database.Oracle.csproj" />
+    <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
+  </ItemGroup>
+</Project>

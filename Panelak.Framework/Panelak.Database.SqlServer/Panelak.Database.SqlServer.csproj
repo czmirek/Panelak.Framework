@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>2.0.0</Version>
+    <Authors>Miroslav Bartl</Authors>
+    <Description>Database adapter for accessing Sql Server database and executing SQL queries.</Description>
+    <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
+    <PackageLicenseUrl>https://github.com/czmirek/Panelak.Database/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/czmirek/Panelak.Database</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/czmirek/Panelak.Database</RepositoryUrl>
+    <PackageReleaseNotes>Panelak.Database update to 2.0.0</PackageReleaseNotes>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Product>Panelak.Database.SqlServer</Product>
+    <PackageId>Panelak.Database.SqlServer</PackageId>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <FileVersion>2.0.0</FileVersion>
+    <Deterministic>False</Deterministic>
+    <Company>Miroslav Bartl</Company>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Panelak.Database.SqlServer.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>1701;1702;NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Panelak.Database" Version="2.0.0" />
+    <PackageReference Include="Panelak.Geometry" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.1016.290" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Panelak.Database\Panelak.Database.csproj" />
+    <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
+  </ItemGroup>
+
+</Project>

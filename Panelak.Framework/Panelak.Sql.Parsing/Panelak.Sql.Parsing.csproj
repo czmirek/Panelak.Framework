@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Miroslav Bartl</Authors>
+    <Description>Library with a parser of SQL SELECT queries and a parser of simple SQL condition expressions into a binary tree according to the operator precedence. Useful for parsing, checking and testing SQL from unsafe sources before execution. Works only for generic SQL which should be same in all RDBMS.</Description>
+    <PackageReleaseNotes>Naming style fixes, added comments, built as strongly named assembly</PackageReleaseNotes>
+    <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
+    <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
+    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <Product>Panelak.Sql.Parsing</Product>
+    <PackageId>Panelak.Sql.Parsing</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0.1</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Miroslav Bartl</Company>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Panelak.Sql.Parsing.pfx</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Panelak.Sql" Version="1.0.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Panelak.Sql\Panelak.Sql.csproj" />
+  </ItemGroup>
+  
+</Project>

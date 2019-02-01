@@ -1,0 +1,9 @@
+{
+  "commands": {
+    "odac.client.x86.Console": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c odac.client.x86.Console.cmd"
+    }
+  }
+}

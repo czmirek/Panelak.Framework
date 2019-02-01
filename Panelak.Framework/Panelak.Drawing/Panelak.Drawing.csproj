@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Panelak.Drawing.pfx</AssemblyOriginatorKeyFile>
+    <Description>Library for drawing simple geometric shapes</Description>
+    <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
+    <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
+    <PackageIconUrl>https://en.gravatar.com/userimage/151995816/c91ff1861aefb66aad9067853e53db35.jpg?size=64</PackageIconUrl>
+    <PackageReleaseNotes>Added a geometric canvas for drawing simple geometric shapes</PackageReleaseNotes>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Product>Panelak.Drawing</Product>
+    <PackageId>Panelak.Drawing</PackageId>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Panelak.Drawing</Company>
+    <Authors>Panelak.Drawing</Authors>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Panelak.Geometry" Version="1.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
+  </ItemGroup>
+</Project>

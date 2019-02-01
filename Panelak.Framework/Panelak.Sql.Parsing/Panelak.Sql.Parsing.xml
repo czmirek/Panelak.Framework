@@ -1,0 +1,864 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Panelak.Sql.Parsing</name>
+    </assembly>
+    <members>
+        <member name="T:Panelak.Sql.Parsing.And">
+            <summary>
+            SQL operator AND
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.And.#ctor(Panelak.Sql.ISqlConditionExpression,Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.And"/> class.
+            </summary>
+            <param name="left">Expression on the left side of the AND operator</param>
+            <param name="right">Expression on the right side of the AND operator</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.ComparisonExpression">
+            <summary>
+            Abstraction for SQL operators in the form [Column] [Operator] [Literal].
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.ComparisonExpression.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.ComparisonExpression" /> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="operator">SQL comparison operator</param>
+            <param name="literal">Literal value</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.ComparisonExpression.Column">
+            <summary>
+            Gets a column identifier on the left side of the SQL operator
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.ComparisonExpression.Operator">
+            <summary>
+            Gets an SQL comparison operator
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.ComparisonExpression.Literal">
+            <summary>
+            Gets a literal value on the right side of the SQL operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.IsNotNull">
+            <summary>
+            SQL IS NULL expression in the format [Column] IS NOT NULL
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.IsNotNull.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.IsNotNull"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.IsNotNull.Column">
+            <summary>
+            Gets the column identifier in the expression
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.IsNull">
+            <summary>
+            SQL IS NULL expression in the format [Column] IS NULL
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.IsNull.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.IsNull"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.IsNull.Column">
+            <summary>
+            Gets the column identifier in the expression
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.LeftRightSideExpression">
+            <summary>
+            Abstraction for the SQL logic operator with left and right side expressions (such as AND, OR)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.LeftRightSideExpression.#ctor(System.String,Panelak.Sql.ISqlConditionExpression,Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.LeftRightSideExpression"/> class.
+            </summary>
+            <param name="operator">SQL logical operator</param>
+            <param name="leftExpression">Expression on the left side of the operator</param>
+            <param name="rightExpression">Expression on the right side of the operator</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.LeftRightSideExpression.LeftExpression">
+            <summary>
+            Gets an expression on the left side of the logical operator
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.LeftRightSideExpression.RightExpression">
+            <summary>
+            Gets an expression on the right side of the logical operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.LogicExpression">
+            <summary>
+            Abstraction for the SQL logic operator expression
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.LogicExpression.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.LogicExpression"/> class.
+            </summary>
+            <param name="operator">SQL logical operator</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.LogicExpression.Operator">
+            <summary>
+            Gets the operator literal
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.Not">
+            <summary>
+            SQL NOT logical operator
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.Not.#ctor(Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.Not"/> class.
+            </summary>
+            <param name="right">Expression on the right side of the NOT operator</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.Or">
+            <summary>
+            SQL operator OR
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.Or.#ctor(Panelak.Sql.ISqlConditionExpression,Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.Or"/> class.
+            </summary>
+            <param name="left">Expression on the left side of the OR operator</param>
+            <param name="right">Expression on the right side of the OR operator</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsEqualTo">
+            <summary>
+            SQL operator equal to (=)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsEqualTo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsEqualTo"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsGreaterThan">
+            <summary>
+            SQL operator greater than (&gt;)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsGreaterThan.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsGreaterThan"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsGreaterThanOrEqualTo">
+            <summary>
+            SQL operator greater than or equal to (&gt;=)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsGreaterThanOrEqualTo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsGreaterThanOrEqualTo"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsIn">
+            <summary>
+            Default implementation of the IN expression in the format Column IN ([value], [value], ...)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsIn.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsIn"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="values">Enumeration of values</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.PropertyIsIn.Column">
+            <summary>
+            Gets the column identifier
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.PropertyIsIn.Operator">
+            <summary>
+            Gets the IN literal
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.PropertyIsIn.Values">
+            <summary>
+            Gets the enumeration of values on the right side of the IN operator
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.PropertyIsIn.Literal">
+            <summary>
+            Gets the string representation of the right side of the IN operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsLessThan">
+            <summary>
+            SQL operator less than (&lt;)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsLessThan.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsLessThan"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsLessThanOrEqualTo">
+            <summary>
+            SQL operator less than or equal to (&lt;=)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsLessThanOrEqualTo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsLessThanOrEqualTo"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsLike">
+            <summary>
+            SQL operator LIKE
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsLike.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsLike"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsNotEqualTo">
+            <summary>
+            SQL operator not equal to (!=)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsNotEqualTo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsNotEqualTo"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.PropertyIsNotLike">
+            <summary>
+            SQL operator NOT LIKE
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.PropertyIsNotLike.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.PropertyIsNotLike"/> class.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="literal">Value literal</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.RightSideExpression">
+            <summary>
+            Abstraction for the SQL logic operator with only right side next to the operator (such as NOT)
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.RightSideExpression.#ctor(System.String,Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.RightSideExpression"/> class.
+            </summary>
+            <param name="operator">The operator literal</param>
+            <param name="rightSideExpression">Expression on the right side of the logical operator</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.RightSideExpression.RightExpression">
+            <summary>
+            Gets the expression on the right side of the logical operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.InvalidSqlParserStateException">
+            <summary>
+            Thrown on parsing invalid or unsupported SQL queries
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.ParseState">
+            <summary>
+            States of the internal parsing state machine
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.ParseState.ExpressionStart">
+            <summary>
+            Initial state, start of expression
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.ParseState.LeftSideIdentifier">
+            <summary>
+            State signaling identifier presence in the expression
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.ParseState.TwoSidedOperator">
+            <summary>
+            State signaling two sided operator in the expression
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlColumn">
+            <summary>
+            Single column in a SQL SELECT expression
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlColumn.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlColumn"/> class.
+            </summary>
+            <param name="expression">Column identifier</param>
+            <param name="alias">Optional alias of the column</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlColumn.IsPrimaryKey">
+            <summary>
+            Gets or sets a value indicating whether the column is the primary key of the table
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlColumn.Expression">
+            <summary>
+            Gets the column expression or identifier
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlColumn.ExpressionAlias">
+            <summary>
+            Gets the alias of the expression
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlColumn.TrimmedAlias">
+            <summary>
+            Gets the alias trimmed of apostrophes and spaces
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlColumn.Unquoted">
+            <summary>
+            Gets a value indicating whether expression is not to be quoted in the resulting query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlColumn.Include">
+            <summary>
+            Gets or sets a value indicating whether the column is to be included in the result
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlColumn.SortOrder">
+            <summary>
+            Gets or sets the SortOrder
+            Gets or sets whether the column is used for sorting
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlConditionBuilder">
+            <summary>
+            Builder of a binary tree representation of simplified SQL condition expression
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionBuilder.logger">
+            <summary>
+            Logger reference
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionBuilder.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlConditionBuilder"/> class.
+            </summary>
+            <param name="logger">Instance for logging</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionBuilder.Build(System.String)">
+            <summary>
+            Builds a binary tree out of SQL string with a condition expression
+            </summary>
+            <param name="expression">SQL string with condition expression</param>
+            <returns>Binary tree of the expression</returns>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlConditionParser">
+            <summary>
+            Builds a SQL condition binary tree out of parsed SQL tokens
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionParser.logger">
+            <summary>
+            Logger reference
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionParser.nestedLevel">
+            <summary>
+            Recursion index when braces are used
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionParser.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlConditionParser"/> class.
+            </summary>
+            <param name="logger">Instance for logging</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionParser.Parse(System.Collections.Generic.IEnumerable{Panelak.Sql.Parsing.SqlToken})">
+            <summary>
+            Parses tokens into binary tree expression
+            </summary>
+            <param name="tokens">The tokens<see cref="T:System.Collections.Generic.IEnumerable`1"/></param>
+            <returns>The <see cref="T:Panelak.Sql.ISqlConditionExpression"/></returns>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionParser.ParseOperators(System.Collections.Generic.List{System.Object})">
+            <summary>
+            Parses logical operators
+            </summary>
+            <param name="parsedExpressions">List of already parsed expressions</param>
+            <returns>Binary tree expression</returns>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionParser.RightOperator(System.Collections.Generic.List{System.Object},Panelak.Sql.Parsing.TokenType,System.Func{Panelak.Sql.ISqlConditionExpression,System.Object})">
+            <summary>
+            Parses a logical operator with right expression
+            </summary>
+            <param name="exprList">List of expressions</param>
+            <param name="tokenType">The operator token type</param>
+            <param name="exprFac">Factory for creating the expression instance</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionParser.LeftRightOperator(System.Collections.Generic.List{System.Object},Panelak.Sql.Parsing.TokenType,System.Func{Panelak.Sql.ISqlConditionExpression,Panelak.Sql.ISqlConditionExpression,System.Object})">
+            <summary>
+            Parses a logical operator with left and right expressions
+            </summary>
+            <param name="exprList">List of expressions</param>
+            <param name="tokenType">The operator token type</param>
+            <param name="exprFac">Factory for creating the expression instance</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionParser.GetExpression(System.Object)">
+            <summary>
+            Casts object to <see cref="T:Panelak.Sql.ISqlConditionExpression"/> with a type check
+            </summary>
+            <param name="expression">The expression object</param>
+            <returns>Expression object returned as condition expression</returns>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlConditionTokenizer">
+            <summary>
+            Converts SQL condition expression in string to individual tokens using regular expressions 
+            which can be later fed into the binary tree builder.
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.IdentifierRx">
+            <summary>
+            Regex used for parsing a column identifier
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.BracketedIdentifier">
+            <summary>
+            Regex used for parsing a bracketed column identifier (for MSSQL)
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.LiteralRx">
+            <summary>
+            Regex used for parsing string literals
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.InRx">
+            <summary>
+            Regex used for parsing list of values next to the IN operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.NumericLiteralRx">
+            <summary>
+            Regex used for parsing numeric literals
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.OperatorRx">
+            <summary>
+            Regex used for parsing SQL operators
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.log">
+            <summary>
+            Logger instance
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionTokenizer.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlConditionTokenizer"/> class.
+            </summary>
+            <param name="log">Logging instance</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlConditionTokenizer.Tokenize(System.String)">
+            <summary>
+            Converts string expression into an enumeration of tokens
+            </summary>
+            <param name="expression">SQL string expression</param>
+            <returns>Enumeration of tokens</returns>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlParameter">
+            <summary>
+            SQL parameter of a SQL query
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlParameter.#ctor(System.String,System.Object,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlParameter"/> class.
+            </summary>
+            <param name="name">Name of the parameter</param>
+            <param name="value">Parameter value</param>
+            <param name="isFilteringParameter">Whether the parameter is used for filtering</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlParameter.Name">
+            <summary>
+            Gets the name of the parameter
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlParameter.Value">
+            <summary>
+            Gets the value of the parameter
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlParameter.IsFilteringParameter">
+            <summary>
+            Gets a value indicating whether the parameter affects number of returned results
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlParser">
+            <summary>
+            Parses the SQL query independently of specific RDBMS by conventions (expressed in Regexes).
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlParser.QueryParser">
+            <summary>
+            Parses the query into the SELECT columns, FROM table and ORDER BY columns.
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlParser.ColumnParser">
+            <summary>
+            Parses the full column expression into an identifier and alias (including ' or "))
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlParser.OrderbyParser">
+            <summary>
+            Parses the ORDER BY column identifier with the sort direction
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlParser.TableIdentifierParser">
+            <summary>
+            Parses table identifier in the FROM clause of query
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlParser.SubqueryCheck">
+            <summary>
+            Used to check whether the query string contains sub queries (which is not supported)
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlParser.log">
+            <summary>
+            Logger instance
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlParser.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlParser"/> class.
+            </summary>
+            <param name="log">Logger instance</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlParser.ParseSqlQuery(System.String)">
+            <summary>
+            Converts the SQL query text into a parsed representation of the query which can be worked on.
+            </summary>
+            <param name="sqlText">SELECT SQL query text</param>
+            <returns>SQL SELECT query model</returns>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlParser.ParseTableIdentifier(System.String)">
+            <summary>
+            Converts the table identifier by convention into a parsed object.
+            </summary>
+            <param name="tableIdentifier">Table identifier string</param>
+            <returns>Table identifier model</returns>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlParser.ParseTableIdentifierInSqlText(System.String)">
+            <summary>
+            Finds a first table in the first FROM expression and parses that to <see cref="T:Panelak.Sql.ISqlTableIdentifier"/>.
+            </summary>
+            <param name="sqlQuery">SQL query string</param>
+            <returns>Table identifier model</returns>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlSelectQuery">
+            <summary>
+            Parsed SQL SELECT query model.
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlSelectQuery.log">
+            <summary>
+            Logger instance
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlSelectQuery.parameters">
+            <summary>
+            List of SQL parameters
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlSelectQuery.columns">
+            <summary>
+            List of columns in the SELECT query
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.#ctor(System.Collections.Generic.IEnumerable{Panelak.Sql.Parsing.SqlColumn},Panelak.Sql.ISqlTableIdentifier,Panelak.Sql.ISqlConditionExpression,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlSelectQuery"/> class.
+            </summary>
+            <param name="columns">List of columns in the SELECT clause</param>
+            <param name="tableIdentifier">Table identifier after the FROM clause</param>
+            <param name="sqlConditionExpression">Condition expression binary tree</param>
+            <param name="log">Logger instance</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.TableIdentifier">
+            <summary>
+            Gets or sets the identifier of the table in the FROM clause
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.Columns">
+            <summary>
+            Gets the SQL columns in the SELECT clause. Sub queries are not supported.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.ExcludeAliases">
+            <summary>
+            Gets or sets a value indicating whether column aliases are to be included in the query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.NoPagination">
+            <summary>
+            Gets or sets a value indicating whether pagination is not considered when building this SQL query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.Page">
+            <summary>
+            Gets or sets the Page
+            Page for pagination purposes. Starts at 1.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.PageSize">
+            <summary>
+            Gets or sets the size of the page for pagination purposes.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.Parameters">
+            <summary>
+            Gets the SQL parameters entering into the RDBMS with this query.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlSelectQuery.Condition">
+            <summary>
+            Gets the binary tree representation of an SQL condition
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.And(Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Appends new expression in AND node to the root with existing expression
+            or directly as the root.
+            </summary>
+            <param name="expression">New expression</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.AndIn(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends an IN expression in AND node with existing expression
+            or directly as the root.
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="values">Values of the IN operator</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.AndString(System.String)">
+            <summary>
+            Parses the expression string and appends it with AND node to the root with the existing expression
+            or directly as root if no expression is set.
+            </summary>
+            <param name="expressionString">Unparsed SQL expression string</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.ApplySorting(System.String,Panelak.Sql.SortOrder,System.Collections.Generic.IEnumerable{Panelak.Sql.ISqlSortColumn})">
+            <summary>
+            Applies sorting in fallback manner. If no sorting is specified in the query, default
+            column sorting is used.
+            </summary>
+            <param name="defaultColumnSort">Column used for default sorting</param>
+            <param name="defaultColumnSortOrder">Sort order of default column</param>
+            <param name="inputSortByColumns">Columns with sorting from the input</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.InsertColumn(System.String,System.Boolean,Panelak.Sql.SortOrder)">
+            <summary>
+            Inserts a new column into the list of SELECT query columns
+            </summary>
+            <param name="name">Name of the column</param>
+            <param name="include">Whether the column has to be included in the SELECT clause</param>
+            <param name="sortOrder">Sorting of the column</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.SetPrimaryKey(System.String)">
+            <summary>
+            Finds and sets the given column as primary key.
+            </summary>
+            <param name="primaryKeyColumnName">Name of the primary key column</param>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlTableIdentifier">
+            <summary>
+            Parses the table identifier used in by convention (expressed in Regex).
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.SqlTableIdentifier.parser">
+            <summary>
+            Parses the database name, schema, table and connection key from the table identifier.
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlTableIdentifier.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlTableIdentifier"/> class.
+            </summary>
+            <param name="tableIdentifier">Table identifier</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlTableIdentifier.Database">
+            <summary>
+            Gets the database identifier. Can be null.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlTableIdentifier.Schema">
+            <summary>
+            Gets the schema or owner name. Can be null.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlTableIdentifier.Table">
+            <summary>
+            Gets the table name. Cannot be null.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlTableIdentifier.ConnectionKey">
+            <summary>
+            Gets the connection key from configuration. Can be null.
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SqlToken">
+            <summary>
+            SQL token model
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlToken.#ctor(System.String,Panelak.Sql.Parsing.TokenType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SqlToken"/> class.
+            </summary>
+            <param name="token">The token literal</param>
+            <param name="tokenType">Token type</param>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlToken.Token">
+            <summary>
+            Gets the token literal
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.Parsing.SqlToken.TokenType">
+            <summary>
+            Gets the token classification
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.SubqueriesNotAllowedException">
+            <summary>
+            Thrown when attempting to parse condition expression in the <see cref="T:Panelak.Sql.Parsing.SqlConditionParser"/> with sub queries
+            which is not supported.
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SubqueriesNotAllowedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.SubqueriesNotAllowedException"/> class.
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.Parsing.TokenType">
+            <summary>
+            SQL token classifications
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.Identifier">
+            <summary>
+            Column identifier: [column], column
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.Literal">
+            <summary>
+            Value literal: 'literal', '%literal%', literal
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.OpeningRoundBracket">
+            <summary>
+            Opening round bracket
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.ClosingRoundBracket">
+            <summary>
+            Closing round bracket
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.Equal">
+            <summary>
+            Equal sign
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.NotEqual">
+            <summary>
+            Not equal sign
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.GreaterThan">
+            <summary>
+            Greater than sign
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.LesserThan">
+            <summary>
+            Lesser than sign
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.GreaterThanOrEqual">
+            <summary>
+            Greater than or equal sign
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.LesserThanOrEqual">
+            <summary>
+            Lesser than or equal sign
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.Not">
+            <summary>
+            NOT operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.Like">
+            <summary>
+            LIKE operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.NotLike">
+            <summary>
+            NOT LIKE operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.And">
+            <summary>
+            AND operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.Or">
+            <summary>
+            OR operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.IsNull">
+            <summary>
+            IS NULL comparison operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.IsNotNull">
+            <summary>
+            IS NOT NULL comparison operator
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.Parsing.TokenType.In">
+            <summary>
+            IN operator
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Panelak.Sql</name>
+    </assembly>
+    <members>
+        <member name="T:Panelak.Sql.ISqlConditionComparisonExpression">
+            <summary>
+            SQL comparison expression of the form COLUMN OPERATOR LITERAL (e.g. NumberColumn = 3 or StringColumn LIKE 'text').
+            Note that column must be on the left side of the operator and literal on the right side of the operator.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionComparisonExpression.Operator">
+            <summary>
+            Gets a string representation of the operator.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionComparisonExpression.Column">
+            <summary>
+            Gets a column identifier on the left side of the operator
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionComparisonExpression.Literal">
+            <summary>
+            Gets a literal value on the right side of the operator.
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionExpression">
+            <summary>
+            Binary tree representation of an SQL condition
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionIn">
+            <summary>
+            IN operator expression in the form [Column] IN ([value], [value], ...)
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionIn.Values">
+            <summary>
+            Gets a list of values contained on the right side of the IN operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionIsBetween">
+            <summary>
+            IS BETWEEN expression in the form [Column] IS BETWEEN [LowerBoundary] AND [UpperBoundary]
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionIsBetween.Column">
+            <summary>
+            Gets a column identifier
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionIsBetween.UpperBoundary">
+            <summary>
+            Gets an upper boundary value
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionIsBetween.LowerBoundary">
+            <summary>
+            Gets a lower boundary value
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionIsNotNull">
+            <summary>
+            IS NOT NULL expression in the form [Column] IS NOT NULL
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionIsNotNull.Column">
+            <summary>
+            Gets a column identifier
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionIsNull">
+            <summary>
+            IS NULL expression in the form [Column] IS NULL
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionIsNull.Column">
+            <summary>
+            Gets a column identifier
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionLeftRightOperator">
+            <summary>
+            Logical operator expression with left and right side expression (e.g. AND, OR)
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionLeftRightOperator.LeftExpression">
+            <summary>
+            Gets an expression on the left side of the logical operator
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionLeftRightOperator.RightExpression">
+            <summary>
+            Gets an expression on the right side of the logical operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionLogicExpression">
+            <summary>
+            Expression of SQL logical operator
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionLogicExpression.Operator">
+            <summary>
+            Gets an SQL logical operator such as AND, OR, NOT
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionRightOperator">
+            <summary>
+            Logical operator expression with only right side expression (e.g. NOT)
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionRightOperator.RightExpression">
+            <summary>
+            Gets an expression on the right side of the logical operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.IParameterizedQuery">
+            <summary>
+            RDBMS independent model of SQL query with parameters
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.IParameterizedQuery.QueryText">
+            <summary>
+            Gets an SQL of the query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.IParameterizedQuery.SqlParameters">
+            <summary>
+            Gets parameters of the query
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlBuilder">
+            <summary>
+            Implements conversion from SQL models to parameterized models.
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.ISqlBuilder.BuildQuery(Panelak.Sql.ISqlSelectQuery)">
+            <summary>
+            Builds a <see cref="T:Panelak.Sql.IParameterizedQuery"/> out of given <see cref="T:Panelak.Sql.ISqlSelectQuery"/>.
+            </summary>
+            <param name="sqlQuery">Configured query</param>
+            <returns>Query with given SQL text and parameters.</returns>
+        </member>
+        <member name="M:Panelak.Sql.ISqlBuilder.BuildCountQuery(Panelak.Sql.ISqlTableIdentifier,Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Builds a "SELECT COUNT(*) FROM {<paramref name="table"/>} [WHERE {<paramref name="filter"/>}] query.
+            </summary>
+            <param name="table">Table identifier of the query</param>
+            <param name="filter">Optional filter expression in WHERE clause</param>
+            <returns>Constructed SQL query model with parameters</returns>
+        </member>
+        <member name="T:Panelak.Sql.ISqlColumn">
+            <summary>
+            RDBMS independent single column in a SQL SELECT expression
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlColumn.IsPrimaryKey">
+            <summary>
+            Gets a value indicating whether the column is considered a primary key
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlColumn.ExpressionAlias">
+            <summary>
+            Gets an alias of the expression
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlColumn.TrimmedAlias">
+            <summary>
+            Gets a name of the column without identifier quotes
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlColumn.Include">
+            <summary>
+            Gets or sets a value indicating whether the column is to be included in the result
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlColumn.Unquoted">
+            <summary>
+            Gets a value indicating whether expression is not to be quoted in the resulting query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlColumn.SortOrder">
+            <summary>
+            Gets or sets the sort order of the column
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlParameter">
+            <summary>
+            RDBMS independent SQL parameter of a SQL query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlParameter.Name">
+            <summary>
+            Gets name of the parameter
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlParameter.Value">
+            <summary>
+            Gets value of the parameter
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlParameter.IsFilteringParameter">
+            <summary>
+            Gets a value indicating whether the parameter affects number of returned results
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlParser">
+            <summary>
+            Implements parsing functionality for RDBMS independent SQL SELECT query and table identifiers.
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.ISqlParser.ParseSqlQuery(System.String)">
+            <summary>
+            Parses the SQL SELECT query.
+            </summary>
+            <param name="sqlText">SQL query string</param>
+            <returns>Parsed SQL query model</returns>
+        </member>
+        <member name="M:Panelak.Sql.ISqlParser.ParseTableIdentifier(System.String)">
+            <summary>
+            Parses the table identifier by the convention.
+            </summary>
+            <param name="tableIdentifier">String representation of the table identifier</param>
+            <returns>Parsed table identifier model</returns>
+        </member>
+        <member name="M:Panelak.Sql.ISqlParser.ParseTableIdentifierInSqlText(System.String)">
+            <summary>
+            Parses the first table identifier in the FROM clause of any SQL query
+            </summary>
+            <param name="sqlText">SQL query string</param>
+            <returns>Parsed table identifier model</returns>
+        </member>
+        <member name="T:Panelak.Sql.ISqlSelectQuery">
+            <summary>
+            RDBMS independent SQL SELECT query model
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.TableIdentifier">
+            <summary>
+            Gets or sets the identifier of the table in the FROM clause
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.Columns">
+            <summary>
+            Gets SQL columns in the SELECT clause. Sub queries are not supported.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.ExcludeAliases">
+            <summary>
+            Gets or sets a value indicating whether column aliases are to be excluded from the query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.NoPagination">
+            <summary>
+            Gets or sets a value indicating whether pagination is not considered when building this SQL query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.Page">
+            <summary>
+            Gets or sets page for pagination purposes. Starts at 1.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.PageSize">
+            <summary>
+            Gets or sets the size of the page for pagination purposes.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.Parameters">
+            <summary>
+            Gets SQL parameters entering into the RDBMS with this query.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSelectQuery.Condition">
+            <summary>
+            Gets a binary tree representation of an SQL condition
+            </summary>
+        </member>
+        <member name="M:Panelak.Sql.ISqlSelectQuery.ApplySorting(System.String,Panelak.Sql.SortOrder,System.Collections.Generic.IEnumerable{Panelak.Sql.ISqlSortColumn})">
+            <summary>
+            Applies sorting in fallback manner. If no sorting is specified in the query, default
+            column sorting is used.
+            </summary>
+            <param name="defaultSortColumnName">Column used for default sorting</param>
+            <param name="defaultSortColumnSortOrder">Sort order of default column</param>
+            <param name="inputSortByColumns">Columns with sorting from the input</param>
+        </member>
+        <member name="M:Panelak.Sql.ISqlSelectQuery.InsertColumn(System.String,System.Boolean,Panelak.Sql.SortOrder,System.String)">
+            <summary>
+            Inserts a new column to the column list
+            </summary>
+            <param name="name">Column identifier</param>
+            <param name="include">Whether the column must to be included in the query</param>
+            <param name="sortOrder">Column sort order</param>
+            <param name="alias">Alias of the column</param>
+        </member>
+        <member name="M:Panelak.Sql.ISqlSelectQuery.RemoveColumn(System.String)">
+            <summary>
+            Removes a column by name from the list
+            </summary>
+            <param name="columnName">Name of the column to remove</param>
+        </member>
+        <member name="M:Panelak.Sql.ISqlSelectQuery.SetPrimaryKey(System.String)">
+            <summary>
+            Sets a selected column as a primary key and unsets the primary key flag from all other columns.
+            </summary>
+            <param name="primaryKeyColumnName">Column identifier of the primary key</param>
+        </member>
+        <member name="M:Panelak.Sql.ISqlSelectQuery.And(Panelak.Sql.ISqlConditionExpression)">
+            <summary>
+            Appends a new condition expression after "AND"
+            </summary>
+            <param name="expression">SQL expression</param>
+        </member>
+        <member name="M:Panelak.Sql.ISqlSelectQuery.AndIn(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends "AND column IN (1,2,3...)" to the condition expression tree
+            </summary>
+            <param name="column">Column identifier</param>
+            <param name="values">Values of the IN operator</param>
+        </member>
+        <member name="M:Panelak.Sql.ISqlSelectQuery.AndString(System.String)">
+            <summary>
+            Parses <paramref name="expression"/> and appends it to the condition expression tree
+            </summary>
+            <param name="expression">SQL expression</param>
+        </member>
+        <member name="T:Panelak.Sql.ISqlSortColumn">
+            <summary>
+            RDBMS independent single column for sorting in a SQL SELECT expression
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSortColumn.Expression">
+            <summary>
+            Gets a column expression or identifier
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlSortColumn.SortOrder">
+            <summary>
+            Gets the column sort order
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlTableIdentifier">
+            <summary>
+            RDBMS independent table identifier from the FROM clause of the SQL query
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlTableIdentifier.ConnectionKey">
+            <summary>
+            Gets the connection key
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlTableIdentifier.Database">
+            <summary>
+            Gets the database identifier
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlTableIdentifier.Table">
+            <summary>
+            Gets the table name
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlTableIdentifier.Schema">
+            <summary>
+            Gets the schema or owner name
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.SortOrder">
+            <summary>
+            Sort order of the SQL query (e.g. ASC, DESC)
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.SortOrder.Unspecified">
+            <summary>
+            The default. No sort order is specified.
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.SortOrder.Ascending">
+            <summary>
+            Rows are sorted in ascending order.
+            </summary>
+        </member>
+        <member name="F:Panelak.Sql.SortOrder.Descending">
+            <summary>
+            Rows are sorted in descending order.
+            </summary>
+        </member>
+    </members>
+</doc>
