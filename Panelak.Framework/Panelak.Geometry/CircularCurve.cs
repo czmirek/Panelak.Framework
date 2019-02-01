@@ -18,5 +18,11 @@
         /// Gets the middle arc point
         /// </summary>
         public Point ArcPoint { get; }
+
+        /// <summary>
+        /// Returns string representation of points in geometric object
+        /// </summary>
+        /// <returns>String representation of points in geometric object</returns>
+        public override string ToString() => $"{Start.ToString()} {ArcPoint.ToString()} {End.ToString()}";
     }
 }

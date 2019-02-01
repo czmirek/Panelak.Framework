@@ -144,17 +144,79 @@
 
             if (ab_slope == 0)
                 return new StraightLine(new Point(ab_mid.X, canvasHeight), new Point(ab_mid.X, 0));
-            
-            double invertedSlope = -1 / ab_slope;
+
+            double invertedSlope;
+
+            if (Double.IsInfinity(ab_slope))
+                invertedSlope = 0;
+            else
+                invertedSlope = -1 / ab_slope;
+
             double y_intercept = (-invertedSlope * ab_mid.X) + ab_mid.Y;
 
-            double ytop = canvasHeight;
-            double xtop = (canvasHeight / invertedSlope) + y_intercept;
+            //coordinates where line intersects with the left side of bounding box
+            double left_y = y_intercept;
+            double left_x = 0;
+            var left = new Point(left_x, left_y);
 
-            double ybottom = 0;
-            double xbottom = y_intercept;
+            //coordinates where line intersects with the top side of bounding box
+            double top_x = (canvasHeight / invertedSlope) - (y_intercept / invertedSlope);
+            double top_y = canvasHeight;
+            var top = new Point(top_x, top_y);
 
-            return new StraightLine(new Point(xtop, ytop), new Point(xbottom, ybottom));
+            //coordinates where line intersects with the right side of bounding box
+            double right_y = (invertedSlope * canvasWidth) + y_intercept;
+            double right_x = canvasWidth;
+            var right = new Point(right_x, right_y);
+
+            //coordinates where line intersects with the bottom side of bounding box
+            double bottom_x = -y_intercept / invertedSlope;
+            double bottom_y = 0;
+            var bottom = new Point(bottom_x, bottom_y);
+            
+            Point startPoint = null, endPoint = null;
+
+            if(left_y >= 0 && left_y <= canvasHeight)
+            {
+                startPoint = new Point(left_x, left_y);
+
+                if (top_x >= 0 && top_x <= canvasWidth)
+                    endPoint = top;
+                else if (right_y >= 0 && right_y <= canvasHeight)
+                    endPoint = right;
+                else if (bottom_x >= 0 && bottom_x <= canvasWidth)
+                    endPoint = bottom;
+            }
+            else if(top_x >= 0 && top_x <= canvasWidth)
+            {
+                if (right_y >= 0 && right_y <= canvasHeight)
+                    endPoint = right;
+                else if (bottom_x >= 0 && bottom_x <= canvasWidth)
+                    endPoint = bottom;
+                else if (left_y >= 0 && left_y <= canvasHeight)
+                    endPoint = left;
+            }
+            else if (right_y >= 0 && right_y <= canvasHeight)
+            {
+                if (bottom_x >= 0 && bottom_x <= canvasWidth)
+                    endPoint = bottom;
+                else if (left_y >= 0 && left_y <= canvasHeight)
+                    endPoint = left;
+                else if (top_x >= 0 && top_x <= canvasWidth)
+                    endPoint = top;
+            }
+            else if (bottom_x >= 0 && bottom_x <= canvasWidth)
+            {
+                if (left_y >= 0 && left_y <= canvasHeight)
+                    endPoint = left;
+                else if (top_x >= 0 && top_x <= canvasWidth)
+                    endPoint = top;
+                else if (right_y >= 0 && right_y <= canvasHeight)
+                    endPoint = right;
+            }
+            
+
+            return new StraightLine(startPoint, endPoint);
         }
 
         /// <summary>

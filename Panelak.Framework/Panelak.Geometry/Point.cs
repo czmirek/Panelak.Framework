@@ -25,5 +25,11 @@
         /// Gets the Y
         /// </summary>
         public double Y { get; }
+
+        /// <summary>
+        /// Returns string representation of points in geometric object
+        /// </summary>
+        /// <returns>String representation of points in geometric object</returns>
+        public override string ToString() => $"{X} {Y}";
     }
 }

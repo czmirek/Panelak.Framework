@@ -22,7 +22,7 @@
         {
             var c = new GeometryCanvas(150, 150);
             //c.AddShape(new Line(new Point(10, 10), new Point(140, 140)));
-            c.AddShape(new CircularCurve(new Point(100, 140), new Point(140, 100), new Point(60, 100)));
+            c.AddShape(new CircularCurve(new Point(30, 30), new Point(40, 10), new Point(50, 30)));
             byte[] bytes = c.CreatePng();
 
             File.WriteAllBytes("point_image.png", bytes);

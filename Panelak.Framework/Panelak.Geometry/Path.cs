@@ -1,5 +1,6 @@
 ﻿namespace Panelak.Geometry
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -17,5 +18,18 @@
         /// Gets the list of line geometries
         /// </summary>
         public IList<Line> Lines { get; }
+
+        /// <summary>
+        /// Returns string representation of points in geometric object
+        /// </summary>
+        /// <returns>String representation of points in geometric object</returns>
+        public override string ToString()
+        {
+            string str = "";
+            foreach (Line line in Lines)
+                str += line.ToString() + Environment.NewLine;
+
+            return str;
+        }
     }
 }
