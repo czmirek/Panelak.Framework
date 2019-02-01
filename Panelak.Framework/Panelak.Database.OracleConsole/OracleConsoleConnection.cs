@@ -20,7 +20,6 @@
     {
         /// <summary>
         /// Regex used for replacement of RDBMS-independent parameters used in SQL queries in the format {parameter}.
-        /// This is then replaced into RDBMS-specific implementation in the <see cref="GetParameterToken"/> method.
         /// </summary>
         private static readonly Regex QueryParametersRegex = new Regex("\\{(\\w+)\\}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 

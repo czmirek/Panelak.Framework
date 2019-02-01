@@ -26,6 +26,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1701;1702;5125</NoWarn>
     <WarningLevel>0</WarningLevel>
+    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Database.Oracle\Panelak.Database.Oracle.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

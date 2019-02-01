@@ -81,7 +81,7 @@
                 double ex = numPoints[i + 1].x;
                 double ey = numPoints[i + 1].y;
 
-                var line = new Line(new Point(sx, sy), new Point(ex, ey));
+                var line = new StraightLine(new Point(sx, sy), new Point(ex, ey));
                 lines.Add(line);
             }
 

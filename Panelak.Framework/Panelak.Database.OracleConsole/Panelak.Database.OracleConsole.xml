@@ -1,0 +1,470 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Panelak.Database.OracleConsole</name>
+    </assembly>
+    <members>
+        <member name="T:Panelak.Database.OracleConsole.Message">
+            <summary>
+            Input message sent to the named pipe in JSON format
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.Message.IsExit">
+            <summary>
+            Gets or sets a value indicating whether the executable should close.
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.Message.Query">
+            <summary>
+            Gets or sets the SQL query text.
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.Message.ConnectionString">
+            <summary>
+            Gets or sets the connection string.
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.Message.Parameters">
+            <summary>
+            Gets or sets the SQL query parameters.
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.OdacPipe">
+            <summary>
+            Named pipe.
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacPipe.Reader">
+            <summary>
+            Named pipe reader
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacPipe.Writer">
+            <summary>
+            Named pipe writer
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacPipe.namedPipeStream">
+            <summary>
+            Named pipe
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OdacPipe.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Database.OracleConsole.OdacPipe"/> class.
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OdacPipe.Dispose">
+            <summary>
+            Disposes the named pipe
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.OdacPipeExitMessage">
+            <summary>
+            Sends exit message to the named pipe to kill the process
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OdacPipeExitMessage.Exit">
+            <summary>
+            Sends exit message to the named pipe to kill the process
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.OdacPipeQueryMessage">
+            <summary>
+            Sends query to the named pipe
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacPipeQueryMessage.connectionString">
+            <summary>
+            Oracle connection string
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacPipeQueryMessage.query">
+            <summary>
+            SQL query text
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacPipeQueryMessage.parameters">
+            <summary>
+            SQL query comma separated parameters
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OdacPipeQueryMessage.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Database.OracleConsole.OdacPipeQueryMessage"/> class.
+            </summary>
+            <param name="connectionString">Oracle connection string</param>
+            <param name="query">SQL query text</param>
+            <param name="parameters">SQL query parameters</param>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OdacPipeQueryMessage.GetResult">
+            <summary>
+            Creates a new message object, sends it to the named pipe and retrieves the
+            JSON serialized result.
+            </summary>
+            <returns>JSON result</returns>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.OdacProcess">
+            <summary>
+            Instance of the executable process
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacProcess.PipeName">
+            <summary>
+            Pipe name
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacProcess.Executable">
+            <summary>
+            Executable path
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacProcess.ProcessStartInfo">
+            <summary>
+            Process properties
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OdacProcess.odacProcess">
+            <summary>
+            Process instance
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OdacProcess.Start">
+            <summary>
+            Starts the executable which immediately starts listening to the named pipe.
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OdacProcess.End">
+            <summary>
+            Sends the exit message to the executable.
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.OdacResult">
+            <summary>
+            JSON serialized result returned by the executable
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.OdacResult.Columns">
+            <summary>
+            Gets a list of columns in the result
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.OdacResult.Data">
+            <summary>
+            Gets a result table
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.OdacResult`1">
+            <summary>
+            JSON serialized result returned by the executable. Data are of type <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">Type of the result row.</typeparam>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.OdacResult`1.Columns">
+            <summary>
+            Gets a list of column names
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.OdacResult`1.Data">
+            <summary>
+            Gets a result mapped to a specific type in <typeparamref name="T"/>.
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.OracleConsoleConnection">
+            <summary>
+            Oracle Connection for the Oracle ODAC console application.
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OracleConsoleConnection.QueryParametersRegex">
+            <summary>
+            Regex used for replacement of RDBMS-independent parameters used in SQL queries in the format {parameter}.
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.OracleConsole.OracleConsoleConnection.jsonSettings">
+            <summary>
+            JSON settings for converting the result to DTO
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Database.OracleConsole.OracleConsoleConnection"/> class.
+            </summary>
+            <param name="connectionString">Connection string</param>
+            <param name="logger">Logger instance</param>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetDataTable(Panelak.Sql.IParameterizedQuery)">
+            <summary>
+            Returns a result as a RDBMS-specific <see cref="T:System.Data.DataSet"/> for a parameterized query.
+            Individual parameters, in present, are converted into the relevant RDMBS-specific <see cref="T:System.Data.Common.DbParameter"/>.
+            </summary>
+            <param name="query">SQL query</param>
+            <returns>RDBMS-specific <see cref="T:System.Data.DataSet"/>.</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetResult``1(System.String)">
+            <summary>
+            Returns a result enumeration from given <paramref name="query"/> into a list of a given DTO (<typeparamref name="T"/>).
+            </summary>
+            <typeparam name="T">Type of the DTO</typeparam>
+            <param name="query">Query returning a result</param>
+            <returns>DTO enumeration</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetResult``1(Panelak.Sql.IParameterizedQuery)">
+            <summary>
+            Returns a result enumeration from given parameterized query into a list of a given DTO.
+            </summary>
+            <typeparam name="T">Type of the DTO</typeparam>
+            <param name="query">Parameterized query</param>
+            <returns>DTO enumeration</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetResult``1(System.String,System.Object)">
+            <summary>
+            Returns a result enumeration from given <paramref name="query"/> into a list of a given DTO (<typeparamref name="T"/>)
+            and mapping parameters into the query from <paramref name="queryParams"/>.
+            </summary>
+            <typeparam name="T">DTO type</typeparam>
+            <param name="query">SQL query</param>
+            <param name="queryParams">Query parameters object</param>
+            <returns>Enumeration of DTOs from the result.</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetResult``1(System.String,System.Int32)">
+            <summary>
+            Returns a result enumeration for a given query with a single ID parameter.
+            </summary>
+            <typeparam name="T">DTO type</typeparam>
+            <param name="query">SQL query</param>
+            <param name="idParam">Value of the ID parameter</param>
+            <returns>Enumeration of DTOs from the result.</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetScalar``1(System.String)">
+            <summary>
+            Returns a value from the first row of the first column in the query result.
+            </summary>
+            <typeparam name="T">Type of the scalar</typeparam>
+            <param name="query">SQL query</param>
+            <returns>Scalar value</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetScalar``1(System.String,System.Object)">
+            <summary>
+            Returns a value from the first row of the first column in the query result using parameters.
+            </summary>
+            <typeparam name="T">Type of the scalar</typeparam>
+            <param name="query">SQL query with RDBMS-independent parameters.</param>
+            <param name="queryParams">Query parameters</param>
+            <returns>Scalar value</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetScalar``1(System.String,System.Int32)">
+            <summary>
+            Returns a value from the first row of the first column in the query result.
+            </summary>
+            <typeparam name="T">Type of the scalar</typeparam>
+            <param name="query">SQL query</param>
+            <param name="idParam">ID parameter included in the query</param>
+            <returns>Scalar value</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetScalar``1(Panelak.Sql.IParameterizedQuery)">
+            <summary>
+            Returns a value from the first row of the first column in the query result.
+            </summary>
+            <typeparam name="T">Type of the scalar</typeparam>
+            <param name="query">SQL query with parameters</param>
+            <returns>Scalar value</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetRow``1(System.Collections.Generic.IDictionary{Panelak.Database.DatabaseType,System.String},System.Int32)">
+            <summary>
+            Returns a single row for the query in given <see cref="T:Panelak.Database.DatabaseType"/>.
+            </summary>
+            <typeparam name="T">DTO of the result</typeparam>
+            <param name="query">SQL query</param>
+            <param name="idParam">ID parameter</param>
+            <returns>DTO of the first row, if present, otherwise null.</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetRow``1(System.String,System.Int32)">
+            <summary>
+            Returns a single row for the query with an ID parameter.
+            </summary>
+            <typeparam name="T">DTO of the row.</typeparam>
+            <param name="query">SQL query</param>
+            <param name="idParam">ID parameter</param>
+            <returns>DTO result</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetRow``1(Panelak.Sql.IParameterizedQuery)">
+            <summary>
+            Returns a single row for a parameterized query.
+            </summary>
+            <typeparam name="T">DTO of the row</typeparam>
+            <param name="parameterizedQuery">Parameterized query</param>
+            <returns>DTO result</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetConnectionProtected(System.String)">
+            <summary>
+            Returns the Oracle managed connection for given connection string
+            </summary>
+            <param name="connectionString">Connection string</param>
+            <returns>Oracle managed connection</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.GetDataAdapterForCommand(System.Data.Common.DbCommand)">
+            <summary>
+            Returns the Oracle managed data adapter for given command
+            </summary>
+            <param name="command">Oracle command to enter the data adapter</param>
+            <returns>The oracle data adapter</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.ReadOdacResult``1(System.String,System.String)">
+            <summary>
+            Reads the result from ODAC console and maps the JSON to DTO in <typeparamref name="T"/>
+            </summary>
+            <typeparam name="T">DTO type</typeparam>
+            <param name="query">SQL query</param>
+            <param name="parameters">SQL query parameters</param>
+            <returns>Result enumeration</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.ReadOdacScalar``1(System.String,System.String)">
+            <summary>
+            Reads the result from ODAC console and returns the value of the first column in the first row
+            </summary>
+            <typeparam name="T">Scalar type</typeparam>
+            <param name="query">SQL query text</param>
+            <param name="parameters">SQL query parameters</param>
+            <returns>Scalar value</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.TranslateQueryParameters(System.String)">
+            <summary>
+            Replaces RDMBS independent parameters {parameter} into RDBMS-specific parameters (e.g. @parameter in SQL Server).
+            </summary>
+            <param name="query">SQL query string with RDBMS independent parameters</param>
+            <returns>SQL query string with RDBMS specific parameters</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.LogQuery(System.String)">
+            <summary>
+            Logs a query string
+            </summary>
+            <param name="query">Query string</param>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.LogQuery(Panelak.Sql.IParameterizedQuery)">
+            <summary>
+            Logs parameterized query
+            </summary>
+            <param name="query">Parameterized query model</param>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.ProcessParams(System.Collections.Generic.IEnumerable{Panelak.Sql.ISqlParameter})">
+            <summary>
+            Converts SQL parameters into a JSON string representation
+            </summary>
+            <param name="sqlParameters">SQL parameters</param>
+            <returns>JSON serialized parameters</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.ProcessParams(System.Object)">
+            <summary>
+            Converts anonymous object parameters into a serialized JSON string
+            </summary>
+            <param name="queryParams">Anonymous object parameters</param>
+            <returns>JSON serialized parameters</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.OracleConsoleConnection.ReadOdac(System.String,System.String)">
+            <summary>
+            Sends the query to the named pipe and returns the string result in JSON.
+            </summary>
+            <param name="queryText">SQL query text</param>
+            <param name="parameters">Serialized parameters</param>
+            <returns>The string result</returns>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.SdoGeometry">
+            <summary>
+            Oracle SDO_GEOMETRY model.
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoGeometry.SdoGtype">
+            <summary>
+            Gets or sets the SDO_GTYPE
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoGeometry.SdoSRID">
+            <summary>
+            Gets or sets the SDO_SRID
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoGeometry.SdoPoint">
+            <summary>
+            Gets or sets the SDO_POINT
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoGeometry.ElemArray">
+            <summary>
+            Gets or sets the SDO_ELEM_INFO 
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoGeometry.OrdinatesArray">
+            <summary>
+            Gets or sets the SDO_ORDINATES 
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.SdoGeometryConverter">
+            <summary>
+            Implements conversion from SDO_GEOMETRY model into geometry models for drawing
+            Only 2D geometries are supported
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.SdoGeometryConverter.GeometryFromSdo(Panelak.Database.OracleConsole.SdoGeometry)">
+            <summary>
+            Converts SDO_GEOMETRY model into a general geometry model for drawing.
+            </summary>
+            <param name="sdoGeometry">Oracle SDO_GEOMETRY model</param>
+            <returns>RDBMS independent geometry model</returns>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.SdoGeometryJsonConverter">
+            <summary>
+            JSON to SDO_GEOMETRY model converter for Newtonsoft.Json converter.
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.SdoGeometryJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified <see cref="T:Panelak.Geometry.Geometry"/>.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns>true if this instance can convert the specified object type; otherwise, false.</returns>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoGeometryJsonConverter.CanWrite">
+            <summary>
+            Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.SdoGeometryJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The Newtonsoft.Json.JsonReader to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>The object value.</returns>
+        </member>
+        <member name="M:Panelak.Database.OracleConsole.SdoGeometryJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The Newtonsoft.Json.JsonWriter to write to.</param>
+            <param name="value">The value.</param>
+            <param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="T:Panelak.Database.OracleConsole.SdoPoint">
+            <summary>
+            Oracle SDO_POINT model
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoPoint.X">
+            <summary>
+            Gets or sets the X
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoPoint.Y">
+            <summary>
+            Gets or sets the Y
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.OracleConsole.SdoPoint.Z">
+            <summary>
+            Gets or sets the Z
+            </summary>
+        </member>
+    </members>
+</doc>

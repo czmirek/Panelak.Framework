@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.1</LangVersion>
     <Description>Simple geometric shapes with Well-Known Text (WKT) converter</Description>
-    <PackageReleaseNotes>Strongly signed assembly</PackageReleaseNotes>
+    <PackageReleaseNotes>Added StraightLine and made Line abstract</PackageReleaseNotes>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
     <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
@@ -13,13 +13,17 @@
     <Product>Panelak.Geometry</Product>
     <PackageId>Panelak.Geometry</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>2.0.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Geometry</Company>
     <Authors>Panelak.Geometry</Authors>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Geometry.pfx</AssemblyOriginatorKeyFile>
-    <FileVersion>1.0.1</FileVersion>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Geometry\Panelak.Geometry.xml</DocumentationFile>
   </PropertyGroup>
 </Project>

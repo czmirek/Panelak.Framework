@@ -48,6 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>bin\x86\Release\odac.client.x86.Console.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>EC337514CDE1FA2F1AC89D5976094E175810BFB8</ManifestCertificateThumbprint>

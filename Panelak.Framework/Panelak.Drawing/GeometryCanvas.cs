@@ -143,7 +143,7 @@
             double ab_slope = (b.Y - a.Y) / (b.X - a.X);
 
             if (ab_slope == 0)
-                return new Line(new Point(ab_mid.X, canvasHeight), new Point(ab_mid.X, 0));
+                return new StraightLine(new Point(ab_mid.X, canvasHeight), new Point(ab_mid.X, 0));
             
             double invertedSlope = -1 / ab_slope;
             double y_intercept = (-invertedSlope * ab_mid.X) + ab_mid.Y;
@@ -154,7 +154,7 @@
             double ybottom = 0;
             double xbottom = y_intercept;
 
-            return new Line(new Point(xtop, ytop), new Point(xbottom, ybottom));
+            return new StraightLine(new Point(xtop, ytop), new Point(xbottom, ybottom));
         }
 
         /// <summary>
@@ -215,15 +215,15 @@
             if ((circularCurve.Start.X == circularCurve.ArcPoint.X && circularCurve.Start.X == circularCurve.End.X)
              || (circularCurve.Start.Y == circularCurve.ArcPoint.Y && circularCurve.Start.Y == circularCurve.End.Y))
             {
-                DrawLine(new Line(circularCurve.Start, circularCurve.End));
+                DrawLine(new StraightLine(circularCurve.Start, circularCurve.End));
             }
 
             Point a = circularCurve.Start;
             Point b = circularCurve.ArcPoint;
             Point c = circularCurve.End;
 
-            Line p1 = CreatePerpendicularLineInBox(new Line(a, b));
-            Line p2 = CreatePerpendicularLineInBox(new Line(b, c));
+            Line p1 = CreatePerpendicularLineInBox(new StraightLine(a, b));
+            Line p2 = CreatePerpendicularLineInBox(new StraightLine(b, c));
 
             Point intersection = FindIntersection(p1, p2);
 

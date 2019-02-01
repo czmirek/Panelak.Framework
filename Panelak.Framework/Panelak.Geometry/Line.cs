@@ -1,9 +1,9 @@
 ﻿namespace Panelak.Geometry
 {
     /// <summary>
-    /// Line geometry shape
+    /// Line geometry shape consisting of two points
     /// </summary>
-    public class Line : Geometry
+    public abstract class Line : Geometry
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Line"/> class.

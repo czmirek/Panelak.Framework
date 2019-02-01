@@ -20,4 +20,7 @@
     <FileVersion>1.0.1</FileVersion>
     <AssemblyVersion>1.0.1</AssemblyVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Sql\Panelak.Sql.xml</DocumentationFile>
+  </PropertyGroup>
 </Project>

@@ -59,7 +59,7 @@
                             var start = new Point(startX, startY);
                             var end = new Point(endX, endY);
 
-                            var line = new Line(start, end);
+                            var line = new StraightLine(start, end);
 
                             r += 1;
 
