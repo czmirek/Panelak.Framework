@@ -10,19 +10,19 @@
         /// </summary>
         /// <param name="start">Starting point</param>
         /// <param name="end">Ending point</param>
-        /// <param name="arcPoint">Middle arc point</param>
-        public CircularCurve(Point start, Point end, Point arcPoint)
-            : base(start, end) => ArcPoint = arcPoint;
+        /// <param name="middle">Middle arc point</param>
+        public CircularCurve(Point start, Point middle, Point end)
+            : base(start, end) => Middle = middle;
 
         /// <summary>
         /// Gets the middle arc point
         /// </summary>
-        public Point ArcPoint { get; }
+        public Point Middle { get; }
 
         /// <summary>
         /// Returns string representation of points in geometric object
         /// </summary>
         /// <returns>String representation of points in geometric object</returns>
-        public override string ToString() => $"{Start.ToString()} {ArcPoint.ToString()} {End.ToString()}";
+        public override string ToString() => $"{Start.ToString()} {Middle.ToString()} {End.ToString()}";
     }
 }

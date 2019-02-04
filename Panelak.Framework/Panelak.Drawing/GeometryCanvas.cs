@@ -266,10 +266,12 @@
         private double GetAngle(Point center, Point onCircle)
         {
             double radian = Math.Atan2(onCircle.Y - center.Y, onCircle.X - center.X);
-            double angle = (radian * (180 / Math.PI)) - 90;
+            double angle = radian * (180 / Math.PI);
 
-            if (angle < 0.0)
-                angle += 360.0;
+            if (angle < 0)
+                angle += 360;
+
+            angle = 360 - angle;
 
             return angle;
         }
@@ -280,14 +282,14 @@
         /// <param name="circularCurve">Circular curve geometry shape.</param>
         private void DrawCircularCurve(CircularCurve circularCurve)
         {
-            if ((circularCurve.Start.X == circularCurve.ArcPoint.X && circularCurve.Start.X == circularCurve.End.X)
-             || (circularCurve.Start.Y == circularCurve.ArcPoint.Y && circularCurve.Start.Y == circularCurve.End.Y))
+            if ((circularCurve.Start.X == circularCurve.Middle.X && circularCurve.Start.X == circularCurve.End.X)
+             || (circularCurve.Start.Y == circularCurve.Middle.Y && circularCurve.Start.Y == circularCurve.End.Y))
             {
                 DrawLine(new StraightLine(circularCurve.Start, circularCurve.End));
             }
 
             Point a = circularCurve.Start;
-            Point b = circularCurve.ArcPoint;
+            Point b = circularCurve.Middle;
             Point c = circularCurve.End;
 
             Line p1 = CreatePerpendicularLineInBox(new StraightLine(a, b));
@@ -296,8 +298,43 @@
             Point intersection = FindIntersection(p1, p2);
 
             double radius = Math.Sqrt(Math.Pow(intersection.X - a.X, 2) + Math.Pow(intersection.Y - a.Y, 2));
-            double angle1 = GetAngle(intersection, a);
-            double angle2 = GetAngle(intersection, c);
+            double a_angle = GetAngle(intersection, a);
+            double b_angle = GetAngle(intersection, b);
+            double c_angle = GetAngle(intersection, c);
+
+            double startAngle = 0, sweepAngle = 0;
+
+            if (a_angle < b_angle && b_angle < c_angle)
+            {
+                startAngle = a_angle;
+                sweepAngle = c_angle - a_angle;
+            }
+            else if (a_angle < c_angle && c_angle < b_angle)
+            {
+                startAngle = 0;
+                sweepAngle = 360;
+            }
+            else if (b_angle < a_angle && a_angle < c_angle)
+            {
+                startAngle = c_angle;
+                sweepAngle = 360 - c_angle + a_angle;
+            }
+            else if (b_angle < c_angle && c_angle < a_angle)
+            {
+                startAngle = a_angle;
+                sweepAngle = 360 - a_angle + c_angle;
+            }
+            else if (c_angle < a_angle && a_angle < b_angle)
+            {
+                startAngle = a_angle;
+                sweepAngle = 360 - a_angle + c_angle;
+            }
+            else if (c_angle < b_angle && b_angle < c_angle)
+            {
+                startAngle = 0;
+                sweepAngle = 360;
+            }
+
             double box_x = intersection.X - radius;
             double box_y = intersection.Y + radius;
             double width = radius * 2;
@@ -309,8 +346,8 @@
                 y: canvasHeight - (float)box_y,
                 width: (float)width,
                 height: (float)height,
-                startAngle: (float)angle1,
-                sweepAngle: (float)angle2);
+                startAngle: (float)startAngle,
+                sweepAngle: (float)sweepAngle);
         }
 
         /// <summary>

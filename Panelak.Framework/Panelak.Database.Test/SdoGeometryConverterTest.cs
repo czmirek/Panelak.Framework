@@ -61,7 +61,7 @@
             var ogeomCirc = ogeom.Lines[1] as CircularCurve;
 
             TestPoint(10, 14, ogeomCirc.Start);
-            TestPoint(6, 10, ogeomCirc.ArcPoint);
+            TestPoint(6, 10, ogeomCirc.Middle);
             TestPoint(14, 10, ogeomCirc.End);
         }
 
@@ -95,7 +95,7 @@
             var ogeomCirc = ogeom.Lines[2] as CircularCurve;
 
             TestPoint(14, 10, ogeomCirc.Start);
-            TestPoint(10, 14, ogeomCirc.ArcPoint);
+            TestPoint(10, 14, ogeomCirc.Middle);
             TestPoint(6, 10, ogeomCirc.End);
         }
 

@@ -31,12 +31,15 @@
         [Test]
         public void SomeTest()
         {
-            var c = new GeometryCanvas(2851, 600);
-            c.AddShape(new StraightLine(new Point(1375.5, 250), new Point(1475.5, 350)));
-            c.AddShape(new StraightLine(new Point(1375.5, 250), new Point(1475.5, 350)));
-            c.AddShape(new CircularCurve(new Point(1405.5, 280), new Point(1405.5, 300), new Point(1470.5, 280)));
+            var c = new GeometryCanvas(100, 100);
+            //c.AddShape(new StraightLine(new Point(1375.5, 250), new Point(1475.5, 350)));
+            //c.AddShape(new StraightLine(new Point(1375.5, 250), new Point(1475.5, 350)));
+            c.AddShape(new CircularCurve(new Point(30, 30), new Point(95, 30), new Point(30, 50)));
 
             c.CreatePng();
+            byte[] bytes = c.CreatePng();
+
+            File.WriteAllBytes("point_image.png", bytes);
         }
     }
 }
