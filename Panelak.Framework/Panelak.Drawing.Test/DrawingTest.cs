@@ -27,5 +27,16 @@
 
             File.WriteAllBytes("point_image.png", bytes);
         }
+
+        [Test]
+        public void SomeTest()
+        {
+            var c = new GeometryCanvas(2851, 600);
+            c.AddShape(new StraightLine(new Point(1375.5, 250), new Point(1475.5, 350)));
+            c.AddShape(new StraightLine(new Point(1375.5, 250), new Point(1475.5, 350)));
+            c.AddShape(new CircularCurve(new Point(1405.5, 280), new Point(1405.5, 300), new Point(1470.5, 280)));
+
+            c.CreatePng();
+        }
     }
 }

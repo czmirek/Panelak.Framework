@@ -12,7 +12,7 @@
         /// Initializes a new instance of the <see cref="Path"/> class.
         /// </summary>
         /// <param name="lines">List of line geometries.</param>
-        public Path(IList<Line> lines) => Lines = lines;
+        public Path(IList<Line> lines) => Lines = lines ?? throw new ArgumentNullException(nameof(lines));
 
         /// <summary>
         /// Gets the list of line geometries

@@ -1,5 +1,7 @@
 ﻿namespace Panelak.Geometry
 {
+    using System;
+
     /// <summary>
     /// Line geometry shape consisting of two points
     /// </summary>
@@ -12,8 +14,8 @@
         /// <param name="end">The end <see cref="Point"/></param>
         public Line(Point start, Point end)
         {
-            Start = start;
-            End = end;
+            Start = start ?? throw new ArgumentNullException(nameof(start));
+            End = end ?? throw new ArgumentNullException(nameof(end));
         }
 
         /// <summary>

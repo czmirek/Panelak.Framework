@@ -189,6 +189,8 @@
             }
             else if(top_x >= 0 && top_x <= canvasWidth)
             {
+                startPoint = new Point(top_x, top_y);
+
                 if (right_y >= 0 && right_y <= canvasHeight)
                     endPoint = right;
                 else if (bottom_x >= 0 && bottom_x <= canvasWidth)
@@ -198,6 +200,8 @@
             }
             else if (right_y >= 0 && right_y <= canvasHeight)
             {
+                startPoint = new Point(right_x, right_y);
+
                 if (bottom_x >= 0 && bottom_x <= canvasWidth)
                     endPoint = bottom;
                 else if (left_y >= 0 && left_y <= canvasHeight)
@@ -207,6 +211,8 @@
             }
             else if (bottom_x >= 0 && bottom_x <= canvasWidth)
             {
+                startPoint = new Point(bottom_x, bottom_y);
+
                 if (left_y >= 0 && left_y <= canvasHeight)
                     endPoint = left;
                 else if (top_x >= 0 && top_x <= canvasWidth)
