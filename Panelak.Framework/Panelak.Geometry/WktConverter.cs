@@ -18,7 +18,8 @@
         public Geometry FromWkt(int? srid, string wktString)
         {
             wktString = wktString.ToUpperInvariant().Trim();
-
+            
+            //todo bug
             if (wktString.StartsWith("POINT"))
             {
                 string[] values = wktString

@@ -48,6 +48,36 @@
         ISqlConditionExpression Condition { get; }
 
         /// <summary>
+        /// Gets a value indicating whether the query contains a geometry filter.
+        /// </summary>
+        bool HasGeometryFilter { get; }
+
+        /// <summary>
+        /// Gets the geometry filter column
+        /// </summary>
+        string GeometryFilterColumn { get; }
+
+        /// <summary>
+        /// Gets the geomtery filter bounding box bottom left X coordinate.
+        /// </summary>
+        double GeomertryFilterBboxX1 { get; }
+
+        /// <summary>
+        /// Gets the geomtery filter bounding box bottom left Y coordinate.
+        /// </summary>
+        double GeomertryFilterBboxY1 { get; }
+
+        /// <summary>
+        /// Gets the geomtery filter bounding box top right X coordinate.
+        /// </summary>
+        double GeomertryFilterBboxX2 { get; }
+
+        /// <summary>
+        /// Gets the geomtery filter bounding box top right Y coordinate.
+        /// </summary>
+        double GeomertryFilterBboxY2 { get; }
+
+        /// <summary>
         /// Applies sorting in fallback manner. If no sorting is specified in the query, default
         /// column sorting is used.
         /// </summary>
@@ -95,5 +125,16 @@
         /// </summary>
         /// <param name="expression">SQL expression</param>
         void AndString(string expression);
+
+        /// <summary>
+        /// Configures the query to append a geometry bounding-box filter for given <paramref name="geometryColumn"/>
+        /// with given coordinates.
+        /// </summary>
+        /// <param name="geometryColumn">Geometry column identifier</param>
+        /// <param name="x1">Bounding box left bottom X</param>
+        /// <param name="y1">Bounding box left bottom Y</param>
+        /// <param name="x2">Bounding box top right X</param>
+        /// <param name="y2">Bounding box top right Y</param>
+        void AndGeomInBbox(string geometryColumn, double x1, double y1, double x2, double y2);
     }
 }

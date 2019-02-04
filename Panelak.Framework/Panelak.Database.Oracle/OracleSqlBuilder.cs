@@ -6,6 +6,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Globalization;
 
     /// <summary>
     /// SQL builder for building Oracle SQL queries
@@ -55,6 +56,33 @@
             {
                 parameters = sqlQuery.Parameters;
                 conditions = "1 = 1";
+            }
+
+
+            if(sqlQuery.HasGeometryFilter)
+            {
+                if(!Connection.CheckIfColumnExists(sqlQuery.TableIdentifier, sqlQuery.GeometryFilterColumn))
+                    throw new InvalidOperationException($"Column {sqlQuery.TableIdentifier.Table}.{sqlQuery.GeometryFilterColumn} does not exist or is not accessible.");
+
+                var nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };
+
+                var geomParams = new List<OracleDbParameter>()
+                {
+                    new OracleDbParameter() { Name = "x1", Value = sqlQuery.GeomertryFilterBboxX1, IsFilteringParameter = true },
+                    new OracleDbParameter() { Name = "y1", Value = sqlQuery.GeomertryFilterBboxY1, IsFilteringParameter = true },
+                    new OracleDbParameter() { Name = "x2", Value = sqlQuery.GeomertryFilterBboxX2, IsFilteringParameter = true },
+                    new OracleDbParameter() { Name = "y2", Value = sqlQuery.GeomertryFilterBboxY2, IsFilteringParameter = true }
+                };
+
+                parameters = parameters.Union(geomParams);
+                
+                string geomCondition = "";
+                geomCondition += $"sdo_filter({sqlQuery.GeometryFilterColumn}, ";
+                geomCondition += $"mdsys.sdo_geometry(2003,NULL,NULL, ";
+                geomCondition += $"mdsys.sdo_elem_info_array(1, 1003, 3), ";
+                geomCondition += $"mdsys.sdo_ordinate_array(:x1, :y1, :x2, :y2)), 'querytype=window') = 'TRUE'";
+
+                conditions = $"({conditions}) AND ({geomCondition})";
             }
 
             if (sqlQuery.NoPagination)
@@ -107,7 +135,7 @@
             {
                 string columnExpression = col.Unquoted ? col.Expression : QuoteIdentifier(col.Expression);
 
-                if (!sqlQuery.ExcludeAliases && col.ExpressionAlias != null)
+                if (!sqlQuery.ExcludeAliases && !String.IsNullOrEmpty(col.ExpressionAlias))
                     columnExpression += " " + QuoteIdentifier(col.ExpressionAlias);
 
                 return columnExpression;

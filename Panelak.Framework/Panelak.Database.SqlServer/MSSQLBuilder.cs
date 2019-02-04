@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
+    using System.Globalization;
 
     /// <summary>
     /// SQL builder for building SQL Server queries
@@ -54,6 +55,31 @@
             {
                 parameters = sqlQuery.Parameters;
                 conditions = "1 = 1";
+            }
+
+            if (sqlQuery.HasGeometryFilter)
+            {
+                if (!Connection.CheckIfColumnExists(sqlQuery.TableIdentifier, sqlQuery.GeometryFilterColumn))
+                    throw new InvalidOperationException($"Column {sqlQuery.TableIdentifier.Table}.{sqlQuery.GeometryFilterColumn} does not exist or is not accessible.");
+
+                var nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };
+
+                string x1 = sqlQuery.GeomertryFilterBboxX1.ToString(nfi);
+                string y1 = sqlQuery.GeomertryFilterBboxY1.ToString(nfi);
+                string x2 = sqlQuery.GeomertryFilterBboxX2.ToString(nfi);
+                string y2 = sqlQuery.GeomertryFilterBboxY2.ToString(nfi);
+
+                string polygon = $"POLYGON(({x1} {y1}, {x2} {y1}, {x2} {y2}, {x1} {y2}, {x1} {y1}))";
+
+                var geomParams = new List<MSSQLDbParameter>()
+                {
+                    new MSSQLDbParameter() { Name = "poly", Value = polygon, IsFilteringParameter = true },
+                };
+
+                parameters = parameters.Union(geomParams);
+                string geoColumnQuoted = QuoteIdentifier(sqlQuery.GeometryFilterColumn);
+                string geomCondition = $@"Geometry::STGeomFromText(@poly,0).STIntersects({geoColumnQuoted}) = 1";
+                conditions = $"({conditions}) AND ({geomCondition})";
             }
 
             if (sqlQuery.NoPagination)
@@ -106,8 +132,8 @@
             {
                 string columnExpression = QuoteIdentifier(col.Expression);
 
-                if (!sqlQuery.ExcludeAliases && col.ExpressionAlias != null)
-                    columnExpression += " " + QuoteIdentifier(col.ExpressionAlias);
+                if (!sqlQuery.ExcludeAliases && !String.IsNullOrEmpty(col.ExpressionAlias))
+                    columnExpression += " " + col.ExpressionAlias;
 
                 return columnExpression;
             }));

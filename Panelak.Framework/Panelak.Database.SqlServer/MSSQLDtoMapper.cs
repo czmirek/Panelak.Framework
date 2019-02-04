@@ -27,7 +27,7 @@
             var geom = dataValue as SqlGeometry;
             int? srid = (int?)geom.STSrid;
 
-            string wkt = geom.STAsText().ToString();
+            string wkt = geom.STAsText().ToSqlString().Value;
             var converter = new WktConverter();
             customMap = converter.FromWkt(srid, wkt);
             return true;
