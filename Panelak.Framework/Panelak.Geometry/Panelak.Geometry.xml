@@ -15,9 +15,9 @@
             </summary>
             <param name="start">Starting point</param>
             <param name="end">Ending point</param>
-            <param name="arcPoint">Middle arc point</param>
+            <param name="middle">Middle arc point</param>
         </member>
-        <member name="P:Panelak.Geometry.CircularCurve.ArcPoint">
+        <member name="P:Panelak.Geometry.CircularCurve.Middle">
             <summary>
             Gets the middle arc point
             </summary>

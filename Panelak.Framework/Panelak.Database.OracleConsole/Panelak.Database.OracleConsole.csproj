@@ -13,12 +13,12 @@
     <Product>Panelak.Database.OracleConsole</Product>
     <PackageId>Panelak.Database.OracleConsole</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Version>2.0.2</Version>
+    <Version>3.0.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Database.OracleConsole</Company>
     <Authors>Panelak.Database.OracleConsole</Authors>
-    <FileVersion>2.0.2</FileVersion>
-    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <FileVersion>3.0.0</FileVersion>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Database.OracleConsole\Panelak.Database.OracleConsole.xml</DocumentationFile>
@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Release'">
     <PackageReference Include="Panelak.Database.Oracle" Version="2.0.0" />
-    <PackageReference Include="Panelak.Geometry" Version="2.0.2" />
+    <PackageReference Include="Panelak.Geometry" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Panelak.Database.Oracle\Panelak.Database.Oracle.csproj" />
