@@ -39,7 +39,7 @@
 
             if (wktString.StartsWith("LINESTRING"))
             {
-                string values = wktString.Substring(wktString.IndexOf('(') + 1, wktString.Length - "LINESTRING".Length - 2);
+                string values = wktString.Substring(wktString.IndexOf('(') + 1, wktString.LastIndexOf(')') - wktString.IndexOf('(') - 1);
                 List<Line> lines = CreateLines(srid, values);
 
                 return new Path(lines.AsReadOnly());
