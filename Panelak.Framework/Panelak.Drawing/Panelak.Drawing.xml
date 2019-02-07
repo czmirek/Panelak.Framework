@@ -147,5 +147,11 @@
             </summary>
             <param name="p">Point geometry</param>
         </member>
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawPolygon(Panelak.Geometry.Polygon)">
+            <summary>
+            Draws a polygon geometry
+            </summary>
+            <param name="polygon">Polygon geometry</param>
+        </member>
     </members>
 </doc>

@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.1</LangVersion>
     <Description>Simple geometric shapes with Well-Known Text (WKT) converter</Description>
-    <PackageReleaseNotes>Bugfixes in wkt converter</PackageReleaseNotes>
+    <PackageReleaseNotes>Added a Polygon model and support for WKT polygons and multipolygons</PackageReleaseNotes>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
     <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
@@ -13,14 +13,14 @@
     <Product>Panelak.Geometry</Product>
     <PackageId>Panelak.Geometry</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
+    <Version>3.1.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Geometry</Company>
     <Authors>Panelak.Geometry</Authors>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Geometry.pfx</AssemblyOriginatorKeyFile>
-    <FileVersion>3.0.1</FileVersion>
-    <AssemblyVersion>3.0.1</AssemblyVersion>
+    <FileVersion>3.1.0</FileVersion>
+    <AssemblyVersion>3.1.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

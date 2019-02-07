@@ -163,6 +163,15 @@
         </member>
         <member name="M:Panelak.Geometry.WktConverter.FromWkt(System.Nullable{System.Int32},System.String)">
             <summary>
+            Converts the WKT string into a single geometry model or returns the first geometry model
+            in the list of geometries defined in WKT.
+            </summary>
+            <param name="srid">Coordinate system identification</param>
+            <param name="wktString">Well Known Text string</param>
+            <returns>Single or first geometry</returns>
+        </member>
+        <member name="M:Panelak.Geometry.WktConverter.FromWktToGeomCollection(System.Nullable{System.Int32},System.String)">
+            <summary>
             Converts the WKT string into a given Geometry.
             </summary>
             <param name="srid">Coordinate system identification</param>

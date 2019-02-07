@@ -117,6 +117,9 @@
 
                     if (geometry is Path path)
                         DrawPath(path);
+
+                    if (geometry is Polygon polygon)
+                        DrawPolygon(polygon);
                 }
 
                 using (var stream = new MemoryStream())
@@ -397,6 +400,16 @@
             float y = canvasHeight - (float)p.Y - PointRadius;
 
             graphics.DrawEllipse(drawingPen, x, y, PointDiameter, PointDiameter);
+        }
+
+        /// <summary>
+        /// Draws a polygon geometry
+        /// </summary>
+        /// <param name="polygon">Polygon geometry</param>
+        private void DrawPolygon(Polygon polygon)
+        {
+            foreach (Line line in polygon.Lines)
+                DrawLine(line);
         }
     }
 }

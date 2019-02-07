@@ -41,7 +41,6 @@
 
             if (wktString.StartsWith("POINT"))
             {
-
                 string regexValue = matches[0].Groups["points"].Value;
                 string[] values = regexValue.Split(' ');
 
