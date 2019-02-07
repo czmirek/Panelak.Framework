@@ -1,22 +1,22 @@
 ﻿namespace Panelak.Geometry
 {
+    using System.Linq;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
-    /// Path geometry consisting of multiple lines.
+    /// Single polygon geometry
     /// </summary>
-    public class Path : Geometry
+    public class Polygon : Geometry
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Path"/> class.
+        /// Initializes a new instance of the <see cref="Polygon"/> class.
         /// </summary>
         /// <param name="lines">List of line geometries.</param>
-        public Path(IList<Line> lines) => Lines = lines ?? throw new ArgumentNullException(nameof(lines));
+        public Polygon(IList<Line> lines) => Lines = lines ?? throw new ArgumentNullException(nameof(lines));
 
         /// <summary>
-        /// Gets the list of line geometries
+        /// Gets the list of line geometries for this polygon
         /// </summary>
         public IList<Line> Lines { get; }
 

@@ -116,6 +116,28 @@
             </summary>
             <returns>String representation of points in geometric object</returns>
         </member>
+        <member name="T:Panelak.Geometry.Polygon">
+            <summary>
+            Single polygon geometry
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.Polygon.#ctor(System.Collections.Generic.IList{Panelak.Geometry.Line})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Geometry.Polygon"/> class.
+            </summary>
+            <param name="lines">List of line geometries.</param>
+        </member>
+        <member name="P:Panelak.Geometry.Polygon.Lines">
+            <summary>
+            Gets the list of line geometries for this polygon
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.Polygon.ToString">
+            <summary>
+            Returns string representation of points in geometric object
+            </summary>
+            <returns>String representation of points in geometric object</returns>
+        </member>
         <member name="T:Panelak.Geometry.StraightLine">
             <summary>
             Represents a straight line between two points
@@ -130,7 +152,13 @@
         </member>
         <member name="T:Panelak.Geometry.WktConverter">
             <summary>
-            Converts WKT (Well-Known Text) to geometry models
+            Converts WKT (Well-Known Text) to geometry models.
+            Supports only 2D models, other dimensions are ignored.
+            </summary>
+        </member>
+        <member name="F:Panelak.Geometry.WktConverter.numberFormat">
+            <summary>
+            Default number format
             </summary>
         </member>
         <member name="M:Panelak.Geometry.WktConverter.FromWkt(System.Nullable{System.Int32},System.String)">

@@ -156,6 +156,26 @@
             <param name="tableIdentifier">Table identifier</param>
             <returns>Primary key</returns>
         </member>
+        <member name="T:Panelak.Database.SqlServer.MSSQLDbParameter">
+            <summary>
+            Sql Server SQL parameter of a SQL query
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.SqlServer.MSSQLDbParameter.Name">
+            <summary>
+            Gets name of the parameter
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.SqlServer.MSSQLDbParameter.Value">
+            <summary>
+            Gets value of the parameter
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.SqlServer.MSSQLDbParameter.IsFilteringParameter">
+            <summary>
+            Gets a value indicating whether the parameter affects number of returned results
+            </summary>
+        </member>
         <member name="T:Panelak.Database.SqlServer.MSSQLDbQuery">
             <summary>
             Local implementation of SQL query with parameters

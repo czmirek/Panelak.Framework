@@ -4,9 +4,11 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     /// <summary>
-    /// Converts WKT (Well-Known Text) to geometry models
+    /// Converts WKT (Well-Known Text) to geometry models.
+    /// Supports only 2D models, other dimensions are ignored.
     /// </summary>
     public class WktConverter
     {
@@ -16,47 +18,64 @@
         private readonly NumberFormatInfo numberFormat = new NumberFormatInfo() { NumberDecimalSeparator = "." };
 
         /// <summary>
+        /// Converts the WKT string into a single geometry model or returns the first geometry model
+        /// in the list of geometries defined in WKT.
+        /// </summary>
+        /// <param name="srid">Coordinate system identification</param>
+        /// <param name="wktString">Well Known Text string</param>
+        /// <returns>Single or first geometry</returns>
+        public Geometry FromWkt(int? srid, string wktString) => FromWktToGeomCollection(srid, wktString).FirstOrDefault();
+
+        /// <summary>
         /// Converts the WKT string into a given Geometry.
         /// </summary>
         /// <param name="srid">Coordinate system identification</param>
         /// <param name="wktString">Well Known Text string</param>
         /// <returns>The <see cref="Geometry"/></returns>
-        public Geometry FromWkt(int? srid, string wktString)
+        public IEnumerable<Geometry> FromWktToGeomCollection(int? srid, string wktString)
         {
+            var pointMatches = new Regex(@"\((?<points>[\d\s\-\,\.]+)\)");
+            MatchCollection matches = pointMatches.Matches(wktString);
+
             wktString = wktString.ToUpperInvariant().Trim();
 
             if (wktString.StartsWith("POINT"))
             {
-                string[] values = wktString
-                         .Substring(wktString.IndexOf('(') + 1, wktString.LastIndexOf(')') - wktString.IndexOf('(') - 1)
-                         .Split(' ');
+
+                string regexValue = matches[0].Groups["points"].Value;
+                string[] values = regexValue.Split(' ');
 
                 double x = Double.Parse(values[0], numberFormat);
                 double y = Double.Parse(values[1], numberFormat);
 
-                return new Point(x, y);
+                return new Geometry[] { new Point(x, y) };
             }
 
             if (wktString.StartsWith("LINESTRING"))
             {
-                string values = wktString.Substring(wktString.IndexOf('(') + 1, wktString.LastIndexOf(')') - wktString.IndexOf('(') - 1);
+                string values = matches[0].Groups["points"].Value;
                 List<Line> lines = CreateLines(srid, values);
 
-                return new Path(lines.AsReadOnly());
+                return new Geometry[] { new Path(lines.AsReadOnly()) };
             }
 
-            if (wktString.StartsWith("POLYGON"))
+            if (wktString.StartsWith("POLYGON") || wktString.StartsWith("MULTIPOLYGON"))
             {
-                int openPar = wktString.IndexOf('(', wktString.IndexOf('(') + 1);
-                int closePar = wktString.IndexOf(')');
-                int length = closePar - openPar;
+                var polygons = new List<Polygon>();
 
-                string values = wktString.Substring(openPar + 1, length - 1);
+                foreach (Match match in matches)
+                {
+                    string points = match.Groups["points"].Value;
+                    List<Line> lines = CreateLines(srid, points);
 
-                return new Path(CreateLines(srid, values));
+                    var poly = new Polygon(lines.AsReadOnly());
+                    polygons.Add(poly);
+                }
+
+                return polygons.AsReadOnly();
             }
 
-            throw new NotImplementedException();
+            throw new InvalidOperationException($"Unable to convert WKT string to a geometry model: {wktString.Substring(0, Math.Max(20, wktString.Length))}");
         }
 
         /// <summary>
