@@ -9,14 +9,10 @@ Current projects.
     - [Panelak.Database.SqlServer](https://www.nuget.org/packages/Panelak.Database.SqlServer/)
     - [Panelak.Database.Oracle](https://www.nuget.org/packages/Panelak.Database.Oracle/)
 
-2) .NET Core Oracle ORM with SDO_GEOMETRY support
-    - communicates with .NET Framework console with older Oracle references supporting UDT through a named pipe.
-    - [Panelak.Database.OracleConsole](https://www.nuget.org/packages/Panelak.Database.OracleConsole/)
-  
-3) SQL parsing
+2) SQL parsing
    - [Panelak.Sql.Parsing](https://www.nuget.org/packages/Panelak.Sql.Parsing/)
  
-4) Simple geometry and drawing
+3) Simple geometry and drawing
    - [Panelak.Geometry](https://www.nuget.org/packages/Panelak.Geometry/)
    - [Panelak.Drawing](https://www.nuget.org/packages/Panelak.Drawing/)
   
@@ -26,12 +22,6 @@ Current projects.
 ``Panelak.Database[.Oracle|.SqlServer]`` is a simple ORM for Sql Server and Oracle libraries able to accept parsed SQL queries from unsafe sources (using ``Panelak.Sql.Parsing``).
 
 ``Panelak.Sql.Parsing`` contains a tokenizer and parser of simple SQL queries and can convert an SQL condition expression (assuming some constraints) to a binary tree according to operator precedence and accounting for parentheses. This is useful for executing SQL queries from unsafe sources. The SQL queries must conform to a specific set of rules (e.g. no subqueries, no function expressions etc.)
-
-## [Oracle ORM](https://github.com/Panelak/Panelak.Framework/tree/master/Panelak.Framework/Panelak.Database.OracleConsole) with SDO_GEOMETRY support for .NET Core (hackish solution)
-
-This ORM does not really listen to any Oracle connection but on a named pipe of the console application [odac.client.x86.Console](https://github.com/Panelak/Panelak.Framework/tree/master/Panelak.Framework/odac.client.x86.Console) which accepts the connection string, PL/SQL query string and optionally serialized query parameters.
-
-The console app then simply launches the query against given connection and returns the result as serialized JSON. It's a .NET Framework 4.6.1. project with older Oracle DLLs which support UDTs. The console happily returns SDO_GEOMETRY columns as the [SdoGeometry](https://github.com/Panelak/Panelak.Framework/blob/master/Panelak.Framework/odac.client.x86.Console/SdoGeometry.cs) model.
 
 ## SELECT SQL parsing
 
