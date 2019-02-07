@@ -22,7 +22,7 @@
         public void LinestringTest()
         {
             var wktConverter = new WktConverter();
-            Geometry geom = wktConverter.FromWkt(null, "LINESTRING (-774857.75980217988 -1150781.5611234587, -775160.37494971533 -1150756.6329409846)");
+            Geometry geom = wktConverter.FromWkt(null, "LINESTRING (1 1, 3 3, 2 4, 2 0)");
             Assert.IsInstanceOf<Path>(geom);
 
             var p = geom as Path;
