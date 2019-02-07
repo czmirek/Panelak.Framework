@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
 
     /// <summary>
@@ -9,6 +10,11 @@
     /// </summary>
     public class WktConverter
     {
+        /// <summary>
+        /// Default number format
+        /// </summary>
+        private readonly NumberFormatInfo numberFormat = new NumberFormatInfo() { NumberDecimalSeparator = "." };
+
         /// <summary>
         /// Converts the WKT string into a given Geometry.
         /// </summary>
@@ -18,16 +24,15 @@
         public Geometry FromWkt(int? srid, string wktString)
         {
             wktString = wktString.ToUpperInvariant().Trim();
-            
-            //todo bug
+
             if (wktString.StartsWith("POINT"))
             {
                 string[] values = wktString
-                         .Substring(wktString.IndexOf('(') + 1, wktString.Length - "POINT".Length - 2)
+                         .Substring(wktString.IndexOf('(') + 1, wktString.LastIndexOf(')') - wktString.IndexOf('(') - 1)
                          .Split(' ');
 
-                double x = Double.Parse(values[0]);
-                double y = Double.Parse(values[1]);
+                double x = Double.Parse(values[0], numberFormat);
+                double y = Double.Parse(values[1], numberFormat);
 
                 return new Point(x, y);
             }
@@ -69,8 +74,8 @@
             {
                 string[] xyStr = s.Trim(' ').Split(' ');
 
-                double x = Double.Parse(xyStr[0]);
-                double y = Double.Parse(xyStr[1]);
+                double x = Double.Parse(xyStr[0], numberFormat);
+                double y = Double.Parse(xyStr[1], numberFormat);
                 return (x, y);
             }).ToList();
 

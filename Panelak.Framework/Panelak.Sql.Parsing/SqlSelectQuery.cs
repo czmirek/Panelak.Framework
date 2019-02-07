@@ -86,36 +86,6 @@
         public ISqlConditionExpression Condition { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether the query contains a geometry filter.
-        /// </summary>
-        public bool HasGeometryFilter { get; private set; }
-
-        /// <summary>
-        /// Gets the geometry filter column
-        /// </summary>
-        public string GeometryFilterColumn { get; private set; }
-
-        /// <summary>
-        /// Gets the geomtery filter bounding box bottom left X coordinate.
-        /// </summary>
-        public double GeomertryFilterBboxX1 { get; private set; }
-
-        /// <summary>
-        /// Gets the geomtery filter bounding box bottom left Y coordinate.
-        /// </summary>
-        public double GeomertryFilterBboxY1 { get; private set; }
-
-        /// <summary>
-        /// Gets the geomtery filter bounding box top right X coordinate.
-        /// </summary>
-        public double GeomertryFilterBboxX2 { get; private set; }
-
-        /// <summary>
-        /// Gets the geomtery filter bounding box top right Y coordinate.
-        /// </summary>
-        public double GeomertryFilterBboxY2 { get; private set; }
-
-        /// <summary>
         /// Appends new expression in AND node to the root with existing expression
         /// or directly as the root.
         /// </summary>
@@ -126,25 +96,6 @@
                 Condition = expression;
             else
                 Condition = new And(Condition, expression);
-        }
-
-        /// <summary>
-        /// Configures the query to append a geometry bounding-box filter for given <paramref name="geometryColumn"/>
-        /// with given coordinates.
-        /// </summary>
-        /// <param name="geometryColumn">Geometry column identifier</param>
-        /// <param name="x1">Bounding box left bottom X</param>
-        /// <param name="y1">Bounding box left bottom Y</param>
-        /// <param name="x2">Bounding box top right X</param>
-        /// <param name="y2">Bounding box top right Y</param>
-        public void AndGeomInBbox(string geometryColumn, double x1, double y1, double x2, double y2)
-        {
-            HasGeometryFilter = true;
-            GeometryFilterColumn = geometryColumn;
-            GeomertryFilterBboxX1 = x1;
-            GeomertryFilterBboxY1 = y1;
-            GeomertryFilterBboxX2 = x2;
-            GeomertryFilterBboxY2 = y2;
         }
 
         /// <summary>

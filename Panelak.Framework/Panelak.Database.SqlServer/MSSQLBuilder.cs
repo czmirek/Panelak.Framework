@@ -57,31 +57,6 @@
                 conditions = "1 = 1";
             }
 
-            if (sqlQuery.HasGeometryFilter)
-            {
-                if (!Connection.CheckIfColumnExists(sqlQuery.TableIdentifier, sqlQuery.GeometryFilterColumn))
-                    throw new InvalidOperationException($"Column {sqlQuery.TableIdentifier.Table}.{sqlQuery.GeometryFilterColumn} does not exist or is not accessible.");
-
-                var nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };
-
-                string x1 = sqlQuery.GeomertryFilterBboxX1.ToString(nfi);
-                string y1 = sqlQuery.GeomertryFilterBboxY1.ToString(nfi);
-                string x2 = sqlQuery.GeomertryFilterBboxX2.ToString(nfi);
-                string y2 = sqlQuery.GeomertryFilterBboxY2.ToString(nfi);
-
-                string polygon = $"POLYGON(({x1} {y1}, {x2} {y1}, {x2} {y2}, {x1} {y2}, {x1} {y1}))";
-
-                var geomParams = new List<MSSQLDbParameter>()
-                {
-                    new MSSQLDbParameter() { Name = "poly", Value = polygon, IsFilteringParameter = true },
-                };
-
-                parameters = parameters.Union(geomParams);
-                string geoColumnQuoted = QuoteIdentifier(sqlQuery.GeometryFilterColumn);
-                string geomCondition = $@"Geometry::STGeomFromText(@poly,0).STIntersects({geoColumnQuoted}) = 1";
-                conditions = $"({conditions}) AND ({geomCondition})";
-            }
-
             if (sqlQuery.NoPagination)
             {
                 string noPaginationQuery = $"SELECT {columns} FROM {table} WHERE({conditions})";
