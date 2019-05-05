@@ -57,7 +57,7 @@
         /// <summary>
         /// List of geometric shapes in the canvas
         /// </summary>
-        private List<Geometry> shapes = new List<Geometry>();
+        private readonly List<IGeometry> shapes = new List<IGeometry>();
 
         /// <summary>
         /// <see cref="System.Drawing.Graphics"/> instance for drawing.
@@ -81,7 +81,7 @@
         /// Adds a geometry shape to the canvas
         /// </summary>
         /// <param name="geometry">Geometry shape to be drawn</param>
-        public void AddShape(Geometry geometry) => shapes.Add(geometry);
+        public void AddShape(IGeometry geometry) => shapes.Add(geometry);
 
         /// <summary>
         /// Returns a PNG picture
@@ -107,12 +107,12 @@
             {
                 graphics.Clear(backgroundColor);
 
-                foreach (Geometry geometry in shapes)
+                foreach (IGeometry geometry in shapes)
                 {
                     if (geometry is Point point)
                         DrawPoint(point);
 
-                    if (geometry is Line line)
+                    if (geometry is ILine line)
                         DrawLine(line);
 
                     if (geometry is Path path)
@@ -136,7 +136,7 @@
         /// </summary>
         /// <param name="line">Input line</param>
         /// <returns>Perpendicular line to the input line</returns>
-        private Line CreatePerpendicularLineInBox(Line line)
+        private ILine CreatePerpendicularLineInBox(ILine line)
         {
             Point a = line.Start;
             Point b = line.End;
@@ -176,10 +176,10 @@
             double bottom_x = -y_intercept / invertedSlope;
             double bottom_y = 0;
             var bottom = new Point(bottom_x, bottom_y);
-            
-            Point startPoint = null, endPoint = null;
 
-            if(left_y >= 0 && left_y <= canvasHeight)
+            Point startPoint, endPoint = new Point(0, 0);
+
+            if (left_y >= 0 && left_y <= canvasHeight)
             {
                 startPoint = new Point(left_x, left_y);
 
@@ -190,7 +190,7 @@
                 else if (bottom_x >= 0 && bottom_x <= canvasWidth)
                     endPoint = bottom;
             }
-            else if(top_x >= 0 && top_x <= canvasWidth)
+            else if (top_x >= 0 && top_x <= canvasWidth)
             {
                 startPoint = new Point(top_x, top_y);
 
@@ -223,6 +223,8 @@
                 else if (right_y >= 0 && right_y <= canvasHeight)
                     endPoint = right;
             }
+            else
+                throw new InvalidOperationException();
             
 
             return new StraightLine(startPoint, endPoint);
@@ -234,7 +236,7 @@
         /// <param name="p1">First line</param>
         /// <param name="p2">Second line</param>
         /// <returns>Intersection point</returns>
-        private Point FindIntersection(Line p1, Line p2)
+        private Point FindIntersection(ILine p1, ILine p2)
         {
             Point s1 = p1.Start;
             Point e1 = p1.End;
@@ -295,8 +297,8 @@
             Point b = circularCurve.Middle;
             Point c = circularCurve.End;
 
-            Line p1 = CreatePerpendicularLineInBox(new StraightLine(a, b));
-            Line p2 = CreatePerpendicularLineInBox(new StraightLine(b, c));
+            ILine p1 = CreatePerpendicularLineInBox(new StraightLine(a, b));
+            ILine p2 = CreatePerpendicularLineInBox(new StraightLine(b, c));
 
             Point intersection = FindIntersection(p1, p2);
 
@@ -359,7 +361,7 @@
         /// <param name="path">Path geometry</param>
         private void DrawPath(Path path)
         {
-            foreach (Line line in path.Lines)
+            foreach (ILine line in path.Lines)
                 DrawLine(line);
         }
 
@@ -367,7 +369,7 @@
         /// Draws a line geometry
         /// </summary>
         /// <param name="line">Line geometry</param>
-        private void DrawLine(Line line)
+        private void DrawLine(ILine line)
         {
             if (line is CircularCurve circularCurve)
                 DrawCircularCurve(circularCurve);
@@ -379,7 +381,7 @@
         /// Draws a straight line geometry
         /// </summary>
         /// <param name="line">Straight line geometry</param>
-        private void DrawStraightLine(Line line)
+        private void DrawStraightLine(ILine line)
         {
             float x1 = (float)line.Start.X;
             float y1 = canvasHeight - (float)line.Start.Y;
@@ -408,7 +410,7 @@
         /// <param name="polygon">Polygon geometry</param>
         private void DrawPolygon(Polygon polygon)
         {
-            foreach (Line line in polygon.Lines)
+            foreach (ILine line in polygon.Lines)
                 DrawLine(line);
         }
     }

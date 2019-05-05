@@ -3,11 +3,11 @@
     /// <summary>
     /// Geometry shape
     /// </summary>
-    public abstract class Geometry
+    public interface IGeometry
     {
         /// <summary>
         /// Gets the coordinate system identification
         /// </summary>
-        public int? Srid { get; }
+        int? Srid { get; }
     }
 }

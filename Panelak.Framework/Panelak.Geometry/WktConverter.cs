@@ -24,7 +24,7 @@
         /// <param name="srid">Coordinate system identification</param>
         /// <param name="wktString">Well Known Text string</param>
         /// <returns>Single or first geometry</returns>
-        public Geometry FromWkt(int? srid, string wktString) => FromWktToGeomCollection(srid, wktString).FirstOrDefault();
+        public IGeometry FromWkt(int? srid, string wktString) => FromWktToGeomCollection(srid, wktString).FirstOrDefault();
 
         /// <summary>
         /// Converts the WKT string into a given Geometry.
@@ -32,7 +32,7 @@
         /// <param name="srid">Coordinate system identification</param>
         /// <param name="wktString">Well Known Text string</param>
         /// <returns>The <see cref="Geometry"/></returns>
-        public IEnumerable<Geometry> FromWktToGeomCollection(int? srid, string wktString)
+        public IEnumerable<IGeometry> FromWktToGeomCollection(int? srid, string wktString)
         {
             var pointMatches = new Regex(@"\((?<points>[\d\s\-\,\.]+)\)");
             MatchCollection matches = pointMatches.Matches(wktString);
@@ -47,15 +47,15 @@
                 double x = Double.Parse(values[0], numberFormat);
                 double y = Double.Parse(values[1], numberFormat);
 
-                return new Geometry[] { new Point(x, y) };
+                return new IGeometry[] { new Point(x, y) };
             }
 
             if (wktString.StartsWith("LINESTRING"))
             {
                 string values = matches[0].Groups["points"].Value;
-                List<Line> lines = CreateLines(srid, values);
+                List<ILine> lines = CreateLines(srid, values);
 
-                return new Geometry[] { new Path(lines.AsReadOnly()) };
+                return new IGeometry[] { new Path(lines.AsReadOnly()) };
             }
 
             if (wktString.StartsWith("POLYGON") || wktString.StartsWith("MULTIPOLYGON"))
@@ -65,13 +65,13 @@
                 foreach (Match match in matches)
                 {
                     string points = match.Groups["points"].Value;
-                    List<Line> lines = CreateLines(srid, points);
+                    List<ILine> lines = CreateLines(srid, points);
 
                     var poly = new Polygon(lines.AsReadOnly());
                     polygons.Add(poly);
                 }
 
-                return polygons.AsReadOnly();
+                return polygons.AsReadOnly().Select(p => p as IGeometry);
             }
 
             throw new InvalidOperationException($"Unable to convert WKT string to a geometry model: {wktString.Substring(0, Math.Max(20, wktString.Length))}");
@@ -83,9 +83,9 @@
         /// <param name="srid">Coordinate system ID</param>
         /// <param name="pointValues">WKT points</param>
         /// <returns>List of line geometries</returns>
-        private List<Line> CreateLines(int? srid, string pointValues)
+        private List<ILine> CreateLines(int? srid, string pointValues)
         {
-            var lines = new List<Line>();
+            var lines = new List<ILine>();
             string[] points = pointValues.Split(',');
 
             var numPoints = points.Select(s =>

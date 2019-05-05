@@ -682,13 +682,20 @@
             <param name="defaultColumnSortOrder">Sort order of default column</param>
             <param name="inputSortByColumns">Columns with sorting from the input</param>
         </member>
-        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.InsertColumn(System.String,System.Boolean,Panelak.Sql.SortOrder)">
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.InsertColumn(System.String,System.Boolean,Panelak.Sql.SortOrder,System.String)">
             <summary>
             Inserts a new column into the list of SELECT query columns
             </summary>
             <param name="name">Name of the column</param>
             <param name="include">Whether the column has to be included in the SELECT clause</param>
             <param name="sortOrder">Sorting of the column</param>
+            <param name="alias">Optional column alias</param>
+        </member>
+        <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.RemoveColumn(System.String)">
+            <summary>
+            Removes a column by name
+            </summary>
+            <param name="name">Name of the column to remove</param>
         </member>
         <member name="M:Panelak.Sql.Parsing.SqlSelectQuery.SetPrimaryKey(System.String)">
             <summary>

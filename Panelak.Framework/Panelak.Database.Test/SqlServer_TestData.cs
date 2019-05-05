@@ -33,6 +33,7 @@
         [Test]
         public void SpatialFilterTest()
         {
+            /*
             var connection = new MSSQLConnection("Server=127.0.0.1;Database=INGR_QUERYSERVQADATA;User Id=sa;Password=Heslo12345Heslo;", log);
             var parser = new SqlParser(log);
             Sql.ISqlSelectQuery parsedQuery = parser.ParseSqlQuery("SELECT G3E_GEOMETRY_SPA geometry_notnull FROM IQS_FID_A33");
@@ -40,7 +41,7 @@
             parsedQuery.NoPagination = true;
             Sql.IParameterizedQuery parametrizedQuery = connection.BuildQuery(parsedQuery);
 
-            IEnumerable<MSSQLGeometryTable> data = connection.GetResult<MSSQLGeometryTable>(parametrizedQuery);
+            IEnumerable<MSSQLGeometryTable> data = connection.GetResult<MSSQLGeometryTable>(parametrizedQuery);*/
             //IEnumerable<MSSQLGeometryTable> data = connection.GetResult<MSSQLGeometryTable>("SELECT * FROM GeometryTestTable");
             //Assert.AreEqual(3, data.Count());
         }

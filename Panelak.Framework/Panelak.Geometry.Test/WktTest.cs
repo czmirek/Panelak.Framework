@@ -11,13 +11,13 @@
         public void Point_Test()
         {
             var wktConverter = new WktConverter();
-            Geometry geom = wktConverter.FromWkt(null, "POINT(1 2)").FirstOrDefault();
-            Geometry geom2 = wktConverter.FromWkt(null, "POINT(-7330.778696 4662.77960)").FirstOrDefault();
+            IGeometry geom = wktConverter.FromWkt(null, "POINT(1 2)");
+            IGeometry geom2 = wktConverter.FromWkt(null, "POINT(-7330.778696 4662.77960)");
             Assert.IsInstanceOf<Point>(geom);
             Assert.IsInstanceOf<Point>(geom2);
 
-            var p = geom as Point;
-            var p2= geom2 as Point;
+            var p = (Point)geom;
+            var p2= (Point)geom2;
 
             Assert.IsNull(p.Srid);
             AssertPoint(1, 2, p);
@@ -29,10 +29,10 @@
         public void LinestringTest()
         {
             var wktConverter = new WktConverter();
-            Geometry geom = wktConverter.FromWkt(null, "LINESTRING (1 1, 3 3, 2 4, 2 0)").FirstOrDefault();
+            IGeometry geom = wktConverter.FromWkt(null, "LINESTRING (1 1, 3 3, 2 4, 2 0)");
             Assert.IsInstanceOf<Path>(geom);
 
-            var p = geom as Path;
+            var p = (Path)geom;
 
             Assert.IsNull(p.Srid);
             Assert.AreEqual(3, p.Lines.Count);
@@ -45,10 +45,10 @@
         public void PolygonTest()
         {
             var wktConverter = new WktConverter();
-            Geometry geom = wktConverter.FromWkt(null, "POLYGON((1 1, 3 3, 3 1, 1 1))").FirstOrDefault();
+            IGeometry geom = wktConverter.FromWkt(null, "POLYGON((1 1, 3 3, 3 1, 1 1))");
             Assert.IsInstanceOf<Polygon>(geom);
 
-            var p = geom as Polygon;
+            var p = (Polygon)geom;
             Assert.IsNull(p.Srid);
             Assert.AreEqual(3, p.Lines.Count);
             AssertLine(1, 1, 3, 3, p.Lines[0]);
@@ -61,16 +61,16 @@
         public void MultipolygonTest()
         {
             var wktConverter = new WktConverter();
-            var geometries = wktConverter.FromWkt(null, "MULTIPOLYGON(((0 -0.7856336, 0 3, 3 3, 3 0, 0 -0.7856336), (1 1, 1 2, 2 1, 1 1)), ((9 9, 9 10, 10 9, 9 9)))")
+            var geometries = wktConverter.FromWktToGeomCollection(null, "MULTIPOLYGON(((0 -0.7856336, 0 3, 3 3, 3 0, 0 -0.7856336), (1 1, 1 2, 2 1, 1 1)), ((9 9, 9 10, 10 9, 9 9)))")
                                          .ToList();
 
             Assert.IsInstanceOf<Polygon>(geometries[0]);
             Assert.IsInstanceOf<Polygon>(geometries[1]);
             Assert.IsInstanceOf<Polygon>(geometries[2]);
 
-            var p1 = geometries[0] as Polygon;
-            var p2 = geometries[1] as Polygon;
-            var p3 = geometries[2] as Polygon;
+            var p1 = (Polygon)geometries[0];
+            var p2 = (Polygon)geometries[1];
+            var p3 = (Polygon)geometries[2];
 
             Assert.AreEqual(4, p1.Lines.Count);
             Assert.AreEqual(3, p2.Lines.Count);
@@ -95,7 +95,7 @@
             Assert.AreEqual(y, p.Y);
         }
 
-        public void AssertLine(double sx, double sy, double ex, double ey, Line l)
+        public void AssertLine(double sx, double sy, double ex, double ey, ILine l)
         {
             AssertPoint(sx, sy, l.Start);
             AssertPoint(ex, ey, l.End);

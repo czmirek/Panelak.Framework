@@ -17,9 +17,33 @@
             <param name="end">Ending point</param>
             <param name="middle">Middle arc point</param>
         </member>
+        <member name="M:Panelak.Geometry.CircularCurve.#ctor(Panelak.Geometry.Point,Panelak.Geometry.Point,Panelak.Geometry.Point,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Geometry.CircularCurve"/> class.
+            </summary>
+            <param name="start">Starting point</param>
+            <param name="end">Ending point</param>
+            <param name="middle">Middle arc point</param>
+            <param name="srid">Coordinate system ID</param>
+        </member>
         <member name="P:Panelak.Geometry.CircularCurve.Middle">
             <summary>
             Gets the middle arc point
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.CircularCurve.Start">
+            <summary>
+            Gets the starting arc point
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.CircularCurve.End">
+            <summary>
+            Gets the ending arc point
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.CircularCurve.Srid">
+            <summary>
+            Gets the coordinate system ID
             </summary>
         </member>
         <member name="M:Panelak.Geometry.CircularCurve.ToString">
@@ -28,58 +52,57 @@
             </summary>
             <returns>String representation of points in geometric object</returns>
         </member>
-        <member name="T:Panelak.Geometry.Geometry">
+        <member name="T:Panelak.Geometry.IGeometry">
             <summary>
             Geometry shape
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Geometry.Srid">
+        <member name="P:Panelak.Geometry.IGeometry.Srid">
             <summary>
             Gets the coordinate system identification
             </summary>
         </member>
-        <member name="T:Panelak.Geometry.Line">
+        <member name="T:Panelak.Geometry.ILine">
             <summary>
             Line geometry shape consisting of two points
             </summary>
         </member>
-        <member name="M:Panelak.Geometry.Line.#ctor(Panelak.Geometry.Point,Panelak.Geometry.Point)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Panelak.Geometry.Line"/> class.
-            </summary>
-            <param name="start">The start <see cref="T:Panelak.Geometry.Point"/></param>
-            <param name="end">The end <see cref="T:Panelak.Geometry.Point"/></param>
-        </member>
-        <member name="P:Panelak.Geometry.Line.Start">
+        <member name="P:Panelak.Geometry.ILine.Start">
             <summary>
             Gets the start point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Line.End">
+        <member name="P:Panelak.Geometry.ILine.End">
             <summary>
             Gets the end point
             </summary>
-        </member>
-        <member name="M:Panelak.Geometry.Line.ToString">
-            <summary>
-            Returns string representation of points in geometric object
-            </summary>
-            <returns>String representation of points in geometric object</returns>
         </member>
         <member name="T:Panelak.Geometry.Path">
             <summary>
             Path geometry consisting of multiple lines.
             </summary>
         </member>
-        <member name="M:Panelak.Geometry.Path.#ctor(System.Collections.Generic.IList{Panelak.Geometry.Line})">
+        <member name="M:Panelak.Geometry.Path.#ctor(System.Collections.Generic.IList{Panelak.Geometry.ILine})">
             <summary>
             Initializes a new instance of the <see cref="T:Panelak.Geometry.Path"/> class.
             </summary>
             <param name="lines">List of line geometries.</param>
         </member>
+        <member name="M:Panelak.Geometry.Path.#ctor(System.Collections.Generic.IList{Panelak.Geometry.ILine},System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Geometry.Path"/> class.
+            </summary>
+            <param name="lines">List of line geometries.</param>
+            <param name="srid">Coordinate system ID</param>
+        </member>
         <member name="P:Panelak.Geometry.Path.Lines">
             <summary>
             Gets the list of line geometries
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.Path.Srid">
+            <summary>
+            Gets the coordinate system ID
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Path.ToString">
@@ -100,6 +123,14 @@
             <param name="x">The x coordinate</param>
             <param name="y">The y coordinate</param>
         </member>
+        <member name="M:Panelak.Geometry.Point.#ctor(System.Double,System.Double,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Geometry.Point"/> class.
+            </summary>
+            <param name="x">The x coordinate</param>
+            <param name="y">The y coordinate</param>
+            <param name="srid">Coordinate system ID</param>
+        </member>
         <member name="P:Panelak.Geometry.Point.X">
             <summary>
             Gets the X
@@ -108,6 +139,11 @@
         <member name="P:Panelak.Geometry.Point.Y">
             <summary>
             Gets the Y
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.Point.Srid">
+            <summary>
+            Gets the Srid
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Point.ToString">
@@ -121,15 +157,27 @@
             Single polygon geometry
             </summary>
         </member>
-        <member name="M:Panelak.Geometry.Polygon.#ctor(System.Collections.Generic.IList{Panelak.Geometry.Line})">
+        <member name="M:Panelak.Geometry.Polygon.#ctor(System.Collections.Generic.IList{Panelak.Geometry.ILine})">
             <summary>
             Initializes a new instance of the <see cref="T:Panelak.Geometry.Polygon"/> class.
             </summary>
             <param name="lines">List of line geometries.</param>
         </member>
+        <member name="M:Panelak.Geometry.Polygon.#ctor(System.Collections.Generic.IList{Panelak.Geometry.ILine},System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Geometry.Polygon"/> class.
+            </summary>
+            <param name="lines">List of line geometries.</param>
+            <param name="srid">Coordinate system ID</param>
+        </member>
         <member name="P:Panelak.Geometry.Polygon.Lines">
             <summary>
             Gets the list of line geometries for this polygon
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.Polygon.Srid">
+            <summary>
+            Gets the coordinate system ID
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Polygon.ToString">
@@ -149,6 +197,29 @@
             </summary>
             <param name="start">The start <see cref="T:Panelak.Geometry.Point"/></param>
             <param name="end">The end <see cref="T:Panelak.Geometry.Point"/></param>
+        </member>
+        <member name="M:Panelak.Geometry.StraightLine.#ctor(Panelak.Geometry.Point,Panelak.Geometry.Point,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Panelak.Geometry.StraightLine"/> class.
+            </summary>
+            <param name="start">The start <see cref="T:Panelak.Geometry.Point"/></param>
+            <param name="end">The end <see cref="T:Panelak.Geometry.Point"/></param>
+            <param name="srid">Coordinate system ID</param>
+        </member>
+        <member name="P:Panelak.Geometry.StraightLine.Start">
+            <summary>
+            Gets the start point
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.StraightLine.End">
+            <summary>
+            Gets the end point
+            </summary>
+        </member>
+        <member name="P:Panelak.Geometry.StraightLine.Srid">
+            <summary>
+            Gets the coordinate system ID
+            </summary>
         </member>
         <member name="T:Panelak.Geometry.WktConverter">
             <summary>
@@ -176,7 +247,7 @@
             </summary>
             <param name="srid">Coordinate system identification</param>
             <param name="wktString">Well Known Text string</param>
-            <returns>The <see cref="T:Panelak.Geometry.Geometry"/></returns>
+            <returns>The <see cref="N:Panelak.Geometry"/></returns>
         </member>
         <member name="M:Panelak.Geometry.WktConverter.CreateLines(System.Nullable{System.Int32},System.String)">
             <summary>

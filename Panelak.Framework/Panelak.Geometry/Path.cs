@@ -7,18 +7,38 @@
     /// <summary>
     /// Path geometry consisting of multiple lines.
     /// </summary>
-    public class Path : Geometry
+    public struct Path : IGeometry
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Path"/> class.
         /// </summary>
         /// <param name="lines">List of line geometries.</param>
-        public Path(IList<Line> lines) => Lines = lines ?? throw new ArgumentNullException(nameof(lines));
+        public Path(IList<ILine> lines)
+        {
+            Lines = lines ?? throw new ArgumentNullException(nameof(lines));
+            Srid = null;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Path"/> class.
+        /// </summary>
+        /// <param name="lines">List of line geometries.</param>
+        /// <param name="srid">Coordinate system ID</param>
+        public Path(IList<ILine> lines, int? srid)
+        {
+            Lines = lines ?? throw new ArgumentNullException(nameof(lines));
+            Srid = srid;
+        }
 
         /// <summary>
         /// Gets the list of line geometries
         /// </summary>
-        public IList<Line> Lines { get; }
+        public IList<ILine> Lines { get; }
+
+        /// <summary>
+        /// Gets the coordinate system ID
+        /// </summary>
+        public int? Srid { get; }
 
         /// <summary>
         /// Returns string representation of points in geometric object
