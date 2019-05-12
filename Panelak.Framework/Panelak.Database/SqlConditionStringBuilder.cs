@@ -55,6 +55,13 @@
         protected abstract string GetQuotedIdentifier(string identifier);
 
         /// <summary>
+        /// Creates a RDBMS specific spatial expression.
+        /// </summary>
+        /// <param name="spatialExpression">Soatuak exoressuib</param>
+        /// <returns>RDBMS specific SQL expression</returns>
+        protected abstract string GetSpatialExpression(ISqlConditionSpatialExpression spatialExpression);
+
+        /// <summary>
         /// Build the condition SQL string out of the binary tree expression
         /// </summary>
         /// <param name="expression">Binary tree expression condition</param>
@@ -138,6 +145,13 @@
                         string leftExpr = BuildString(lrOp.LeftExpression);
                         string rightExpr = BuildString(lrOp.RightExpression);
                         sqlCondition.Append($"({leftExpr} {lrOp.Operator} {rightExpr})");
+                        break;
+                    }
+
+                case ISqlConditionSpatialExpression spatialExpression:
+                    {
+                        string sqlStr = GetSpatialExpression(spatialExpression);
+                        sqlCondition.Append(sqlStr);
                         break;
                     }
 

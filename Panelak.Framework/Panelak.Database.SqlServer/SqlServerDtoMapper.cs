@@ -8,7 +8,7 @@
     /// <summary>
     /// Default implementation of the SQL results in the <see cref="IDataReader"/> to the DTO in a type parameter.
     /// </summary>
-    public class MSSQLDtoMapper : DefaultDtoMapper
+    public class SqlServerDtoMapper : DefaultDtoMapper
     {
         /// <summary>
         /// SQL Server DTO mapper accounting for SQL

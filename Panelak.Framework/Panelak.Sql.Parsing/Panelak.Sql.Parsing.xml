@@ -16,30 +16,30 @@
             <param name="left">Expression on the left side of the AND operator</param>
             <param name="right">Expression on the right side of the AND operator</param>
         </member>
-        <member name="T:Panelak.Sql.Parsing.ComparisonExpression">
+        <member name="T:Panelak.Sql.Parsing.ColumnComparisonExpression">
             <summary>
             Abstraction for SQL operators in the form [Column] [Operator] [Literal].
             </summary>
         </member>
-        <member name="M:Panelak.Sql.Parsing.ComparisonExpression.#ctor(System.String,System.String,System.String)">
+        <member name="M:Panelak.Sql.Parsing.ColumnComparisonExpression.#ctor(System.String,System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.ComparisonExpression" /> class.
+            Initializes a new instance of the <see cref="T:Panelak.Sql.Parsing.ColumnComparisonExpression" /> class.
             </summary>
             <param name="column">Column identifier</param>
             <param name="operator">SQL comparison operator</param>
             <param name="literal">Literal value</param>
         </member>
-        <member name="P:Panelak.Sql.Parsing.ComparisonExpression.Column">
+        <member name="P:Panelak.Sql.Parsing.ColumnComparisonExpression.Column">
             <summary>
             Gets a column identifier on the left side of the SQL operator
             </summary>
         </member>
-        <member name="P:Panelak.Sql.Parsing.ComparisonExpression.Operator">
+        <member name="P:Panelak.Sql.Parsing.ColumnComparisonExpression.Operator">
             <summary>
             Gets an SQL comparison operator
             </summary>
         </member>
-        <member name="P:Panelak.Sql.Parsing.ComparisonExpression.Literal">
+        <member name="P:Panelak.Sql.Parsing.ColumnComparisonExpression.Literal">
             <summary>
             Gets a literal value on the right side of the SQL operator
             </summary>
@@ -450,7 +450,7 @@
         </member>
         <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.BracketedIdentifier">
             <summary>
-            Regex used for parsing a bracketed column identifier (for MSSQL)
+            Regex used for parsing a bracketed column identifier (for SqlServer)
             </summary>
         </member>
         <member name="F:Panelak.Sql.Parsing.SqlConditionTokenizer.LiteralRx">

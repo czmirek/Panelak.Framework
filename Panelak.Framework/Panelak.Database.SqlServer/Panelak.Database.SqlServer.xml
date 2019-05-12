@@ -4,88 +4,88 @@
         <name>Panelak.Database.SqlServer</name>
     </assembly>
     <members>
-        <member name="T:Panelak.Database.SqlServer.MSSQLBuilder">
+        <member name="T:Panelak.Database.SqlServer.SqlServerBuilder">
             <summary>
             SQL builder for building SQL Server queries
             </summary>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLBuilder.#ctor(Panelak.Database.SqlServer.MSSQLConnection,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerBuilder.#ctor(Panelak.Database.SqlServer.SqlServerConnection,Microsoft.Extensions.Logging.ILogger)">
             <summary>
-            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.MSSQLBuilder"/> class.
+            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.SqlServerBuilder"/> class.
             </summary>
             <param name="connection">SQL Server connection</param>
             <param name="log">Logger instance</param>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLBuilder.BuildQuery(Panelak.Sql.ISqlSelectQuery)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerBuilder.BuildQuery(Panelak.Sql.ISqlSelectQuery)">
             <summary>
             Creates an SQL Server parameterized query with an SQL text from given <see cref="T:Panelak.Sql.ISqlSelectQuery"/>
             </summary>
             <param name="sqlQuery">SQL query model</param>
             <returns>Parameterized query model</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLBuilder.GetColumns(Panelak.Sql.ISqlSelectQuery)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerBuilder.GetColumns(Panelak.Sql.ISqlSelectQuery)">
             <summary>
             Returns string representation of SQL Server quoted columns
             </summary>
             <param name="sqlQuery">SQL query model</param>
             <returns>Joined string of SQL SELECT columns</returns>
         </member>
-        <member name="T:Panelak.Database.SqlServer.MSSQLConditionStringBuilder">
+        <member name="T:Panelak.Database.SqlServer.SqlServerConditionStringBuilder">
             <summary>
             SQL Server condition string builder
             </summary>
         </member>
-        <member name="F:Panelak.Database.SqlServer.MSSQLConditionStringBuilder.builder">
+        <member name="F:Panelak.Database.SqlServer.SqlServerConditionStringBuilder.builder">
             <summary>
             System SQL command builder
             </summary>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConditionStringBuilder.GetParamName(System.String)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConditionStringBuilder.GetParamName(System.String)">
             <summary>
             Returns SQL Server prefixed parameter name
             </summary>
             <param name="name">Parameter name</param>
             <returns>SQL Server prefixed parameter name</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConditionStringBuilder.GetQuotedIdentifier(System.String)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConditionStringBuilder.GetQuotedIdentifier(System.String)">
             <summary>
             Returns SQL Server quoted column identifier
             </summary>
             <param name="identifier">Column identifier</param>
             <returns>SQL Server quoted column identifier</returns>
         </member>
-        <member name="T:Panelak.Database.SqlServer.MSSQLConnection">
+        <member name="T:Panelak.Database.SqlServer.SqlServerConnection">
             <summary>
             SQL Server specific connection driver
             </summary>
         </member>
-        <member name="F:Panelak.Database.SqlServer.MSSQLConnection.sqlBuilder">
+        <member name="F:Panelak.Database.SqlServer.SqlServerConnection.sqlBuilder">
             <summary>
             SQL Server query builder
             </summary>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.#ctor(System.String,Panelak.Database.IDtoMapper,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.#ctor(System.String,Panelak.Database.IDtoMapper,Microsoft.Extensions.Logging.ILogger)">
             <summary>
-            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.MSSQLConnection"/> class.
+            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.SqlServerConnection"/> class.
             </summary>
             <param name="connectionString">Connection string</param>
             <param name="mapper">DTO mapper</param>
             <param name="logger">Logger instance</param>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
             <summary>
-            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.MSSQLConnection"/> class with
+            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.SqlServerConnection"/> class with
             a default DTO mapper.
             </summary>
             <param name="connectionString">Connection string</param>
             <param name="logger">Logger instance</param>
         </member>
-        <member name="P:Panelak.Database.SqlServer.MSSQLConnection.DatabaseType">
+        <member name="P:Panelak.Database.SqlServer.SqlServerConnection.DatabaseType">
             <summary>
             Gets the SQL Server database type
             </summary>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.TryGetPrimaryKeyForTableAsync(Panelak.Sql.ISqlTableIdentifier,System.String@)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.TryGetPrimaryKeyForTableAsync(Panelak.Sql.ISqlTableIdentifier,System.String@)">
             <summary>
             Attempts to return a primary key for given SQL Server table.
             </summary>
@@ -93,21 +93,21 @@
             <param name="primaryKey">Primary key identifier</param>
             <returns>True whether the attempt to find a primary key succeeded</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.GetFirstColumnNameAsync(Panelak.Sql.ISqlTableIdentifier)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.GetFirstColumnNameAsync(Panelak.Sql.ISqlTableIdentifier)">
             <summary>
             Returns the name of the first column in given SQL Server table
             </summary>
             <param name="tableIdentifier">Table identifier</param>
             <returns>Name of the first column</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.CheckIfTableExists(Panelak.Sql.ISqlTableIdentifier)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.CheckIfTableExists(Panelak.Sql.ISqlTableIdentifier)">
             <summary>
             Checks if table exists in SQL Server database
             </summary>
             <param name="tableIdentifier">Table identifier model</param>
             <returns>True if table exists</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.CheckIfColumnExists(Panelak.Sql.ISqlTableIdentifier,System.String)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.CheckIfColumnExists(Panelak.Sql.ISqlTableIdentifier,System.String)">
             <summary>
             Checks if column exists in SQL Server database
             </summary>
@@ -115,95 +115,95 @@
             <param name="columnIdentifier">Column identifier</param>
             <returns>True if column exists</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.BuildQuery(Panelak.Sql.ISqlSelectQuery)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.BuildQuery(Panelak.Sql.ISqlSelectQuery)">
             <summary>
             Converts SQL SELECT query model into the SQL Server parameterized query
             </summary>
             <param name="sqlQuery">SQL SELECT query model</param>
             <returns>Parameterized SQL Server query</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.BuildCountQuery(Panelak.Sql.ISqlSelectQuery)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.BuildCountQuery(Panelak.Sql.ISqlSelectQuery)">
             <summary>
             Builds a COUNT query for checking the number of rows from a given SQL SELECT query model.
             </summary>
             <param name="sqlQuery">SQL SELECT query model</param>
             <returns>Parameterized SQL Server query</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.GetParameterToken">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.GetParameterToken">
             <summary>
             Returns the parameter token used to prefix the parameters in queries with regexes
             </summary>
             <returns>The parameter token</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.GetConnectionProtected(System.String)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.GetConnectionProtected(System.String)">
             <summary>
             Returns the SQL Server managed connection for given connection string
             </summary>
             <param name="connectionString">Connection string</param>
             <returns>SQL Server managed connection</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.GetDataAdapterForCommand(System.Data.Common.DbCommand)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.GetDataAdapterForCommand(System.Data.Common.DbCommand)">
             <summary>
             Returns the SQL Server managed data adapter for given command
             </summary>
             <param name="command">SQL Server command to enter the data adapter</param>
             <returns>The SQL Server data adapter</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLConnection.GetPrimaryKeyForTableAsync(Panelak.Sql.ISqlTableIdentifier)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.GetPrimaryKeyForTableAsync(Panelak.Sql.ISqlTableIdentifier)">
             <summary>
             Returns the primary key for given table
             </summary>
             <param name="tableIdentifier">Table identifier</param>
             <returns>Primary key</returns>
         </member>
-        <member name="T:Panelak.Database.SqlServer.MSSQLDbParameter">
+        <member name="T:Panelak.Database.SqlServer.SqlServerDbParameter">
             <summary>
             Sql Server SQL parameter of a SQL query
             </summary>
         </member>
-        <member name="P:Panelak.Database.SqlServer.MSSQLDbParameter.Name">
+        <member name="P:Panelak.Database.SqlServer.SqlServerDbParameter.Name">
             <summary>
             Gets name of the parameter
             </summary>
         </member>
-        <member name="P:Panelak.Database.SqlServer.MSSQLDbParameter.Value">
+        <member name="P:Panelak.Database.SqlServer.SqlServerDbParameter.Value">
             <summary>
             Gets value of the parameter
             </summary>
         </member>
-        <member name="P:Panelak.Database.SqlServer.MSSQLDbParameter.IsFilteringParameter">
+        <member name="P:Panelak.Database.SqlServer.SqlServerDbParameter.IsFilteringParameter">
             <summary>
             Gets a value indicating whether the parameter affects number of returned results
             </summary>
         </member>
-        <member name="T:Panelak.Database.SqlServer.MSSQLDbQuery">
+        <member name="T:Panelak.Database.SqlServer.SqlServerDbQuery">
             <summary>
             Local implementation of SQL query with parameters
             </summary>
         </member>
-        <member name="M:Panelak.Database.SqlServer.MSSQLDbQuery.#ctor(System.String,System.Collections.Generic.IEnumerable{Panelak.Sql.ISqlParameter})">
+        <member name="M:Panelak.Database.SqlServer.SqlServerDbQuery.#ctor(System.String,System.Collections.Generic.IEnumerable{Panelak.Sql.ISqlParameter})">
             <summary>
-            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.MSSQLDbQuery"/> class.
+            Initializes a new instance of the <see cref="T:Panelak.Database.SqlServer.SqlServerDbQuery"/> class.
             </summary>
             <param name="query">SQL query</param>
             <param name="enumerable">SQL parameters</param>
         </member>
-        <member name="P:Panelak.Database.SqlServer.MSSQLDbQuery.QueryText">
+        <member name="P:Panelak.Database.SqlServer.SqlServerDbQuery.QueryText">
             <summary>
             Gets the SQL query string
             </summary>
         </member>
-        <member name="P:Panelak.Database.SqlServer.MSSQLDbQuery.SqlParameters">
+        <member name="P:Panelak.Database.SqlServer.SqlServerDbQuery.SqlParameters">
             <summary>
             Gets the SQL query parameters
             </summary>
         </member>
-        <member name="T:Panelak.Database.MSSQLDtoMapper">
+        <member name="T:Panelak.Database.SqlServerDtoMapper">
             <summary>
             Default implementation of the SQL results in the <see cref="T:System.Data.IDataReader"/> to the DTO in a type parameter.
             </summary>
         </member>
-        <member name="M:Panelak.Database.MSSQLDtoMapper.TryCustomMap(System.Object,System.Type,System.Object@)">
+        <member name="M:Panelak.Database.SqlServerDtoMapper.TryCustomMap(System.Object,System.Type,System.Object@)">
             <summary>
             SQL Server DTO mapper accounting for SQL
             </summary>

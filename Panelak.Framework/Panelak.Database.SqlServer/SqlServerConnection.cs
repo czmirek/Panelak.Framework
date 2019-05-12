@@ -1,40 +1,39 @@
 ﻿namespace Panelak.Database.SqlServer
 {
-    using Panelak.Sql;
     using Microsoft.Extensions.Logging;
+    using Panelak.Sql;
     using System.Data.Common;
     using System.Data.SqlClient;
-    using System.Reflection;
 
     /// <summary>
     /// SQL Server specific connection driver
     /// </summary>
-    public class MSSQLConnection : BaseConnection
+    public class SqlServerConnection : BaseConnection
     {
         /// <summary>
         /// SQL Server query builder
         /// </summary>
-        private readonly MSSQLBuilder sqlBuilder;
+        private readonly SqlServerBuilder sqlBuilder;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MSSQLConnection"/> class.
+        /// Initializes a new instance of the <see cref="SqlServerConnection"/> class.
         /// </summary>
         /// <param name="connectionString">Connection string</param>
         /// <param name="mapper">DTO mapper</param>
         /// <param name="logger">Logger instance</param>
-        public MSSQLConnection(string connectionString, IDtoMapper mapper, ILogger logger)
+        public SqlServerConnection(string connectionString, IDtoMapper mapper, ILogger logger)
             : base(connectionString, mapper, logger) 
-            => sqlBuilder = new MSSQLBuilder(this, logger);
+            => sqlBuilder = new SqlServerBuilder(this, logger);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MSSQLConnection"/> class with
+        /// Initializes a new instance of the <see cref="SqlServerConnection"/> class with
         /// a default DTO mapper.
         /// </summary>
         /// <param name="connectionString">Connection string</param>
         /// <param name="logger">Logger instance</param>
-        public MSSQLConnection(string connectionString, ILogger logger)
-            : base(connectionString, new MSSQLDtoMapper(), logger) 
-            => sqlBuilder = new MSSQLBuilder(this, logger);
+        public SqlServerConnection(string connectionString, ILogger logger)
+            : base(connectionString, new SqlServerDtoMapper(), logger) 
+            => sqlBuilder = new SqlServerBuilder(this, logger);
 
         /// <summary>
         /// Gets the SQL Server database type

@@ -1,11 +1,13 @@
 ﻿namespace Panelak.Database.SqlServer
 {
+    using System;
     using System.Data.SqlClient;
+    using Panelak.Sql;
 
     /// <summary>
     /// SQL Server condition string builder
     /// </summary>
-    public class MSSQLConditionStringBuilder : SqlConditionStringBuilder
+    public class SqlServerConditionStringBuilder : SqlConditionStringBuilder
     {
         /// <summary>
         /// System SQL command builder
@@ -25,5 +27,22 @@
         /// <param name="identifier">Column identifier</param>
         /// <returns>SQL Server quoted column identifier</returns>
         protected override string GetQuotedIdentifier(string identifier) => builder.QuoteIdentifier(identifier);
+
+        /// <summary>
+        /// Returns SQL Server spatial expression
+        /// </summary>
+        /// <param name="spatialExpression">Spatial expression</param>
+        /// <returns>SQL Server expression</returns>
+        protected override string GetSpatialExpression(ISqlConditionSpatialExpression spatialExpression)
+        {
+            switch (spatialExpression)
+            {
+                case ISqlConditionOverlaps overlaps:
+                    return $"{GetQuotedIdentifier(overlaps.Column)}.STOverlaps(geometry::STGeomFromText('{overlaps.Geometry.GeometryToSqlServerString()}'))";
+
+                default:
+                    throw new NotImplementedException($"{GetType().Name} cannot convert the spatial expression of type {spatialExpression.GetType().Name} to SQL string expression");
+            }
+        }
     }
 }

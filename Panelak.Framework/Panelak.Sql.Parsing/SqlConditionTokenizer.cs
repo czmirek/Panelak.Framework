@@ -17,7 +17,7 @@
 		private static readonly Regex IdentifierRx = new Regex(@"(^(?!\d)\w+)", RegexOptions.IgnoreCase);
 
 		/// <summary>
-		/// Regex used for parsing a bracketed column identifier (for MSSQL)
+		/// Regex used for parsing a bracketed column identifier (for SqlServer)
 		/// </summary>
 		private static readonly Regex BracketedIdentifier = new Regex(@"(^\[[\w\p{L}\s]+\])", RegexOptions.IgnoreCase);
 

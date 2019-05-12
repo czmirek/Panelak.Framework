@@ -3,7 +3,7 @@
     using System;
 
 #pragma warning disable IDE1006 // Naming Styles
-    public class MSSQLTypesTestTable
+    public class SqlServerTypesTestTable
     { 
         public int ID { get; set; }
         public long bigint_notnull { get; set; }

@@ -11,15 +11,15 @@
     /// <summary>
     /// SQL builder for building SQL Server queries
     /// </summary>
-    public class MSSQLBuilder : SqlBuilder
+    public class SqlServerBuilder : SqlBuilder
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MSSQLBuilder"/> class.
+        /// Initializes a new instance of the <see cref="SqlServerBuilder"/> class.
         /// </summary>
         /// <param name="connection">SQL Server connection</param>
         /// <param name="log">Logger instance</param>
-        public MSSQLBuilder(MSSQLConnection connection, ILogger log)
-            : base(connection, new MSSQLConditionStringBuilder(), new SqlCommandBuilder(), log)
+        public SqlServerBuilder(SqlServerConnection connection, ILogger log)
+            : base(connection, new SqlServerConditionStringBuilder(), new SqlCommandBuilder(), log)
         {
         }
 
@@ -60,7 +60,7 @@
             if (sqlQuery.NoPagination)
             {
                 string noPaginationQuery = $"SELECT {columns} FROM {table} WHERE({conditions})";
-                return new MSSQLDbQuery(noPaginationQuery, parameters);
+                return new SqlServerDbQuery(noPaginationQuery, parameters);
             }
 
             var orderByColumns = sqlQuery.Columns.Where(col => col.SortOrder != Sql.SortOrder.Unspecified)
@@ -91,7 +91,7 @@
                                        WHERE ({conditions})) tbl
                                WHERE tbl.rn BETWEEN {offset} AND {limit} ORDER BY tbl.rn";
 
-            return new MSSQLDbQuery(query, parameters);
+            return new SqlServerDbQuery(query, parameters);
         }
 
         /// <summary>

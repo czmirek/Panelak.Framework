@@ -6,7 +6,7 @@
     public interface IDatabaseConnection
     {
         /// <summary>
-        /// Gets the database type such as MSSQL or Oracle
+        /// Gets the database type such as SqlServer or Oracle
         /// </summary>
         DatabaseType DatabaseType { get; }
 

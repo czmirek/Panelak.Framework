@@ -23,7 +23,7 @@
             var binaryTreeBuilder = new SqlConditionBuilder(log);
             ISqlConditionExpression conditionBinaryTree = binaryTreeBuilder.Build(Expression);
 
-            var sqlStringBuilder = new MSSQLConditionStringBuilder();
+            var sqlStringBuilder = new SqlServerConditionStringBuilder();
             IUncheckedSqlCondition uncheckedSqlCondition = sqlStringBuilder.Build(conditionBinaryTree);
 
             Assert.AreEqual(Expected, uncheckedSqlCondition.SqlConditionString);
@@ -36,7 +36,7 @@
             var binaryTreeBuilder = new SqlConditionBuilder(log);
             ISqlConditionExpression conditionBinaryTree = binaryTreeBuilder.Build(ExpZeros);
 
-            var sqlStringBuilder = new MSSQLConditionStringBuilder();
+            var sqlStringBuilder = new SqlServerConditionStringBuilder();
             IUncheckedSqlCondition uncheckedSqlCondition = sqlStringBuilder.Build(conditionBinaryTree);
 
             Assert.AreEqual(Expected, uncheckedSqlCondition.SqlConditionString);

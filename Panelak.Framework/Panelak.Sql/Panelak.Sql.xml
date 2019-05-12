@@ -105,16 +105,6 @@
             Gets an SQL logical operator such as AND, OR, NOT
             </summary>
         </member>
-        <member name="T:Panelak.Sql.ISqlConditionRightOperator">
-            <summary>
-            Logical operator expression with only right side expression (e.g. NOT)
-            </summary>
-        </member>
-        <member name="P:Panelak.Sql.ISqlConditionRightOperator.RightExpression">
-            <summary>
-            Gets an expression on the right side of the logical operator
-            </summary>
-        </member>
         <member name="T:Panelak.Sql.ISqlConditionRawExpression">
             <summary>
             Unparsed SQL comparison expression with string entering the condition.
@@ -124,6 +114,16 @@
         <member name="P:Panelak.Sql.ISqlConditionRawExpression.RawSqlString">
             <summary>
             SQL expression string
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionRightOperator">
+            <summary>
+            Logical operator expression with only right side expression (e.g. NOT)
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionRightOperator.RightExpression">
+            <summary>
+            Gets an expression on the right side of the logical operator
             </summary>
         </member>
         <member name="T:Panelak.Sql.IParameterizedQuery">

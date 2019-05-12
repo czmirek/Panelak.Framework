@@ -4,7 +4,7 @@ namespace Panelak.Database.Test.Model
 {
 #pragma warning disable IDE1006 // Naming Styles
     
-    public class MSSQLGeometryTable
+    public class SqlServerGeometryTable
     {
         public int ID { get; set; }
         public IGeometry geometry_notnull { get; set; }

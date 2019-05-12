@@ -5,7 +5,7 @@
     /// <summary>
     /// Sql Server SQL parameter of a SQL query
     /// </summary>
-    internal class MSSQLDbParameter : ISqlParameter
+    internal class SqlServerDbParameter : ISqlParameter
     {
         /// <summary>
         /// Gets name of the parameter

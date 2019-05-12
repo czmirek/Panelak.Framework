@@ -5,22 +5,23 @@
     <Authors>Miroslav Bartl</Authors>
     <Description>Abstraction layer for specific database driver ORM</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
-    <PackageLicenseUrl>https://github.com/czmirek/Panelak.Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
-    <PackageReleaseNotes>Renamed Dto attribute</PackageReleaseNotes>
+    <PackageReleaseNotes>publish bugfix</PackageReleaseNotes>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Product>Panelak.Database</Product>
     <PackageId>Panelak.Database</PackageId>
-    <Version>2.0.0</Version>
+    <Version>5.0.1</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
-    <FileVersion>2.0.0</FileVersion>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>5.0.1</FileVersion>
+    <AssemblyVersion>5.0.1</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.pfx</AssemblyOriginatorKeyFile>
     <Deterministic>False</Deterministic>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -38,7 +39,7 @@
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Sql" Version="2.0.0" />
+    <PackageReference Include="Panelak.Sql" Version="3.0.1" />
   </ItemGroup>
   
   <ItemGroup>
