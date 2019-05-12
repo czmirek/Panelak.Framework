@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>7.0.1</Version>
+    <Version>7.1.0</Version>
     <Authors>Miroslav Bartl</Authors>
     <Description>ORM for Sql Server</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
@@ -15,10 +15,10 @@
     <Product>Panelak.Database.SqlServer</Product>
     <PackageId>Panelak.Database.SqlServer</PackageId>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <FileVersion>7.0.1</FileVersion>
+    <FileVersion>7.1.0</FileVersion>
     <Deterministic>False</Deterministic>
     <Company>Miroslav Bartl</Company>
-    <AssemblyVersion>7.0.1</AssemblyVersion>
+    <AssemblyVersion>7.1.0</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.SqlServer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -33,8 +33,8 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Database" Version="5.0.1" />
-    <PackageReference Include="Panelak.Geometry" Version="4.0.0" />
+    <PackageReference Include="Panelak.Database" Version="5.2.0" />
+    <PackageReference Include="Panelak.Geometry" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,7 +43,7 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <ProjectReference Include="..\Panelak.Database\Panelak.Database.csproj" />
     <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
   </ItemGroup>

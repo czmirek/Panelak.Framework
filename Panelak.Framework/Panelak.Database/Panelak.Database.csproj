@@ -9,15 +9,15 @@
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
-    <PackageReleaseNotes>publish bugfix</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated Panelak.Sql reference</PackageReleaseNotes>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Product>Panelak.Database</Product>
     <PackageId>Panelak.Database</PackageId>
-    <Version>5.0.1</Version>
+    <Version>5.2.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
-    <FileVersion>5.0.1</FileVersion>
-    <AssemblyVersion>5.0.1</AssemblyVersion>
+    <FileVersion>5.2.0</FileVersion>
+    <AssemblyVersion>5.2.0</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.pfx</AssemblyOriginatorKeyFile>
     <Deterministic>False</Deterministic>
@@ -39,7 +39,7 @@
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Sql" Version="3.0.1" />
+    <PackageReference Include="Panelak.Sql" Version="3.2.0" />
   </ItemGroup>
   
   <ItemGroup>

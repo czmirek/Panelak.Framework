@@ -105,6 +105,11 @@
             Gets an SQL logical operator such as AND, OR, NOT
             </summary>
         </member>
+        <member name="T:Panelak.Sql.Condition.ISqlConditionOverlaps">
+            <summary>
+            Represents a model for spatial "Overlaps" expression.
+            </summary>
+        </member>
         <member name="T:Panelak.Sql.ISqlConditionRawExpression">
             <summary>
             Unparsed SQL comparison expression with string entering the condition.
@@ -124,6 +129,22 @@
         <member name="P:Panelak.Sql.ISqlConditionRightOperator.RightExpression">
             <summary>
             Gets an expression on the right side of the logical operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionSpatialExpression">
+            <summary>
+            Condition expression for comparing a <see cref="P:Panelak.Sql.ISqlConditionSpatialExpression.Column"/> inside a spatial expression
+            against given <see cref="P:Panelak.Sql.ISqlConditionSpatialExpression.Geometry"/> such as Overlaps, Withing etc.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionSpatialExpression.Column">
+            <summary>
+            Gets the column of the spaitial expression
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionSpatialExpression.Geometry">
+            <summary>
+            Gets the geometry which is used in the spatial expression
             </summary>
         </member>
         <member name="T:Panelak.Sql.IParameterizedQuery">

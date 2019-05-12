@@ -4,6 +4,51 @@
         <name>Panelak.Database.SqlServer</name>
     </assembly>
     <members>
+        <member name="T:Panelak.Database.SqlServer.GeometryToSqlServerStringConverter">
+            <summary>
+            Converter with methods to convert geometry models into Sql Server WKTs
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.SqlServer.GeometryToSqlServerStringConverter.numberFormat">
+            <summary>
+            Number format with decimal dot separator.
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.SqlServer.GeometryToSqlServerStringConverter.GeometryToSqlServerString(Panelak.Geometry.IGeometry)">
+            <summary>
+            Returns the SQL Server spatial string of given <see cref="T:Panelak.Geometry.IGeometry"/>.
+            </summary>
+            <param name="sqlGeometry">SQL geometry model</param>
+            <returns>SQL Server string</returns>
+        </member>
+        <member name="M:Panelak.Database.SqlServer.GeometryToSqlServerStringConverter.PointToSqlServerString(Panelak.Geometry.Point)">
+            <summary>
+            Returns the Sql Server POINT of <see cref="T:Panelak.Geometry.Point"/>.
+            </summary>
+            <param name="sqlPoint">SQL point model</param>
+            <returns>Sql Server POINT string for point</returns>
+        </member>
+        <member name="M:Panelak.Database.SqlServer.GeometryToSqlServerStringConverter.LineStringToSqlServerString(Panelak.Geometry.Path)">
+            <summary>
+            Returns the Sql Server LINESTRING string of <see cref="T:Panelak.Geometry.Path"/>.
+            </summary>
+            <param name="path">SQL line string model</param>
+            <returns>Sql Server LINESTRING</returns>
+        </member>
+        <member name="M:Panelak.Database.SqlServer.GeometryToSqlServerStringConverter.PolygonToSqlServerString(Panelak.Geometry.Polygon)">
+            <summary>
+            Returns the Sql Server POLYGON string of <see cref="T:Panelak.Geometry.Path"/>.
+            </summary>
+            <param name="polygon">SQL polygon model</param>
+            <returns>Sql Server POLYGON</returns>
+        </member>
+        <member name="M:Panelak.Database.SqlServer.GeometryToSqlServerStringConverter.PointString(Panelak.Geometry.Point)">
+            <summary>
+            Helper method returning space separated digits of the point
+            </summary>
+            <param name="point">SQL point model</param>
+            <returns>Space separated points</returns>
+        </member>
         <member name="T:Panelak.Database.SqlServer.SqlServerBuilder">
             <summary>
             SQL builder for building SQL Server queries
@@ -40,6 +85,11 @@
             System SQL command builder
             </summary>
         </member>
+        <member name="F:Panelak.Database.SqlServer.SqlServerConditionStringBuilder.geometryToSqlServer">
+            <summary>
+            Converter from geometry models to Sql Server SQL
+            </summary>
+        </member>
         <member name="M:Panelak.Database.SqlServer.SqlServerConditionStringBuilder.GetParamName(System.String)">
             <summary>
             Returns SQL Server prefixed parameter name
@@ -53,6 +103,13 @@
             </summary>
             <param name="identifier">Column identifier</param>
             <returns>SQL Server quoted column identifier</returns>
+        </member>
+        <member name="M:Panelak.Database.SqlServer.SqlServerConditionStringBuilder.GetSpatialExpression(Panelak.Sql.ISqlConditionSpatialExpression)">
+            <summary>
+            Returns SQL Server spatial expression
+            </summary>
+            <param name="spatialExpression">Spatial expression</param>
+            <returns>SQL Server expression</returns>
         </member>
         <member name="T:Panelak.Database.SqlServer.SqlServerConnection">
             <summary>

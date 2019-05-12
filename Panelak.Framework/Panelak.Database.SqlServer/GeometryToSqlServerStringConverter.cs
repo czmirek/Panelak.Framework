@@ -70,6 +70,6 @@
         /// </summary>
         /// <param name="point">SQL point model</param>
         /// <returns>Space separated points</returns>
-        private string PointString(Point sqlPoint) => $"{sqlPoint.X.ToString(numberFormat)} {sqlPoint.Y.ToString(numberFormat)}";
+        private string PointString(Point point) => $"{point.X.ToString(numberFormat)} {point.Y.ToString(numberFormat)}";
     }
 }

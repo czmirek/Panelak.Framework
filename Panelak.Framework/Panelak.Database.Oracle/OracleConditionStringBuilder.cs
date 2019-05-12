@@ -2,6 +2,7 @@
 {
     using global::Oracle.ManagedDataAccess.Client;
     using Panelak.Sql;
+    using Panelak.Sql.Condition;
     using System;
 
     /// <summary>

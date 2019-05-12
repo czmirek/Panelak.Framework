@@ -38,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{2B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{7E5F3A21-16F1-4B13-86F1-B18E854D109C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panelak.MvcUtils", "Panelak.MvcUtils\Panelak.MvcUtils.csproj", "{934220B6-DDA5-4A12-A89A-2FBBDCE389F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panelak.MvcUtils", "Panelak.MvcUtils\Panelak.MvcUtils.csproj", "{934220B6-DDA5-4A12-A89A-2FBBDCE389F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

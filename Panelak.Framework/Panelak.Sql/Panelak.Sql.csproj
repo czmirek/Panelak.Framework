@@ -9,16 +9,16 @@
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageReleaseNotes>fixed broken publish</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for Overlaps spatial expressions</PackageReleaseNotes>
     <Product>Panelak.Sql</Product>
     <PackageId>Panelak.Sql</PackageId>
-    <Version>3.0.1</Version>
+    <Version>3.2.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Sql.pfx</AssemblyOriginatorKeyFile>
-    <FileVersion>3.0.1</FileVersion>
-    <AssemblyVersion>3.0.1</AssemblyVersion>
+    <FileVersion>3.2.0</FileVersion>
+    <AssemblyVersion>3.2.0</AssemblyVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -26,7 +26,7 @@
   </PropertyGroup>
   
     <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Geometry" Version="4.0.0" />
+    <PackageReference Include="Panelak.Geometry" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />

@@ -4,6 +4,51 @@
         <name>Panelak.Database.Oracle</name>
     </assembly>
     <members>
+        <member name="T:Panelak.Database.Oracle.GeometryToOracleSqlStringConverter">
+            <summary>
+            Converter with methods to convert geometry models into Oracle PL/SQL SDO_GEOMETRY models
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.Oracle.GeometryToOracleSqlStringConverter.numberFormat">
+            <summary>
+            Number format with decimal dot separator.
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.Oracle.GeometryToOracleSqlStringConverter.GeometryToString(Panelak.Geometry.IGeometry)">
+            <summary>
+            Returns the SDO_GEOMETRY string of given <see cref="!:ISqlGeometry"/>.
+            </summary>
+            <param name="sqlGeometry">SQL geometry model</param>
+            <returns>SDO_GEOMETRY SQL string</returns>
+        </member>
+        <member name="M:Panelak.Database.Oracle.GeometryToOracleSqlStringConverter.PointToOracleSqlString(Panelak.Geometry.Point)">
+            <summary>
+            Returns the SDO_GEOMETRY string of <see cref="!:ISqlPoint"/>.
+            </summary>
+            <param name="sqlPoint">SQL point model</param>
+            <returns>SDO_GEOMETRY SQL string for point</returns>
+        </member>
+        <member name="M:Panelak.Database.Oracle.GeometryToOracleSqlStringConverter.PathToOracleSqlString(Panelak.Geometry.Path)">
+            <summary>
+            Returns the SDO_GEOMETRY string of <see cref="!:ISqlLineString"/>.
+            </summary>
+            <param name="sqlLineString">SQL line string model</param>
+            <returns>SDO_GEOMETRY SQL string for line string</returns>
+        </member>
+        <member name="M:Panelak.Database.Oracle.GeometryToOracleSqlStringConverter.PolygonToOracleSqlString(Panelak.Geometry.Polygon)">
+            <summary>
+            Returns the SDO_GEOMETRY string of <see cref="!:ISqlPolygon"/>.
+            </summary>
+            <param name="sqlPolygon">SQL polygon model</param>
+            <returns>SDO_GEOMETRY SQL string for polygon (1003, 1 = simple exterior)</returns>
+        </member>
+        <member name="M:Panelak.Database.Oracle.GeometryToOracleSqlStringConverter.PointString(Panelak.Geometry.Point)">
+            <summary>
+            Helper method returning comma separated digits of the point
+            </summary>
+            <param name="point">SQL point model</param>
+            <returns>Comma separated points</returns>
+        </member>
         <member name="T:Panelak.Database.Oracle.OracleConditionStringBuilder">
             <summary>
             Oracle condition string builder
@@ -12,6 +57,11 @@
         <member name="F:Panelak.Database.Oracle.OracleConditionStringBuilder.builder">
             <summary>
             Managed Oracle command builder
+            </summary>
+        </member>
+        <member name="F:Panelak.Database.Oracle.OracleConditionStringBuilder.geometryToOracle">
+            <summary>
+            Converter from geometry models to Oracle PL/SQL
             </summary>
         </member>
         <member name="M:Panelak.Database.Oracle.OracleConditionStringBuilder.GetParamName(System.String)">
@@ -27,6 +77,13 @@
             </summary>
             <param name="identifier">Column identifier</param>
             <returns>Oracle quoted column identifier</returns>
+        </member>
+        <member name="M:Panelak.Database.Oracle.OracleConditionStringBuilder.GetSpatialExpression(Panelak.Sql.ISqlConditionSpatialExpression)">
+            <summary>
+            Returns Oracle SQL spatial expression
+            </summary>
+            <param name="spatialExpression">Spatial expression</param>
+            <returns>Oracle SQL expression</returns>
         </member>
         <member name="T:Panelak.Database.Oracle.OracleConnection">
             <summary>
@@ -177,6 +234,11 @@
         <member name="P:Panelak.Database.Oracle.OracleDbQuery.SqlParameters">
             <summary>
             Gets the SQL query parameters
+            </summary>
+        </member>
+        <member name="T:Panelak.Database.Oracle.OracleSqlGeometryExtensions">
+            <summary>
+            Extensions with methods to convert <see cref="!:ISqlGeometry"/> types to Oracle DB SDO_GEOMETRY types.
             </summary>
         </member>
         <member name="T:Panelak.Database.Oracle.OracleSqlBuilder">

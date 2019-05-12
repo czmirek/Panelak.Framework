@@ -1,8 +1,9 @@
 ﻿namespace Panelak.Database.SqlServer
 {
+    using Panelak.Sql;
+    using Panelak.Sql.Condition;
     using System;
     using System.Data.SqlClient;
-    using Panelak.Sql;
 
     /// <summary>
     /// SQL Server condition string builder

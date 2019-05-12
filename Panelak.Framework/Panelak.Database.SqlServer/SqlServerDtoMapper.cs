@@ -25,7 +25,7 @@
                 return false;
 
             var geom = dataValue as SqlGeometry;
-            int? csid = (int?)geom.STcsid;
+            int? csid = geom.STSrid.Value;
 
             string wkt = geom.STAsText().ToSqlString().Value;
             var converter = new WktConverter();
