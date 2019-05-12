@@ -1,8 +1,11 @@
 ﻿namespace Panelak.Geometry
 {
+    using System.Diagnostics;
+
     /// <summary>
     /// Two dimensional point geometry
     /// </summary>
+    [DebuggerDisplay("{ToString(),nq}")]
     public readonly struct Point : IGeometry
     {
         /// <summary>

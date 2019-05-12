@@ -1,8 +1,11 @@
-﻿namespace Panelak.Geometry
+﻿using System.Diagnostics;
+
+namespace Panelak.Geometry
 {
     /// <summary>
     /// Represents a circular arc defined by three points.
     /// </summary>
+    [DebuggerDisplay("{ToString(),nq}")]
     public readonly struct CircularCurve : ILine
     {
         /// <summary>

@@ -4,10 +4,12 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
 
     /// <summary>
     /// Polygon geometry
     /// </summary>
+    [DebuggerDisplay("{ToString(),nq}")]
     public readonly struct Polygon : IGeometry
     {
         /// <summary>

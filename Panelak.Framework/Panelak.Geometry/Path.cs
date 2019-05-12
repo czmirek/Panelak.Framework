@@ -3,11 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
 
     /// <summary>
     /// Path geometry consisting of multiple lines.
     /// </summary>
+    [DebuggerDisplay("{ToString(),nq}")]
     public readonly struct Path : IGeometry
     {
         /// <summary>

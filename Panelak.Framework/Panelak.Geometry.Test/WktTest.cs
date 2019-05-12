@@ -1,9 +1,8 @@
 ﻿namespace Tests
 {
+    using NUnit.Framework;
     using Panelak.Geometry;
     using System.Linq;
-    using NUnit.Framework;
-    using System.Collections.Generic;
 
     public class WktTest
     {

@@ -26,24 +26,41 @@
             <param name="middle">Middle arc point</param>
             <param name="csid">Coordinate system ID</param>
         </member>
-        <member name="P:Panelak.Geometry.CircularCurve.Middle">
+        <member name="F:Panelak.Geometry.CircularCurve.Middle">
             <summary>
             Gets the middle arc point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.CircularCurve.Start">
+        <member name="F:Panelak.Geometry.CircularCurve.Start">
             <summary>
             Gets the starting arc point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.CircularCurve.End">
+        <member name="F:Panelak.Geometry.CircularCurve.End">
             <summary>
             Gets the ending arc point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.CircularCurve.Csid">
+        <member name="F:Panelak.Geometry.CircularCurve.Csid">
             <summary>
             Gets the coordinate system ID
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.CircularCurve.GetStartPoint">
+            <summary>
+            Returns the start point
+            </summary>
+            <returns>The start point</returns>
+        </member>
+        <member name="M:Panelak.Geometry.CircularCurve.GetEndPoint">
+            <summary>
+            Returns the end point
+            </summary>
+            <returns>The end point</returns>
+        </member>
+        <member name="M:Panelak.Geometry.CircularCurve.GetCsid">
+            <summary>
+            Gets the coordinate system identification
             </summary>
         </member>
         <member name="M:Panelak.Geometry.CircularCurve.ToString">
@@ -57,7 +74,7 @@
             Geometry shape
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.IGeometry.Csid">
+        <member name="M:Panelak.Geometry.IGeometry.GetCsid">
             <summary>
             Gets the coordinate system identification
             </summary>
@@ -67,12 +84,12 @@
             Line geometry shape consisting of two points
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.ILine.Start">
+        <member name="M:Panelak.Geometry.ILine.GetStartPoint">
             <summary>
             Gets the start point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.ILine.End">
+        <member name="M:Panelak.Geometry.ILine.GetEndPoint">
             <summary>
             Gets the end point
             </summary>
@@ -95,14 +112,14 @@
             <param name="lines">List of line geometries.</param>
             <param name="csid">Coordinate system ID</param>
         </member>
-        <member name="P:Panelak.Geometry.Path.Lines">
+        <member name="F:Panelak.Geometry.Path.Lines">
             <summary>
-            Gets the list of line geometries
+            List of line geometries
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Path.Csid">
+        <member name="F:Panelak.Geometry.Path.Csid">
             <summary>
-            Gets the coordinate system ID
+            Coordinate system ID
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Path.ToString">
@@ -110,6 +127,11 @@
             Returns string representation of points in geometric object
             </summary>
             <returns>String representation of points in geometric object</returns>
+        </member>
+        <member name="M:Panelak.Geometry.Path.GetCsid">
+            <summary>
+            Gets the coordinate system identification
+            </summary>
         </member>
         <member name="T:Panelak.Geometry.Point">
             <summary>
@@ -131,19 +153,24 @@
             <param name="y">The y coordinate</param>
             <param name="csid">Coordinate system ID</param>
         </member>
-        <member name="P:Panelak.Geometry.Point.X">
+        <member name="F:Panelak.Geometry.Point.X">
             <summary>
-            Gets the X
+            X coordinate
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Point.Y">
+        <member name="F:Panelak.Geometry.Point.Y">
             <summary>
-            Gets the Y
+            Y coordinate
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Point.Csid">
+        <member name="F:Panelak.Geometry.Point.Csid">
             <summary>
-            Gets the csid
+            Coordinate system ID
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.Point.GetCsid">
+            <summary>
+            Gets the coordinate system identification
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Point.ToString">
@@ -154,7 +181,7 @@
         </member>
         <member name="T:Panelak.Geometry.Polygon">
             <summary>
-            Single polygon geometry
+            Polygon geometry
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Polygon.#ctor(System.Collections.Generic.IList{Panelak.Geometry.ILine})">
@@ -170,14 +197,19 @@
             <param name="lines">List of line geometries.</param>
             <param name="csid">Coordinate system ID</param>
         </member>
-        <member name="P:Panelak.Geometry.Polygon.Lines">
+        <member name="F:Panelak.Geometry.Polygon.Lines">
             <summary>
-            Gets the list of line geometries for this polygon
+            List of line geometries for this polygon
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Polygon.Csid">
+        <member name="F:Panelak.Geometry.Polygon.Csid">
             <summary>
             Gets the coordinate system ID
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.Polygon.GetCsid">
+            <summary>
+            Gets the coordinate system identification
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Polygon.ToString">
@@ -206,19 +238,34 @@
             <param name="end">The end <see cref="T:Panelak.Geometry.Point"/></param>
             <param name="csid">Coordinate system ID</param>
         </member>
-        <member name="P:Panelak.Geometry.StraightLine.Start">
+        <member name="F:Panelak.Geometry.StraightLine.Start">
             <summary>
             Gets the start point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.StraightLine.End">
+        <member name="F:Panelak.Geometry.StraightLine.End">
             <summary>
             Gets the end point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.StraightLine.Csid">
+        <member name="F:Panelak.Geometry.StraightLine.Csid">
             <summary>
             Gets the coordinate system ID
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.StraightLine.GetCsid">
+            <summary>
+            Gets the coordinate system identification
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.StraightLine.GetStartPoint">
+            <summary>
+            Gets the start point
+            </summary>
+        </member>
+        <member name="M:Panelak.Geometry.StraightLine.GetEndPoint">
+            <summary>
+            Gets the end point
             </summary>
         </member>
         <member name="T:Panelak.Geometry.WktConverter">

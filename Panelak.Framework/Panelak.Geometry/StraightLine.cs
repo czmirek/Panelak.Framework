@@ -1,8 +1,11 @@
-﻿namespace Panelak.Geometry
+﻿using System.Diagnostics;
+
+namespace Panelak.Geometry
 {
     /// <summary>
     /// Represents a straight line between two points
     /// </summary>
+    [DebuggerDisplay("{ToString(),nq}")]
     public readonly struct StraightLine : ILine
     {
         /// <summary>
@@ -59,5 +62,11 @@
         /// Gets the end point
         /// </summary>
         public Point GetEndPoint() => End;
+
+        /// <summary>
+        /// Returns string representation of points in geometric object
+        /// </summary>
+        /// <returns>String representation of points in geometric object</returns>
+        public override string ToString() => $"{Start.ToString()} {End.ToString()}";
     }
 }
