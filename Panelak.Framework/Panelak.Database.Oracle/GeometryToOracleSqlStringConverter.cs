@@ -5,6 +5,9 @@
     using System.Globalization;
     using System.Linq;
 
+    /// <summary>
+    /// Converter with methods to convert geometry models into Oracle PL/SQL SDO_GEOMETRY models
+    /// </summary>
     public class GeometryToOracleSqlStringConverter
     {
         /// <summary>

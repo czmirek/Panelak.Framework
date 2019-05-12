@@ -5,6 +5,9 @@
     using System.Globalization;
     using System.Linq;
 
+    /// <summary>
+    /// Converter with methods to convert geometry models into Sql Server WKTs
+    /// </summary>
     public class GeometryToSqlServerStringConverter
     {
         /// <summary>
