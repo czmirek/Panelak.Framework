@@ -24,4 +24,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Sql\Panelak.Sql.xml</DocumentationFile>
   </PropertyGroup>
+  
+    <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Panelak.Geometry" Version="4.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
+    <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
+  </ItemGroup>
 </Project>

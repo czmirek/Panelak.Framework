@@ -25,11 +25,11 @@
                 return false;
 
             var geom = dataValue as SqlGeometry;
-            int? srid = (int?)geom.STSrid;
+            int? csid = (int?)geom.STcsid;
 
             string wkt = geom.STAsText().ToSqlString().Value;
             var converter = new WktConverter();
-            customMap = converter.FromWkt(srid, wkt);
+            customMap = converter.FromWkt(csid, wkt);
             return true;
         }
     }

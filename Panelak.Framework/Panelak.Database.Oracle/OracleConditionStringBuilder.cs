@@ -15,6 +15,11 @@
         private readonly OracleCommandBuilder builder = new OracleCommandBuilder();
 
         /// <summary>
+        /// Converter from geometry models to Oracle PL/SQL
+        /// </summary>
+        private readonly GeometryToOracleSqlStringConverter geometryToOracle = new GeometryToOracleSqlStringConverter();
+
+        /// <summary>
         /// Returns Oracle prefixed parameter name
         /// </summary>
         /// <param name="name">Parameter name</param>
@@ -38,7 +43,7 @@
             switch (spatialExpression)
             {
                 case ISqlConditionOverlaps overlaps:
-                    return $"SDO_OVERLAPS({GetQuotedIdentifier(overlaps.Column)}, {overlaps.Geometry.GeometryToString()}) = 'TRUE'";
+                    return $"SDO_OVERLAPS({GetQuotedIdentifier(overlaps.Column)}, {geometryToOracle.GeometryToString(overlaps.Geometry)}) = 'TRUE'";
                 default:
                     throw new NotImplementedException($"{GetType().Name} cannot convert the spatial expression of type {spatialExpression.GetType().Name} to SQL string expression");
             }

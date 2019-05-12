@@ -138,8 +138,8 @@
         /// <returns>Perpendicular line to the input line</returns>
         private ILine CreatePerpendicularLineInBox(ILine line)
         {
-            Point a = line.Start;
-            Point b = line.End;
+            Point a = line.GetStartPoint();
+            Point b = line.GetEndPoint();
 
             var ab_mid = new Point((a.X + b.X) / 2, (a.Y + b.Y) / 2);
             
@@ -238,11 +238,11 @@
         /// <returns>Intersection point</returns>
         private Point FindIntersection(ILine p1, ILine p2)
         {
-            Point s1 = p1.Start;
-            Point e1 = p1.End;
+            Point s1 = p1.GetStartPoint();
+            Point e1 = p1.GetEndPoint();
 
-            Point s2 = p2.Start;
-            Point e2 = p2.End;
+            Point s2 = p2.GetStartPoint();
+            Point e2 = p2.GetEndPoint();
 
             double a1 = e1.Y - s1.Y;
             double b1 = s1.X - e1.X;
@@ -383,11 +383,13 @@
         /// <param name="line">Straight line geometry</param>
         private void DrawStraightLine(ILine line)
         {
-            float x1 = (float)line.Start.X;
-            float y1 = canvasHeight - (float)line.Start.Y;
+            Point startPoint = line.GetStartPoint();
+            Point endPoint = line.GetEndPoint();
+            float x1 = (float)startPoint.X;
+            float y1 = canvasHeight - (float)startPoint.Y;
 
-            float x2 = (float)line.End.X;
-            float y2 = canvasHeight - (float)line.End.Y;
+            float x2 = (float)endPoint.X;
+            float y2 = canvasHeight - (float)endPoint.Y;
 
             graphics.DrawLine(drawingPen, x1, y1, x2, y2);
         }

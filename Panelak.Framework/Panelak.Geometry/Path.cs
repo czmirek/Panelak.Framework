@@ -2,12 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     /// <summary>
     /// Path geometry consisting of multiple lines.
     /// </summary>
-    public struct Path : IGeometry
+    public readonly struct Path : IGeometry
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Path"/> class.
@@ -15,35 +16,40 @@
         /// <param name="lines">List of line geometries.</param>
         public Path(IList<ILine> lines)
         {
-            Lines = lines ?? throw new ArgumentNullException(nameof(lines));
-            Srid = null;
+            Lines = new ReadOnlyCollection<ILine>(lines ?? throw new ArgumentNullException(nameof(lines)));
+            Csid = null;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Path"/> class.
         /// </summary>
         /// <param name="lines">List of line geometries.</param>
-        /// <param name="srid">Coordinate system ID</param>
-        public Path(IList<ILine> lines, int? srid)
+        /// <param name="csid">Coordinate system ID</param>
+        public Path(IList<ILine> lines, int? csid)
         {
-            Lines = lines ?? throw new ArgumentNullException(nameof(lines));
-            Srid = srid;
+            Lines = new ReadOnlyCollection<ILine>(lines ?? throw new ArgumentNullException(nameof(lines)));
+            Csid = csid;
         }
 
         /// <summary>
-        /// Gets the list of line geometries
+        /// List of line geometries
         /// </summary>
-        public IList<ILine> Lines { get; }
+        public readonly ReadOnlyCollection<ILine> Lines;
 
         /// <summary>
-        /// Gets the coordinate system ID
+        /// Coordinate system ID
         /// </summary>
-        public int? Srid { get; }
+        public readonly int? Csid;
 
         /// <summary>
         /// Returns string representation of points in geometric object
         /// </summary>
         /// <returns>String representation of points in geometric object</returns>
         public override string ToString() => String.Join(", ", Lines.Select(l => l.ToString()));
+
+        /// <summary>
+        /// Gets the coordinate system identification
+        /// </summary>
+        public int? GetCsid() => Csid;
     }
 }

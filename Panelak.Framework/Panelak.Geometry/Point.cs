@@ -3,7 +3,7 @@
     /// <summary>
     /// Two dimensional point geometry
     /// </summary>
-    public struct Point : IGeometry
+    public readonly struct Point : IGeometry
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Point"/> class.
@@ -14,7 +14,7 @@
         {
             X = x;
             Y = y;
-            Srid = null;
+            Csid = null;
         }
 
         /// <summary>
@@ -22,28 +22,33 @@
         /// </summary>
         /// <param name="x">The x coordinate</param>
         /// <param name="y">The y coordinate</param>
-        /// <param name="srid">Coordinate system ID</param>
-        public Point(double x, double y, int? srid)
+        /// <param name="csid">Coordinate system ID</param>
+        public Point(double x, double y, int? csid)
         {
             X = x;
             Y = y;
-            Srid = srid;
+            Csid = csid;
         }
 
         /// <summary>
-        /// Gets the X
+        /// X coordinate
         /// </summary>
-        public double X { get; }
+        public readonly double X;
 
         /// <summary>
-        /// Gets the Y
+        /// Y coordinate
         /// </summary>
-        public double Y { get; }
+        public readonly double Y;
 
         /// <summary>
-        /// Gets the Srid
+        /// Coordinate system ID
         /// </summary>
-        public int? Srid { get; }
+        public readonly int? Csid;
+
+        /// <summary>
+        /// Gets the coordinate system identification
+        /// </summary>
+        public int? GetCsid() => Csid;
 
         /// <summary>
         /// Returns string representation of points in geometric object

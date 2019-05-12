@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a circular arc defined by three points.
     /// </summary>
-    public struct CircularCurve : ILine
+    public readonly struct CircularCurve : ILine
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CircularCurve"/> class.
@@ -16,7 +16,7 @@
             Start = start;
             Middle = middle;
             End = end;
-            Srid = null;
+            Csid = null;
         }
 
         /// <summary>
@@ -25,34 +25,51 @@
         /// <param name="start">Starting point</param>
         /// <param name="end">Ending point</param>
         /// <param name="middle">Middle arc point</param>
-        /// <param name="srid">Coordinate system ID</param>
-        public CircularCurve(Point start, Point middle, Point end, int? srid)
+        /// <param name="csid">Coordinate system ID</param>
+        public CircularCurve(Point start, Point middle, Point end, int? csid)
         {
             Start = start;
             Middle = middle;
             End = end;
-            Srid = srid;
+            Csid = csid;
         }
 
         /// <summary>
         /// Gets the middle arc point
         /// </summary>
-        public Point Middle { get; }
+        public readonly Point Middle;
 
         /// <summary>
         /// Gets the starting arc point
         /// </summary>
-        public Point Start { get; }
+        public readonly Point Start;
 
         /// <summary>
         /// Gets the ending arc point
         /// </summary>
-        public Point End { get; }
+        public readonly Point End;
 
         /// <summary>
         /// Gets the coordinate system ID
         /// </summary>
-        public int? Srid { get; }
+        public readonly int? Csid;
+
+        /// <summary>
+        /// Returns the start point
+        /// </summary>
+        /// <returns>The start point</returns>
+        public Point GetStartPoint() => Start;
+
+        /// <summary>
+        /// Returns the end point
+        /// </summary>
+        /// <returns>The end point</returns>
+        public Point GetEndPoint() => End;
+
+        /// <summary>
+        /// Gets the coordinate system identification
+        /// </summary>
+        public int? GetCsid() => Csid;
 
         /// <summary>
         /// Returns string representation of points in geometric object

@@ -3,11 +3,12 @@
     using System.Linq;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     /// <summary>
-    /// Single polygon geometry
+    /// Polygon geometry
     /// </summary>
-    public struct Polygon : IGeometry
+    public readonly struct Polygon : IGeometry
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon"/> class.
@@ -15,30 +16,35 @@
         /// <param name="lines">List of line geometries.</param>
         public Polygon(IList<ILine> lines)
         {
-            Lines = lines ?? throw new ArgumentNullException(nameof(lines));
-            Srid = null;
+            Lines = new ReadOnlyCollection<ILine>(lines ?? throw new ArgumentNullException(nameof(lines)));
+            Csid = null;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon"/> class.
         /// </summary>
         /// <param name="lines">List of line geometries.</param>
-        /// <param name="srid">Coordinate system ID</param>
-        public Polygon(IList<ILine> lines, int? srid)
+        /// <param name="csid">Coordinate system ID</param>
+        public Polygon(IList<ILine> lines, int? csid)
         {
-            Lines = lines ?? throw new ArgumentNullException(nameof(lines));
-            Srid = srid;
+            Lines = new ReadOnlyCollection<ILine>(lines ?? throw new ArgumentNullException(nameof(lines)));
+            Csid = csid;
         }
 
         /// <summary>
-        /// Gets the list of line geometries for this polygon
+        /// List of line geometries for this polygon
         /// </summary>
-        public IList<ILine> Lines { get; }
+        public readonly ReadOnlyCollection<ILine> Lines;
 
         /// <summary>
         /// Gets the coordinate system ID
         /// </summary>
-        public int? Srid { get; }
+        public readonly int? Csid;
+
+        /// <summary>
+        /// Gets the coordinate system identification
+        /// </summary>
+        public int? GetCsid() => Csid;
 
         /// <summary>
         /// Returns string representation of points in geometric object

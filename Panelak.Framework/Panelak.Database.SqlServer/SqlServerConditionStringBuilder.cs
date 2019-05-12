@@ -15,6 +15,11 @@
         private readonly SqlCommandBuilder builder = new SqlCommandBuilder();
 
         /// <summary>
+        /// Converter from geometry models to Sql Server SQL
+        /// </summary>
+        private readonly GeometryToSqlServerStringConverter geometryToSqlServer = new GeometryToSqlServerStringConverter();
+
+        /// <summary>
         /// Returns SQL Server prefixed parameter name
         /// </summary>
         /// <param name="name">Parameter name</param>
@@ -38,7 +43,7 @@
             switch (spatialExpression)
             {
                 case ISqlConditionOverlaps overlaps:
-                    return $"{GetQuotedIdentifier(overlaps.Column)}.STOverlaps(geometry::STGeomFromText('{overlaps.Geometry.GeometryToSqlServerString()}'))";
+                    return $"{GetQuotedIdentifier(overlaps.Column)}.STOverlaps(geometry::STGeomFromText('{geometryToSqlServer.GeometryToSqlServerString(overlaps.Geometry)}'))";
 
                 default:
                     throw new NotImplementedException($"{GetType().Name} cannot convert the spatial expression of type {spatialExpression.GetType().Name} to SQL string expression");

@@ -21,18 +21,18 @@
         /// Converts the WKT string into a single geometry model or returns the first geometry model
         /// in the list of geometries defined in WKT.
         /// </summary>
-        /// <param name="srid">Coordinate system identification</param>
+        /// <param name="csid">Coordinate system identification</param>
         /// <param name="wktString">Well Known Text string</param>
         /// <returns>Single or first geometry</returns>
-        public IGeometry FromWkt(int? srid, string wktString) => FromWktToGeomCollection(srid, wktString).FirstOrDefault();
+        public IGeometry FromWkt(int? csid, string wktString) => FromWktToGeomCollection(csid, wktString).FirstOrDefault();
 
         /// <summary>
         /// Converts the WKT string into a given Geometry.
         /// </summary>
-        /// <param name="srid">Coordinate system identification</param>
+        /// <param name="csid">Coordinate system identification</param>
         /// <param name="wktString">Well Known Text string</param>
         /// <returns>The <see cref="Geometry"/></returns>
-        public IEnumerable<IGeometry> FromWktToGeomCollection(int? srid, string wktString)
+        public IEnumerable<IGeometry> FromWktToGeomCollection(int? csid, string wktString)
         {
             var pointMatches = new Regex(@"\((?<points>[\d\s\-\,\.]+)\)");
             MatchCollection matches = pointMatches.Matches(wktString);
@@ -53,7 +53,7 @@
             if (wktString.StartsWith("LINESTRING"))
             {
                 string values = matches[0].Groups["points"].Value;
-                List<ILine> lines = CreateLines(srid, values);
+                List<ILine> lines = CreateLines(csid, values);
 
                 return new IGeometry[] { new Path(lines.AsReadOnly()) };
             }
@@ -65,7 +65,7 @@
                 foreach (Match match in matches)
                 {
                     string points = match.Groups["points"].Value;
-                    List<ILine> lines = CreateLines(srid, points);
+                    List<ILine> lines = CreateLines(csid, points);
 
                     var poly = new Polygon(lines.AsReadOnly());
                     polygons.Add(poly);
@@ -80,10 +80,10 @@
         /// <summary>
         /// Converts the string containing individual points to the list of line geometries.
         /// </summary>
-        /// <param name="srid">Coordinate system ID</param>
+        /// <param name="csid">Coordinate system ID</param>
         /// <param name="pointValues">WKT points</param>
         /// <returns>List of line geometries</returns>
-        private List<ILine> CreateLines(int? srid, string pointValues)
+        private List<ILine> CreateLines(int? csid, string pointValues)
         {
             var lines = new List<ILine>();
             string[] points = pointValues.Split(',');

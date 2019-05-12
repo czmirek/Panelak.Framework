@@ -8,6 +8,6 @@
         /// <summary>
         /// Gets the coordinate system identification
         /// </summary>
-        int? Srid { get; }
+        int? GetCsid();
     }
 }

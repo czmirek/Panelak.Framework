@@ -24,7 +24,7 @@
             <param name="start">Starting point</param>
             <param name="end">Ending point</param>
             <param name="middle">Middle arc point</param>
-            <param name="srid">Coordinate system ID</param>
+            <param name="csid">Coordinate system ID</param>
         </member>
         <member name="P:Panelak.Geometry.CircularCurve.Middle">
             <summary>
@@ -41,7 +41,7 @@
             Gets the ending arc point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.CircularCurve.Srid">
+        <member name="P:Panelak.Geometry.CircularCurve.Csid">
             <summary>
             Gets the coordinate system ID
             </summary>
@@ -57,7 +57,7 @@
             Geometry shape
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.IGeometry.Srid">
+        <member name="P:Panelak.Geometry.IGeometry.Csid">
             <summary>
             Gets the coordinate system identification
             </summary>
@@ -93,14 +93,14 @@
             Initializes a new instance of the <see cref="T:Panelak.Geometry.Path"/> class.
             </summary>
             <param name="lines">List of line geometries.</param>
-            <param name="srid">Coordinate system ID</param>
+            <param name="csid">Coordinate system ID</param>
         </member>
         <member name="P:Panelak.Geometry.Path.Lines">
             <summary>
             Gets the list of line geometries
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Path.Srid">
+        <member name="P:Panelak.Geometry.Path.Csid">
             <summary>
             Gets the coordinate system ID
             </summary>
@@ -129,7 +129,7 @@
             </summary>
             <param name="x">The x coordinate</param>
             <param name="y">The y coordinate</param>
-            <param name="srid">Coordinate system ID</param>
+            <param name="csid">Coordinate system ID</param>
         </member>
         <member name="P:Panelak.Geometry.Point.X">
             <summary>
@@ -141,9 +141,9 @@
             Gets the Y
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Point.Srid">
+        <member name="P:Panelak.Geometry.Point.Csid">
             <summary>
-            Gets the Srid
+            Gets the csid
             </summary>
         </member>
         <member name="M:Panelak.Geometry.Point.ToString">
@@ -168,14 +168,14 @@
             Initializes a new instance of the <see cref="T:Panelak.Geometry.Polygon"/> class.
             </summary>
             <param name="lines">List of line geometries.</param>
-            <param name="srid">Coordinate system ID</param>
+            <param name="csid">Coordinate system ID</param>
         </member>
         <member name="P:Panelak.Geometry.Polygon.Lines">
             <summary>
             Gets the list of line geometries for this polygon
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.Polygon.Srid">
+        <member name="P:Panelak.Geometry.Polygon.Csid">
             <summary>
             Gets the coordinate system ID
             </summary>
@@ -204,7 +204,7 @@
             </summary>
             <param name="start">The start <see cref="T:Panelak.Geometry.Point"/></param>
             <param name="end">The end <see cref="T:Panelak.Geometry.Point"/></param>
-            <param name="srid">Coordinate system ID</param>
+            <param name="csid">Coordinate system ID</param>
         </member>
         <member name="P:Panelak.Geometry.StraightLine.Start">
             <summary>
@@ -216,7 +216,7 @@
             Gets the end point
             </summary>
         </member>
-        <member name="P:Panelak.Geometry.StraightLine.Srid">
+        <member name="P:Panelak.Geometry.StraightLine.Csid">
             <summary>
             Gets the coordinate system ID
             </summary>
@@ -237,7 +237,7 @@
             Converts the WKT string into a single geometry model or returns the first geometry model
             in the list of geometries defined in WKT.
             </summary>
-            <param name="srid">Coordinate system identification</param>
+            <param name="csid">Coordinate system identification</param>
             <param name="wktString">Well Known Text string</param>
             <returns>Single or first geometry</returns>
         </member>
@@ -245,7 +245,7 @@
             <summary>
             Converts the WKT string into a given Geometry.
             </summary>
-            <param name="srid">Coordinate system identification</param>
+            <param name="csid">Coordinate system identification</param>
             <param name="wktString">Well Known Text string</param>
             <returns>The <see cref="N:Panelak.Geometry"/></returns>
         </member>
@@ -253,7 +253,7 @@
             <summary>
             Converts the string containing individual points to the list of line geometries.
             </summary>
-            <param name="srid">Coordinate system ID</param>
+            <param name="csid">Coordinate system ID</param>
             <param name="pointValues">WKT points</param>
             <returns>List of line geometries</returns>
         </member>

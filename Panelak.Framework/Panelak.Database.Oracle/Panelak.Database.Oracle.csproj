@@ -38,7 +38,8 @@
     <PackageReference Include="Panelak.Database" Version="5.0.1" />
   </ItemGroup>
   
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <ProjectReference Include="..\Panelak.Database\Panelak.Database.csproj" />
+    <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
   </ItemGroup>
 </Project>

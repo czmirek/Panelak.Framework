@@ -19,7 +19,7 @@
             var p = (Point)geom;
             var p2= (Point)geom2;
 
-            Assert.IsNull(p.Srid);
+            Assert.IsNull(p.Csid);
             AssertPoint(1, 2, p);
 
             AssertPoint(-7330.778696, 4662.77960, p2);
@@ -34,7 +34,7 @@
 
             var p = (Path)geom;
 
-            Assert.IsNull(p.Srid);
+            Assert.IsNull(p.Csid);
             Assert.AreEqual(3, p.Lines.Count);
             AssertLine(1, 1, 3, 3, p.Lines[0]);
             AssertLine(3, 3, 2, 4, p.Lines[1]);
@@ -49,7 +49,7 @@
             Assert.IsInstanceOf<Polygon>(geom);
 
             var p = (Polygon)geom;
-            Assert.IsNull(p.Srid);
+            Assert.IsNull(p.Csid);
             Assert.AreEqual(3, p.Lines.Count);
             AssertLine(1, 1, 3, 3, p.Lines[0]);
             AssertLine(3, 3, 3, 1, p.Lines[1]);
@@ -97,8 +97,8 @@
 
         public void AssertLine(double sx, double sy, double ex, double ey, ILine l)
         {
-            AssertPoint(sx, sy, l.Start);
-            AssertPoint(ex, ey, l.End);
+            AssertPoint(sx, sy, l.GetStartPoint());
+            AssertPoint(ex, ey, l.GetEndPoint());
         }
     }
 }
