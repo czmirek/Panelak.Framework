@@ -18,12 +18,12 @@
         /// <summary>
         /// List of SQL parameters
         /// </summary>
-        private List<ISqlParameter> parameters = new List<ISqlParameter>();
+        private readonly List<ISqlParameter> parameters = new List<ISqlParameter>();
 
         /// <summary>
         /// List of columns in the SELECT query
         /// </summary>
-        private List<SqlColumn> columns = new List<SqlColumn>();
+        private readonly List<SqlColumn> columns = new List<SqlColumn>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SqlSelectQuery"/> class.

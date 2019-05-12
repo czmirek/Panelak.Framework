@@ -7,19 +7,19 @@
     /// Abstraction for SQL operators in the form [Column] [Operator] [Literal].
     /// </summary>
     [DebuggerDisplay("{Column} {Operator} {Literal}")]
-    public abstract class ComparisonExpression : ISqlConditionComparisonExpression
+    public abstract class ColumnComparisonExpression : ISqlConditionColumnComparisonExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ComparisonExpression" /> class.
+        /// Initializes a new instance of the <see cref="ColumnComparisonExpression" /> class.
         /// </summary>
         /// <param name="column">Column identifier</param>
         /// <param name="operator">SQL comparison operator</param>
         /// <param name="literal">Literal value</param>
-        protected ComparisonExpression(string column, string @operator, string literal)
+        protected ColumnComparisonExpression(string column, string @operator, string literal)
         {
-            this.Column = column ?? throw new ArgumentNullException(nameof(column));
-            this.Operator = @operator;
-            this.Literal = literal ?? throw new ArgumentNullException(nameof(literal));
+            Column = column ?? throw new ArgumentNullException(nameof(column));
+            Operator = @operator;
+            Literal = literal ?? throw new ArgumentNullException(nameof(literal));
         }
 
         /// <summary>

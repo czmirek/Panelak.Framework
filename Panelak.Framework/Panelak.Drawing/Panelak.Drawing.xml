@@ -66,7 +66,7 @@
             <param name="width">Width of the canvas in pixels</param>
             <param name="height">Height of the canvas in pixels</param>
         </member>
-        <member name="M:Panelak.Drawing.GeometryCanvas.AddShape(Panelak.Geometry.Geometry)">
+        <member name="M:Panelak.Drawing.GeometryCanvas.AddShape(Panelak.Geometry.IGeometry)">
             <summary>
             Adds a geometry shape to the canvas
             </summary>
@@ -91,7 +91,7 @@
             <param name="imageFormat">Image format</param>
             <returns>Picture in byte array</returns>
         </member>
-        <member name="M:Panelak.Drawing.GeometryCanvas.CreatePerpendicularLineInBox(Panelak.Geometry.Line)">
+        <member name="M:Panelak.Drawing.GeometryCanvas.CreatePerpendicularLineInBox(Panelak.Geometry.ILine)">
             <summary>
             Returns a line perpendicular to the line. The start and end
             of this line is at the borders of the canvas.
@@ -99,7 +99,7 @@
             <param name="line">Input line</param>
             <returns>Perpendicular line to the input line</returns>
         </member>
-        <member name="M:Panelak.Drawing.GeometryCanvas.FindIntersection(Panelak.Geometry.Line,Panelak.Geometry.Line)">
+        <member name="M:Panelak.Drawing.GeometryCanvas.FindIntersection(Panelak.Geometry.ILine,Panelak.Geometry.ILine)">
             <summary>
             Returns a point where two input lines intersect.
             </summary>
@@ -129,13 +129,13 @@
             </summary>
             <param name="path">Path geometry</param>
         </member>
-        <member name="M:Panelak.Drawing.GeometryCanvas.DrawLine(Panelak.Geometry.Line)">
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawLine(Panelak.Geometry.ILine)">
             <summary>
             Draws a line geometry
             </summary>
             <param name="line">Line geometry</param>
         </member>
-        <member name="M:Panelak.Drawing.GeometryCanvas.DrawStraightLine(Panelak.Geometry.Line)">
+        <member name="M:Panelak.Drawing.GeometryCanvas.DrawStraightLine(Panelak.Geometry.ILine)">
             <summary>
             Draws a straight line geometry
             </summary>

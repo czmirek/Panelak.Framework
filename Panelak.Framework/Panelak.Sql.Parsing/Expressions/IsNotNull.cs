@@ -13,10 +13,7 @@
         /// Initializes a new instance of the <see cref="IsNotNull"/> class.
         /// </summary>
         /// <param name="column">Column identifier</param>
-        public IsNotNull(string column)
-        {
-            this.Column = column ?? throw new ArgumentNullException(nameof(column));
-        }
+        public IsNotNull(string column) => Column = column ?? throw new ArgumentNullException(nameof(column));
 
         /// <summary>
         /// Gets the column identifier in the expression

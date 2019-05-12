@@ -88,7 +88,13 @@
                         break;
                     }
 
-                case ISqlConditionComparisonExpression comp:
+                case ISqlConditionRawExpression comp:
+                    {
+                        sqlCondition.Append($"{comp.RawSqlString}");
+                        break;
+                    }
+
+                case ISqlConditionColumnComparisonExpression comp:
                     {
                         string identifier = GetQuotedIdentifier(comp.Column);
                         string paramName = GetParamName($"param_{paramCounter++}");

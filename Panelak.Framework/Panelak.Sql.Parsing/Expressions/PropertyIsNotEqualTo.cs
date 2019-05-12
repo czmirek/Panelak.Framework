@@ -3,7 +3,7 @@
     /// <summary>
     /// SQL operator not equal to (!=)
     /// </summary>
-    public class PropertyIsNotEqualTo : ComparisonExpression
+    public class PropertyIsNotEqualTo : ColumnComparisonExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsNotEqualTo"/> class.

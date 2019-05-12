@@ -68,10 +68,10 @@
 
         private void TestComparisonType(Type comparisonType, ISqlConditionExpression comparisonExpression, string column, string literal)
         {
-            Assert.IsInstanceOf<ComparisonExpression>(comparisonExpression);
+            Assert.IsInstanceOf<ColumnComparisonExpression>(comparisonExpression);
             Assert.IsInstanceOf(comparisonType, comparisonExpression);
 
-            var compExpr = comparisonExpression as ComparisonExpression;
+            var compExpr = comparisonExpression as ColumnComparisonExpression;
 
             Assert.AreEqual(compExpr.Column, column);
             Assert.AreEqual(compExpr.Literal, literal);

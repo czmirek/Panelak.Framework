@@ -3,7 +3,7 @@
     /// <summary>
     /// SQL operator NOT LIKE
     /// </summary>
-    public class PropertyIsNotLike : ComparisonExpression
+    public class PropertyIsNotLike : ColumnComparisonExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsNotLike"/> class.

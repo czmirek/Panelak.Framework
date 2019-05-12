@@ -3,7 +3,7 @@
     /// <summary>
     /// SQL operator equal to (=)
     /// </summary>
-    public class PropertyIsEqualTo : ComparisonExpression
+    public class PropertyIsEqualTo : ColumnComparisonExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsEqualTo"/> class.

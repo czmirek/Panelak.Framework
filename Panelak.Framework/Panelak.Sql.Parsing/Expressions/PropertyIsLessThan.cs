@@ -3,7 +3,7 @@
     /// <summary>
     /// SQL operator less than (&lt;)
     /// </summary>
-    public class PropertyIsLessThan : ComparisonExpression
+    public class PropertyIsLessThan : ColumnComparisonExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsLessThan"/> class.
