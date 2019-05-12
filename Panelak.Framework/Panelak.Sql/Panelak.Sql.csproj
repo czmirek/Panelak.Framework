@@ -9,16 +9,16 @@
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Library generated as a strong named assembly + added XML documentation with comments</PackageReleaseNotes>
+    <PackageReleaseNotes>Added a support for raw SQL condition expression</PackageReleaseNotes>
     <Product>Panelak.Sql</Product>
     <PackageId>Panelak.Sql</PackageId>
-    <Version>1.0.1</Version>
+    <Version>2.0.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Sql.pfx</AssemblyOriginatorKeyFile>
-    <FileVersion>1.0.1</FileVersion>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Sql\Panelak.Sql.xml</DocumentationFile>

@@ -4,23 +4,23 @@
         <name>Panelak.Sql</name>
     </assembly>
     <members>
-        <member name="T:Panelak.Sql.ISqlConditionComparisonExpression">
+        <member name="T:Panelak.Sql.ISqlConditionColumnComparisonExpression">
             <summary>
             SQL comparison expression of the form COLUMN OPERATOR LITERAL (e.g. NumberColumn = 3 or StringColumn LIKE 'text').
             Note that column must be on the left side of the operator and literal on the right side of the operator.
             </summary>
         </member>
-        <member name="P:Panelak.Sql.ISqlConditionComparisonExpression.Operator">
+        <member name="P:Panelak.Sql.ISqlConditionColumnComparisonExpression.Operator">
             <summary>
             Gets a string representation of the operator.
             </summary>
         </member>
-        <member name="P:Panelak.Sql.ISqlConditionComparisonExpression.Column">
+        <member name="P:Panelak.Sql.ISqlConditionColumnComparisonExpression.Column">
             <summary>
             Gets a column identifier on the left side of the operator
             </summary>
         </member>
-        <member name="P:Panelak.Sql.ISqlConditionComparisonExpression.Literal">
+        <member name="P:Panelak.Sql.ISqlConditionColumnComparisonExpression.Literal">
             <summary>
             Gets a literal value on the right side of the operator.
             </summary>
@@ -113,6 +113,17 @@
         <member name="P:Panelak.Sql.ISqlConditionRightOperator.RightExpression">
             <summary>
             Gets an expression on the right side of the logical operator
+            </summary>
+        </member>
+        <member name="T:Panelak.Sql.ISqlConditionRawExpression">
+            <summary>
+            Unparsed SQL comparison expression with string entering the condition.
+            Use only for appending manually parsed and checked SQL or SQL from safe sources.
+            </summary>
+        </member>
+        <member name="P:Panelak.Sql.ISqlConditionRawExpression.RawSqlString">
+            <summary>
+            SQL expression string
             </summary>
         </member>
         <member name="T:Panelak.Sql.IParameterizedQuery">
