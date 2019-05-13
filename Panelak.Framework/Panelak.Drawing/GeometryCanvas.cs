@@ -124,7 +124,7 @@
 
                 using (var stream = new MemoryStream())
                 {
-                    bitmap.Save(stream, ImageFormat.Png);
+                    bitmap.Save(stream, imageFormat);
                     return stream.ToArray();
                 }
             }

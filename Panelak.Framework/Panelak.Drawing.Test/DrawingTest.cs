@@ -4,6 +4,7 @@
     using Panelak.Geometry;
     using NUnit.Framework;
     using System.IO;
+    using System.Collections.Generic;
 
     public class DrawingTest
     {
@@ -28,6 +29,21 @@
             File.WriteAllBytes("point_image.png", bytes);
         }
 
+        [Test]
+        public void DrawPolygon()
+        {
+            var c = new GeometryCanvas(150, 150);
+            c.AddShape(new Polygon(new List<ILine>()
+            {
+                new StraightLine(new Point(0,0), new Point(50,50)),
+                new StraightLine(new Point(50,50), new Point(100,50)),
+                new StraightLine(new Point(50,50), new Point(100,50)),
+                new StraightLine(new Point(100,50), new Point(100,0)),
+                new StraightLine(new Point(100,0), new Point(0,0))
+            }));
+            byte[] bytes = c.CreatePng();
+            File.WriteAllBytes("polygon_image.png", bytes);
+        }
         [Test]
         public void SomeTest()
         {
