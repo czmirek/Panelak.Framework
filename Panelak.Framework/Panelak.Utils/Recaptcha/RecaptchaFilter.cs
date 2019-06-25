@@ -31,9 +31,9 @@
         /// <param name="rvService">Recaptcha service</param>
         /// <param name="modelParameterName">Model parameter name</param>
         /// <param name="modelErrorMessage">Model error message</param>
-        public RecaptchaFilter(ILogger<RecaptchaFilter> logger, 
-            RecaptchaValidationService rvService, 
+        public RecaptchaFilter(RecaptchaValidationService rvService, 
             string modelParameterName,
+            ILogger<RecaptchaFilter> logger = null,
             string modelErrorMessage = null)
         {
             this.logger = logger;
@@ -48,11 +48,11 @@
         /// <param name="logger">Logger service</param>
         /// <param name="rvService">Recaptcha service</param>
         /// <param name="onRecaptchaInvalid">Method for custom context configuration after recaptcha validation failiure.</param>
-        public RecaptchaFilter(ILogger<RecaptchaFilter> logger,
-            RecaptchaValidationService rvService,
-            Action<ActionExecutingContext> onRecaptchaInvalid)
+        public RecaptchaFilter(RecaptchaValidationService rvService,
+            Action<ActionExecutingContext> onRecaptchaInvalid,
+            ILogger<RecaptchaFilter> logger = null)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger;
             this.rvService = rvService ?? throw new ArgumentNullException(nameof(rvService));
             this.onRecaptchaInvalid = onRecaptchaInvalid ?? throw new ArgumentNullException(nameof(onRecaptchaInvalid));
         }

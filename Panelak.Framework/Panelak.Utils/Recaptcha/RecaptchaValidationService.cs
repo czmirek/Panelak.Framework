@@ -46,9 +46,9 @@
         /// <param name="active">True if service is active, false otherwise.</param>
         /// <param name="secretKey">Sercret key</param>
         /// <param name="throwExceptions">True if exceptions should be thrown, false if validation should just fail instead</param>
-        public RecaptchaValidationService(ILogger<RecaptchaValidationService> logger, bool active, string secretKey, bool throwExceptions = true)
+        public RecaptchaValidationService(bool active, string secretKey, ILogger<RecaptchaValidationService> logger, bool throwExceptions = true)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger;
             this.throwExceptions = throwExceptions;
 
             Active = active;
@@ -64,8 +64,8 @@
         /// <param name="active">True if service is active, false otherwise.</param>
         /// <param name="secretKey">Sercret key</param>
         /// <param name="throwExceptions">True if exceptions should be thrown, false if validation should just fail instead</param>
-        public RecaptchaValidationService(ILogger<RecaptchaValidationService> logger, IProxyService proxyService, bool active, string secretKey, bool throwExceptions = true)
-            : this(logger, active, secretKey, throwExceptions)
+        public RecaptchaValidationService(IProxyService proxyService, bool active, string secretKey, ILogger<RecaptchaValidationService> logger = null, bool throwExceptions = true)
+            : this(active, secretKey, logger, throwExceptions)
             => this.proxyService = proxyService ?? throw new ArgumentNullException(nameof(proxyService));
 
         /// <summary>

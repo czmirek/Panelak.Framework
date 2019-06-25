@@ -6,13 +6,27 @@
     using System.Net;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Service for obtaining proxy configuration.
+    /// </summary>
     public class ProxyService : IProxyService
     {
+        /// <summary>
+        /// Logger service
+        /// </summary>
         private readonly ILogger<ProxyService> logger;
 
-        public ProxyService(ILogger<ProxyService> logger) 
+        /// <summary>
+        /// Initializes a new instance of <see cref="ProxyService"/>.
+        /// </summary>
+        /// <param name="logger">Logger service</param>
+        public ProxyService(ILogger<ProxyService> logger = null) 
             => this.logger = logger;
 
+        /// <summary>
+        /// Returns the proxy configured in the operating system.
+        /// </summary>
+        /// <returns></returns>
         public IWebProxy GetSystemProxy()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
