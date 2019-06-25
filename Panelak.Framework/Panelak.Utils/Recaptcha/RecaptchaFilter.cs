@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using System;
     using System.Threading.Tasks;
 
@@ -18,44 +19,45 @@
         /// <summary>
         /// Recaptcha validation service
         /// </summary>
-        private readonly RecaptchaValidationService rvService;
+        public IRecaptchaTokenValidationService Service { get; }
 
-        private readonly string modelParameterName;
-        private readonly string modelErrorMessage = null;
+        /// <summary>
+        /// Recaptcha options
+        /// </summary>
+        public RecaptchaOptions Options { get; }
+
+        /// <summary>
+        /// Custom action invoked when recaptcha token is invalid
+        /// </summary>
         private readonly Action<ActionExecutingContext> onRecaptchaInvalid;
 
         /// <summary>
-        /// Initializes a new instance of <see cref= "RecaptchaFilter" />.
+        /// Initializes a new instance of <see cref="RecaptchaFilter"/>.
         /// </summary>
+        /// <param name="service">Recaptcha validation service</param>
+        /// <param name="options">Recaptcha options</param>
         /// <param name="logger">Logger service</param>
-        /// <param name="rvService">Recaptcha service</param>
-        /// <param name="modelParameterName">Model parameter name</param>
-        /// <param name="modelErrorMessage">Model error message</param>
-        public RecaptchaFilter(RecaptchaValidationService rvService, 
-            string modelParameterName,
-            ILogger<RecaptchaFilter> logger = null,
-            string modelErrorMessage = null)
+        public RecaptchaFilter(IRecaptchaTokenValidationService service, 
+            IOptions<RecaptchaOptions> options,
+            ILogger<RecaptchaFilter> logger)
         {
             this.logger = logger;
-            this.rvService = rvService ?? throw new ArgumentNullException(nameof(rvService));
-            this.modelParameterName = modelParameterName ?? throw new ArgumentNullException(nameof(modelParameterName));
-            this.modelErrorMessage = modelErrorMessage ?? throw new ArgumentNullException(nameof(modelErrorMessage));
+            Service = service ?? throw new ArgumentNullException(nameof(service));
+            Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref= "RecaptchaFilter" />.
+        /// Initializes a new instance of <see cref="RecaptchaFilter"/>.
         /// </summary>
-        /// <param name="logger">Logger service</param>
-        /// <param name="rvService">Recaptcha service</param>
-        /// <param name="onRecaptchaInvalid">Method for custom context configuration after recaptcha validation failiure.</param>
-        public RecaptchaFilter(RecaptchaValidationService rvService,
+        /// <param name="service">Recaptcha validation service</param>
+        /// <param name="options">Recaptcha options</param>
+        /// <param name="onRecaptchaInvalid">Custom action invoked when recaptcha token is invalid</param>
+        /// <param name="logger">Logger</param>
+        public RecaptchaFilter(IRecaptchaTokenValidationService service,
+            IOptions<RecaptchaOptions> options,
             Action<ActionExecutingContext> onRecaptchaInvalid,
-            ILogger<RecaptchaFilter> logger = null)
-        {
-            this.logger = logger;
-            this.rvService = rvService ?? throw new ArgumentNullException(nameof(rvService));
-            this.onRecaptchaInvalid = onRecaptchaInvalid ?? throw new ArgumentNullException(nameof(onRecaptchaInvalid));
-        }
+            ILogger<RecaptchaFilter> logger) : this(service, options, logger) 
+            => this.onRecaptchaInvalid = onRecaptchaInvalid ?? throw new ArgumentNullException(nameof(onRecaptchaInvalid));
 
         /// <summary>
         /// Validates the recaptcha token found in a form response.
@@ -65,28 +67,28 @@
         /// <returns>Task result</returns>
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (rvService.Active)
+            if (Options.Active)
             {
-                logger?.LogTrace($"RecaptchaFilter: Recaptcha is active. Reading form request value \"{modelParameterName}\"");
+                logger?.LogInformation($"RecaptchaFilter: Recaptcha is active. Reading form request value \"{RecaptchaOptions.FormParameterName}\"");
 
-                if (context.HttpContext.Request.Form[modelParameterName].Count > 0)
+                if (context.HttpContext.Request.Form[RecaptchaOptions.FormParameterName].Count > 0)
                 {
-                    string token = context.HttpContext.Request.Form[modelParameterName][0];
-                    logger?.LogTrace($"RecaptchaFilter: Found \"{modelParameterName}\" = {token}");
+                    string token = context.HttpContext.Request.Form[RecaptchaOptions.FormParameterName][0];
+                    logger?.LogInformation($"RecaptchaFilter: Found \"{RecaptchaOptions.FormParameterName}\" = {token}");
 
-                    bool recaptchaValid = await rvService.ValidateAsync(token);
+                    bool recaptchaValid = await Service.ValidateAsync(token);
 
                     if (!recaptchaValid)
                     {
                         if (onRecaptchaInvalid != null)
                             onRecaptchaInvalid.Invoke(context);
                         else
-                            context.ModelState.AddModelError(modelParameterName, modelErrorMessage ?? Recaptcha.Resources.Recaptcha.RecaptchaModelError);
+                            context.ModelState.AddModelError(RecaptchaOptions.FormParameterName, Recaptcha.Resources.Recaptcha.RecaptchaModelError);
                     }
                 }
                 else
                 {
-                    logger?.LogTrace($"RecaptchaFilter: Token not found");
+                    logger?.LogInformation($"RecaptchaFilter: Token not found");
                 }
             }
             await next();

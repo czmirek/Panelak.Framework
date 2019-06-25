@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents a token validation service for captcha purposes.
     /// </summary>
-    public interface ICaptchaTokenValidationService
+    public interface IRecaptchaTokenValidationService
     {
         /// <summary>
         /// Validates the captcha token

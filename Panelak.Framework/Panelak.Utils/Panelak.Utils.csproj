@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,17 +9,41 @@
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
-    <PackageReleaseNotes>Extensions for handling the absolute URLs of a website project.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added extension methods for proxy and recaptcha, bugfixes</PackageReleaseNotes>
     <Product>Panelak.Utils</Product>
     <PackageId>Panelak.Utils</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.13.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Utils</Company>
     <Authors>Panelak.Utils</Authors>
+    <AssemblyVersion>1.13.0.0</AssemblyVersion>
+    <FileVersion>1.13.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Utils\Panelak.Utils.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNet.Mvc.TypedRouting" Version="1.3.0" />
+    <None Remove="Panelak.Utils.targets" />
+    <None Remove="Panelak.Utils.ViewComponentBinding.js" />
+    <None Remove="Recaptcha\Panelak.Utils.Recaptcha.js" />
+    <None Remove="wwwroot\js\Panelak.Utils\Panelak.Utils.Recaptcha.js" />
+    <None Remove="wwwroot\js\Panelak.Utils\Panelak.Utils.ViewComponentBinding.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="build\Panelak.Utils.targets" PackagePath="build\Panelak.Utils.targets" />
+    <Content Include="wwwroot\js\Panelak.Utils\*.js">
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
@@ -37,5 +61,9 @@
       <LastGenOutput>Recaptcha.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)..\*.nupkg&quot; &quot;C:\Users\miros\source\repos\local_packages&quot; /C /Y" />
+  </Target>
 
 </Project>

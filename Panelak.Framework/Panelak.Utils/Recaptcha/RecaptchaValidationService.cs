@@ -1,6 +1,7 @@
 ﻿namespace Panelak.Utils
 {
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
@@ -11,12 +12,12 @@
     /// <summary>
     /// Service used for validating Google Recaptcha tokens.
     /// </summary>
-    public class RecaptchaValidationService : ICaptchaTokenValidationService
+    public class RecaptchaValidationService : IRecaptchaTokenValidationService
     {
         /// <summary>
-        /// Gets or sets the value indicating whether the token validation method contacts the validation service (true) or returns true immediately without checking anything (false).
+        /// Gets the recaptcha options
         /// </summary>
-        public bool Active { get; }
+        public RecaptchaOptions Options { get; }
 
         /// <summary>
         /// Logging service
@@ -29,43 +30,24 @@
         private readonly IProxyService proxyService;
 
         /// <summary>
-        /// True if the service should throw exceptions on contacting the validation service, false if token 
-        /// validation should return false instead in this case.
-        /// </summary>
-        private readonly bool throwExceptions;
-
-        /// <summary>
-        /// Secret key of the token validation service.
-        /// </summary>
-        private readonly string secretKey;
-
-        /// <summary>
         /// Initializes a new instance of <see cref="RecaptchaValidationService" />.
         /// </summary>
+        /// <param name="recaptchaOptions">Recaptcha options</param>
         /// <param name="logger">Logger service</param>
-        /// <param name="active">True if service is active, false otherwise.</param>
-        /// <param name="secretKey">Sercret key</param>
-        /// <param name="throwExceptions">True if exceptions should be thrown, false if validation should just fail instead</param>
-        public RecaptchaValidationService(bool active, string secretKey, ILogger<RecaptchaValidationService> logger, bool throwExceptions = true)
+        public RecaptchaValidationService(IOptions<RecaptchaOptions> recaptchaOptions, ILogger<RecaptchaValidationService> logger)
         {
+            Options = recaptchaOptions.Value;
             this.logger = logger;
-            this.throwExceptions = throwExceptions;
-
-            Active = active;
-            if (Active)
-                this.secretKey = secretKey ?? throw new ArgumentNullException(nameof(secretKey));
         }
 
         /// <summary>
         /// Initializes a new instance of <see cref="RecaptchaValidationService" />.
         /// </summary>
-        /// <param name="logger">Logger service</param>
+        /// <param name="recaptchaOptions">Recaptcha options</param>
         /// <param name="proxyService">Proxy service</param>
-        /// <param name="active">True if service is active, false otherwise.</param>
-        /// <param name="secretKey">Sercret key</param>
-        /// <param name="throwExceptions">True if exceptions should be thrown, false if validation should just fail instead</param>
-        public RecaptchaValidationService(IProxyService proxyService, bool active, string secretKey, ILogger<RecaptchaValidationService> logger = null, bool throwExceptions = true)
-            : this(active, secretKey, logger, throwExceptions)
+        /// <param name="logger">Logger service</param>
+        public RecaptchaValidationService(IOptions<RecaptchaOptions> recaptchaOptions, IProxyService proxyService, ILogger<RecaptchaValidationService> logger)
+            : this(recaptchaOptions, logger)
             => this.proxyService = proxyService ?? throw new ArgumentNullException(nameof(proxyService));
 
         /// <summary>
@@ -75,9 +57,9 @@
         /// <returns>True if token is valid, false othrewise.</returns>
         public async Task<bool> ValidateAsync(string token)
         {
-            if (!Active)
+            if (!Options.Active)
             {
-                logger?.LogTrace($"Recaptcha: skipping validation of token \"{token}\" because recaptcha is inactive (Active = false).");
+                logger?.LogInformation($"Recaptcha: skipping validation of token \"{token}\" because recaptcha is inactive (Active = false).");
                 return true;
             }
 
@@ -89,7 +71,7 @@
 
             var verifyParamsEncoded = new FormUrlEncodedContent(new Dictionary<string, string>()
             {
-                { "secret", secretKey },
+                { "secret", Options.SecretKey },
                 { "response", token }
             });
 
@@ -109,7 +91,7 @@
                 }
             }
 
-            logger?.LogDebug($"Recaptcha: Sending validation request to \"https://www.google.com/recaptcha/api/siteverify\"");
+            logger?.LogInformation($"Recaptcha: Sending validation request to \"https://www.google.com/recaptcha/api/siteverify\"");
 
             string resultStr;
 
@@ -124,20 +106,26 @@
             } 
             catch(Exception e)
             {
-                if (throwExceptions)
+                if (Options.ThrowExceptions)
                 {
                     throw;
                 }
                 else
                 {
                     logger?.LogError(default, e, "Recaptcha: Exception thrown during sending a validation request to Google Recaptcha API");
-                    logger?.LogTrace("Recaptcha: returning false on token validation. (Recaptcha is configured to return false on token validation instead of throwing an exception.)");
+                    logger?.LogInformation("Recaptcha: returning false on token validation. (Recaptcha is configured to return false on token validation instead of throwing an exception.)");
                     return false;
                 }
             }
             
             var resultJObject = JObject.Parse(resultStr);
             bool success = resultJObject["success"].Value<bool>();
+
+            if (success)
+                logger?.LogInformation("Recaptcha: validation successful");
+            else
+                logger?.LogInformation("Recaptcha: validation failed");
+
             return success;
         }
     }
