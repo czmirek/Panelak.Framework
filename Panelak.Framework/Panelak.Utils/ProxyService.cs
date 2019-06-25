@@ -20,7 +20,7 @@
         /// Initializes a new instance of <see cref="ProxyService"/>.
         /// </summary>
         /// <param name="logger">Logger service</param>
-        public ProxyService(ILogger<ProxyService> logger = null) 
+        public ProxyService(ILogger<ProxyService> logger) 
             => this.logger = logger;
 
         /// <summary>
@@ -31,14 +31,14 @@
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                logger?.LogTrace("ProxyService: Windows detected");
+                logger?.LogInformation("ProxyService: Windows detected");
                 RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", false);
                 bool isProxyEnabled = ((int)registry.GetValue("ProxyEnable")) == 1 ? true : false;
                 if (isProxyEnabled)
                 {
 
                     string proxyValue = (string)registry.GetValue("ProxyServer");
-                    logger?.LogTrace($"ProxyService: Proxy is enabled in Windows Internet Settings, loaded proxy value {proxyValue}");
+                    logger?.LogInformation($"ProxyService: Proxy is enabled in Windows Internet Settings, using proxy \"{proxyValue}\".");
 
                     return new WebProxy()
                     {
@@ -49,7 +49,7 @@
                 }
                 else
                 {
-                    logger?.LogTrace("ProxyService: no system proxy set");
+                    logger?.LogInformation("ProxyService: no system proxy set");
                     return null;
                 }
 

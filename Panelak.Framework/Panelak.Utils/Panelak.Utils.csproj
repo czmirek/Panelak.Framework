@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
-    <PackageReleaseNotes>Added extension methods for proxy and recaptcha, bugfixes</PackageReleaseNotes>
+    <PackageReleaseNotes>Added more features</PackageReleaseNotes>
     <Product>Panelak.Utils</Product>
     <PackageId>Panelak.Utils</PackageId>
     <Version>1.13.0</Version>
