@@ -13,8 +13,30 @@
         /// </summary>
         /// <param name="serviceCollection">Service collection</param>
         /// <returns>Service collection</returns>
-        public static IServiceCollection AddProxySupport(this IServiceCollection serviceCollection)
-            => serviceCollection.AddSingleton<IProxyService, ProxyService>();
+        public static IServiceCollection AddProxySupport(this IServiceCollection services)
+            => services.AddSingleton<IProxyService, ProxyService>();
+
+        /// <summary>
+        /// Adds the proxy service
+        /// </summary>
+        /// <param name="services">Service collection</param>
+        /// <param name="proxyUri">URL of proxy</param>
+        /// <returns>Service collection</returns>
+        public static IServiceCollection AddProxySupport(this IServiceCollection services, string proxyUri)
+            => services.Configure<ProxyOptions>(options =>
+            {
+                options.ProxyUrl = proxyUri;
+            }).AddSingleton<IProxyService, ProxyService>();
+
+        /// <summary>
+        /// Adds the proxy service
+        /// </summary>
+        /// <param name="services">Service collection</param>
+        /// <param name="config">Proxy configuration section</param>
+        /// <returns>Service collection</returns>
+        public static IServiceCollection AddProxySupport(this IServiceCollection services, IConfigurationSection config)
+            => services.Configure<ProxyOptions>(config)
+                       .AddSingleton<IProxyService, ProxyService>();
 
         /// <summary>
         /// Adds the recaptcha services

@@ -4,6 +4,6 @@
 
     public interface IProxyService
     {
-        IWebProxy GetSystemProxy();
+        IWebProxy GetProxy();
     }
 }

@@ -1,16 +1,23 @@
 ﻿namespace Panelak.Utils
 {
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using Microsoft.Win32;
     using System;
     using System.Net;
     using System.Runtime.InteropServices;
 
     /// <summary>
-    /// Service for obtaining proxy configuration.
+    /// Service for obtaining proxy configuration either from configured options or from
+    /// window registry.
     /// </summary>
     public class ProxyService : IProxyService
     {
+        /// <summary>
+        /// Proxy options
+        /// </summary>
+        private readonly IOptionsMonitor<ProxyOptions> options;
+
         /// <summary>
         /// Logger service
         /// </summary>
@@ -20,15 +27,40 @@
         /// Initializes a new instance of <see cref="ProxyService"/>.
         /// </summary>
         /// <param name="logger">Logger service</param>
-        public ProxyService(ILogger<ProxyService> logger) 
-            => this.logger = logger;
+        public ProxyService(IOptionsMonitor<ProxyOptions> options, ILogger<ProxyService> logger)
+        {
+            this.options = options;
+            this.logger = logger;
+        }
 
         /// <summary>
         /// Returns the proxy configured in the operating system.
         /// </summary>
         /// <returns></returns>
-        public IWebProxy GetSystemProxy()
+        public IWebProxy GetProxy()
         {
+            string proxyUrl = options.CurrentValue.ProxyUrl;
+            if (!String.IsNullOrEmpty(proxyUrl))
+            {
+                if (Uri.TryCreate(proxyUrl, UriKind.Absolute, out Uri proxyUri))
+                {
+                    logger?.LogInformation($"ProxyService: creating proxy from configuration \"{proxyUrl}\"");
+
+                    return new WebProxy()
+                    {
+                        Address = proxyUri,
+                        BypassProxyOnLocal = false,
+                        UseDefaultCredentials = false
+                    };
+                }
+                else
+                {
+                    logger?.LogError($"ProxyService: ERROR - invalid URL in proxy config \"{proxyUrl}\". " +
+                                     $"Set the value to empty or remove it from configuration to automatically use " +
+                                     $"current user's proxy settings without generating this error message.");
+                }
+            }
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 logger?.LogInformation("ProxyService: Windows detected");

@@ -79,7 +79,7 @@
 
             if (proxyService != null)
             {
-                IWebProxy webProxy = proxyService.GetSystemProxy();
+                IWebProxy webProxy = proxyService.GetProxy();
                 if (webProxy != null)
                 {
                     var proxyHandler = new HttpClientHandler()
