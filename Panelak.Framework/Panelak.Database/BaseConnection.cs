@@ -378,7 +378,7 @@
         /// Returns an opened connection which is considered prepared and ready for use for a given RDBMS.
         /// </summary>
         /// <returns>RDBMS-ready opened connection</returns>
-        private DbConnection GetConnection()
+        protected DbConnection GetConnection()
         {
             DbConnection connection = GetConnectionProtected(ConnectionString);
             Initialize(connection);
@@ -390,15 +390,18 @@
         /// </summary>
         /// <param name="queryParams">Query parameters object</param>
         /// <param name="command">The command<see cref="DbCommand"/></param>
-        private void ProcessParams(object queryParams, DbCommand command)
+        private void ProcessParams(object queryParams, DbCommand command, ParameterDirection direction = ParameterDirection.Input)
         {
+            if (queryParams == null)
+                return;
+
             if (queryParams is IEnumerable paramCollection)
             {
                 foreach (object param in paramCollection)
-                    ProcessParam(param, command);
+                    ProcessParam(param, command, direction);
             }
             else
-                ProcessParam(queryParams, command);
+                ProcessParam(queryParams, command, direction);
         }
 
         /// <summary>
@@ -407,18 +410,21 @@
         /// </summary>
         /// <param name="param">Anonymous object with Name and Value parameters</param>
         /// <param name="command">Command from which to create the parameter and to which to append it</param>
-        private void ProcessParam(object param, DbCommand command)
+        private void ProcessParam(object param, DbCommand command, ParameterDirection direction = ParameterDirection.Input)
         {
             PropertyInfo[] propInfos = param.GetType().GetProperties();
 
             foreach (PropertyInfo propInfo in propInfos)
             {
                 System.Data.Common.DbParameter dbParam = command.CreateParameter();
+                dbParam.Direction = direction;
                 dbParam.ParameterName = propInfo.Name;
                 dbParam.Value = propInfo.GetValue(param);
+
                 command.Parameters.Add(dbParam);
 
-                Log.LogTrace($"{dbParam.ParameterName} = {dbParam.Value.ToString()}");
+                string logDirection = direction.ToString();
+                Log.LogTrace($"({logDirection}): {dbParam.ParameterName} = {dbParam.Value.ToString()}");
             }
         }
 
@@ -433,7 +439,7 @@
         /// Logs a query string
         /// </summary>
         /// <param name="query">Query string</param>
-        private void LogQuery(string query) => Log.LogTrace($"SQL QUERY: {query}");
+        private void LogQuery(string query) => Log.LogDebug($"SQL QUERY: {query}");
 
         /// <summary>
         /// Logs parameterized query

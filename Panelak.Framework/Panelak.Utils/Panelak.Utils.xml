@@ -26,6 +26,22 @@
             <param name="serviceCollection">Service collection</param>
             <returns>Service collection</returns>
         </member>
+        <member name="M:Panelak.Utils.Extensions.AddProxySupport(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Adds the proxy service
+            </summary>
+            <param name="services">Service collection</param>
+            <param name="proxyUri">URL of proxy</param>
+            <returns>Service collection</returns>
+        </member>
+        <member name="M:Panelak.Utils.Extensions.AddProxySupport(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)">
+            <summary>
+            Adds the proxy service
+            </summary>
+            <param name="services">Service collection</param>
+            <param name="config">Proxy configuration section</param>
+            <returns>Service collection</returns>
+        </member>
         <member name="M:Panelak.Utils.Extensions.AddRecaptchaService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)">
             <summary>
             Adds the recaptcha services
@@ -52,14 +68,43 @@
             <param name="services">Service collection</param>
             <returns>Service collection</returns>
         </member>
+        <member name="M:Panelak.Utils.Extensions.ToXml``1(``0)">
+            <summary>
+            Serializes the object to XML using <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
+            </summary>
+            <typeparam name="T">Type of object</typeparam>
+            <param name="value">Instance of object</param>
+            <returns>Serialized XML</returns>
+        </member>
         <member name="T:Panelak.Utils.IDateTimeProvider">
             <summary>
             Provider for date and time
             </summary>
         </member>
+        <member name="T:Panelak.Utils.ProxyOptions">
+            <summary>
+            Options for proxy service
+            </summary>
+        </member>
+        <member name="M:Panelak.Utils.ProxyOptions.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Panelak.Utils.ProxyOptions"/>.
+            </summary>
+        </member>
+        <member name="P:Panelak.Utils.ProxyOptions.ProxyUrl">
+            <summary>
+            Gets the URL of the proxy
+            </summary>
+        </member>
         <member name="T:Panelak.Utils.ProxyService">
             <summary>
-            Service for obtaining proxy configuration.
+            Service for obtaining proxy configuration either from configured options or from
+            window registry.
+            </summary>
+        </member>
+        <member name="F:Panelak.Utils.ProxyService.options">
+            <summary>
+            Proxy options
             </summary>
         </member>
         <member name="F:Panelak.Utils.ProxyService.logger">
@@ -67,13 +112,13 @@
             Logger service
             </summary>
         </member>
-        <member name="M:Panelak.Utils.ProxyService.#ctor(Microsoft.Extensions.Logging.ILogger{Panelak.Utils.ProxyService})">
+        <member name="M:Panelak.Utils.ProxyService.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{Panelak.Utils.ProxyOptions},Microsoft.Extensions.Logging.ILogger{Panelak.Utils.ProxyService})">
             <summary>
             Initializes a new instance of <see cref="T:Panelak.Utils.ProxyService"/>.
             </summary>
             <param name="logger">Logger service</param>
         </member>
-        <member name="M:Panelak.Utils.ProxyService.GetSystemProxy">
+        <member name="M:Panelak.Utils.ProxyService.GetProxy">
             <summary>
             Returns the proxy configured in the operating system.
             </summary>

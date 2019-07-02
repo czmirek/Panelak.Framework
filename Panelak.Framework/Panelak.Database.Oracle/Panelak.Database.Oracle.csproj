@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.2.0</Version>
+    <Version>4.5.0</Version>
     <Authors>Miroslav Bartl</Authors>
     <Description>ORM for Oracle database</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
@@ -10,14 +10,14 @@
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
-    <PackageReleaseNotes>Updated dependency</PackageReleaseNotes>
+    <PackageReleaseNotes>Procedure execution support</PackageReleaseNotes>
     <Product>Panelak.Database.Oracle</Product>
     <PackageId>Panelak.Database.Oracle</PackageId>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <FileVersion>4.2.0</FileVersion>
+    <FileVersion>4.5.0</FileVersion>
     <Company>Miroslav Bartl</Company>
-    <AssemblyVersion>4.2.0</AssemblyVersion>
+    <AssemblyVersion>4.5.0</AssemblyVersion>
     <Deterministic>False</Deterministic>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.Oracle.pfx</AssemblyOriginatorKeyFile>
@@ -43,4 +43,8 @@
     <ProjectReference Include="..\Panelak.Database\Panelak.Database.csproj" />
     <ProjectReference Include="..\Panelak.Geometry\Panelak.Geometry.csproj" />
   </ItemGroup>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+  </Target>
 </Project>

@@ -9,15 +9,15 @@
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
-    <PackageReleaseNotes>Updated Panelak.Sql reference</PackageReleaseNotes>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Removed NonQueryCommand and procedure support for now</PackageReleaseNotes>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Product>Panelak.Database</Product>
     <PackageId>Panelak.Database</PackageId>
-    <Version>5.2.0</Version>
+    <Version>5.5.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
-    <FileVersion>5.2.0</FileVersion>
-    <AssemblyVersion>5.2.0</AssemblyVersion>
+    <FileVersion>5.5.0</FileVersion>
+    <AssemblyVersion>5.5.0</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.pfx</AssemblyOriginatorKeyFile>
     <Deterministic>False</Deterministic>
@@ -45,4 +45,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Panelak.Sql\Panelak.Sql.csproj" />
   </ItemGroup>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+  </Target>
 </Project>
