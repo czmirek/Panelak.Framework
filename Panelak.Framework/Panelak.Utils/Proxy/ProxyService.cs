@@ -39,12 +39,12 @@
         /// <returns></returns>
         public IWebProxy GetProxy()
         {
-            string proxyUrl = options.CurrentValue.ProxyUrl;
+            string proxyUrl = options?.CurrentValue?.ProxyUrl;
             if (!String.IsNullOrEmpty(proxyUrl))
             {
                 if (Uri.TryCreate(proxyUrl, UriKind.Absolute, out Uri proxyUri))
                 {
-                    logger?.LogInformation($"ProxyService: creating proxy from configuration \"{proxyUrl}\"");
+                    logger?.LogDebug($"ProxyService: creating proxy from configuration \"{proxyUrl}\"");
 
                     return new WebProxy()
                     {
@@ -63,31 +63,46 @@
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                logger?.LogInformation("ProxyService: Windows detected");
-                RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", false);
-                bool isProxyEnabled = ((int)registry.GetValue("ProxyEnable")) == 1 ? true : false;
-                if (isProxyEnabled)
-                {
+                logger?.LogDebug("ProxyService: Windows detected");
 
-                    string proxyValue = (string)registry.GetValue("ProxyServer");
-                    logger?.LogInformation($"ProxyService: Proxy is enabled in Windows Internet Settings, using proxy \"{proxyValue}\".");
+                const string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings";
+                RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(subKey, false);
 
-                    return new WebProxy()
-                    {
-                        Address = new Uri(proxyValue),
-                        BypassProxyOnLocal = false,
-                        UseDefaultCredentials = false
-                    };
-                }
-                else
+                if (registryKey == null)
                 {
-                    logger?.LogInformation("ProxyService: no system proxy set");
+                    logger?.LogDebug($"ProxyService: registry \"{subKey}\" not found");
                     return null;
                 }
 
+                object proxyEnableRegistryKey = registryKey.GetValue("ProxyEnable");
+
+                if (proxyEnableRegistryKey == null)
+                {
+                    logger?.LogDebug($"ProxyService: registry value \"ProxyEnable\" in \"{subKey}\" not found");
+                    return null;
+                }
+
+                bool isProxyEnabled = (int)proxyEnableRegistryKey == 1 ? true : false;
+                if (!isProxyEnabled)
+                {
+                    logger?.LogDebug("ProxyService: registry value \"ProxyEnable\" in \"{subKey}\" is set to false.");
+                    return null;
+                }
+
+                string proxyValue = (string)registryKey.GetValue("ProxyServer");
+                logger?.LogDebug($"ProxyService: Proxy is enabled in Windows Internet Settings, using proxy \"{proxyValue}\".");
+
+                return new WebProxy()
+                {
+                    Address = new Uri(proxyValue),
+                    BypassProxyOnLocal = false,
+                    UseDefaultCredentials = false
+                };
             }
 
-            throw new PlatformNotSupportedException();
+
+            logger?.LogInformation("ProxyService: no proxy found.");
+            return null;
         }
     }
 }

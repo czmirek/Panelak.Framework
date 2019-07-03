@@ -167,6 +167,14 @@
             <param name="sqlQuery">SQL SELECT query model</param>
             <returns>Parameterized Oracle query</returns>
         </member>
+        <member name="M:Panelak.Database.Oracle.OracleConnection.ExecuteProcedure(System.String,System.Object,System.Object)">
+            <summary>
+            Runs a procedure with given name, input and output params
+            </summary>
+            <param name="procedure">Name of procedure</param>
+            <param name="inputParams">Input parameters</param>
+            <param name="outputParams">Output parameters</param>
+        </member>
         <member name="M:Panelak.Database.Oracle.OracleConnection.GetConnectionProtected(System.String)">
             <summary>
             Returns the Oracle managed connection for given connection string
@@ -193,6 +201,28 @@
             </summary>
             <param name="table">Table identifier</param>
             <returns>Primary key</returns>
+        </member>
+        <member name="M:Panelak.Database.Oracle.OracleConnection.ProcessParams(System.Object,Oracle.ManagedDataAccess.Client.OracleCommand,System.Data.ParameterDirection)">
+            <summary>
+            Applies the object parameters <paramref name="queryParams"/> into parameters for command in <paramref name="command"/>.
+            </summary>
+            <param name="queryParams">Query parameters object</param>
+            <param name="command">The command <see cref="T:Oracle.ManagedDataAccess.Client.OracleCommand"/></param>
+        </member>
+        <member name="M:Panelak.Database.Oracle.OracleConnection.ProcessParam(System.Object,Oracle.ManagedDataAccess.Client.OracleCommand,System.Data.ParameterDirection)">
+            <summary>
+            Converts a anonymous object parameter with Name and Value
+            into a SQL command parameter.
+            </summary>
+            <param name="param">Anonymous object with Name and Value parameters</param>
+            <param name="command">Command from which to create the parameter and to which to append it</param>
+        </member>
+        <member name="M:Panelak.Database.Oracle.OracleConnection.ProcessOutputParams(System.Object,Oracle.ManagedDataAccess.Client.OracleCommand)">
+            <summary>
+            Performs assigning of output parameters to the user defined object by reflection
+            </summary>
+            <param name="outputParams">Output parameters object</param>
+            <param name="command">Executed command</param>
         </member>
         <member name="T:Panelak.Database.Oracle.OracleDbParameter">
             <summary>
@@ -235,6 +265,34 @@
             <summary>
             Gets the SQL query parameters
             </summary>
+        </member>
+        <member name="T:Panelak.Database.Oracle.OracleDbTypeAttribute">
+            <summary>
+            Attribute for configuring the database type of Oracle parameters
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.Oracle.OracleDbTypeAttribute.OracleDbType">
+            <summary>
+            Oracle database type
+            </summary>
+        </member>
+        <member name="P:Panelak.Database.Oracle.OracleDbTypeAttribute.Size">
+            <summary>
+            Size of oracle type
+            </summary>
+        </member>
+        <member name="M:Panelak.Database.Oracle.OracleDbTypeAttribute.#ctor(Oracle.ManagedDataAccess.Client.OracleDbType)">
+            <summary>
+            Creates a new instance of <see cref="T:Panelak.Database.Oracle.OracleDbTypeAttribute"/>.
+            </summary>
+            <param name="oracleDbType">Oracle database type</param>
+        </member>
+        <member name="M:Panelak.Database.Oracle.OracleDbTypeAttribute.#ctor(Oracle.ManagedDataAccess.Client.OracleDbType,System.Int32)">
+            <summary>
+            Creates a new instance of <see cref="T:Panelak.Database.Oracle.OracleDbTypeAttribute"/>.
+            </summary>
+            <param name="oracleDbType">Oracle database type</param>
+            <param name="size">Size of the type</param>
         </member>
         <member name="T:Panelak.Database.Oracle.OracleSqlGeometryExtensions">
             <summary>

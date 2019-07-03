@@ -31,12 +31,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.18.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.3" />
     <PackageReference Include="Panelak.Geometry" Version="5.0.0" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Database" Version="5.2.0" />
+    <PackageReference Include="Panelak.Database" Version="5.5.0" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Debug'">

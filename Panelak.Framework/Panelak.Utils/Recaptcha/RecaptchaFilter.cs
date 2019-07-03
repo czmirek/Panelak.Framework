@@ -69,12 +69,12 @@
         {
             if (Options.Active)
             {
-                logger?.LogInformation($"RecaptchaFilter: Recaptcha is active. Reading form request value \"{RecaptchaOptions.FormParameterName}\"");
+                logger?.LogDebug($"RecaptchaFilter: Recaptcha is active. Reading form request value \"{RecaptchaOptions.FormParameterName}\"");
 
                 if (context.HttpContext.Request.Form[RecaptchaOptions.FormParameterName].Count > 0)
                 {
                     string token = context.HttpContext.Request.Form[RecaptchaOptions.FormParameterName][0];
-                    logger?.LogInformation($"RecaptchaFilter: Found \"{RecaptchaOptions.FormParameterName}\" = {token}");
+                    logger?.LogDebug($"RecaptchaFilter: Found \"{RecaptchaOptions.FormParameterName}\" = {token}");
 
                     bool recaptchaValid = await Service.ValidateAsync(token);
 
@@ -88,7 +88,7 @@
                 }
                 else
                 {
-                    logger?.LogInformation($"RecaptchaFilter: Token not found");
+                    logger?.LogDebug($"RecaptchaFilter: Token not found");
                 }
             }
             await next();

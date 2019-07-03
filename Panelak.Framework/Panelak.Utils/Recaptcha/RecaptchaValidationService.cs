@@ -59,7 +59,7 @@
         {
             if (!Options.Active)
             {
-                logger?.LogInformation($"Recaptcha: skipping validation of token \"{token}\" because recaptcha is inactive (Active = false).");
+                logger?.LogDebug($"Recaptcha: skipping validation of token \"{token}\" because recaptcha is inactive (Active = false).");
                 return true;
             }
 
@@ -91,7 +91,7 @@
                 }
             }
 
-            logger?.LogInformation($"Recaptcha: Sending validation request to \"https://www.google.com/recaptcha/api/siteverify\"");
+            logger?.LogDebug($"Recaptcha: Sending validation request to \"https://www.google.com/recaptcha/api/siteverify\"");
 
             string resultStr;
 
@@ -113,7 +113,7 @@
                 else
                 {
                     logger?.LogError(default, e, "Recaptcha: Exception thrown during sending a validation request to Google Recaptcha API");
-                    logger?.LogInformation("Recaptcha: returning false on token validation. (Recaptcha is configured to return false on token validation instead of throwing an exception.)");
+                    logger?.LogDebug("Recaptcha: returning false on token validation. (Recaptcha is configured to return false on token validation instead of throwing an exception.)");
                     return false;
                 }
             }
@@ -122,9 +122,9 @@
             bool success = resultJObject["success"].Value<bool>();
 
             if (success)
-                logger?.LogInformation("Recaptcha: validation successful");
+                logger?.LogDebug("Recaptcha: validation successful");
             else
-                logger?.LogInformation("Recaptcha: validation failed");
+                logger?.LogDebug("Recaptcha: validation failed");
 
             return success;
         }
