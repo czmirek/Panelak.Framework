@@ -46,7 +46,7 @@
         /// <param name="tableIdentifier">Table identifier</param>
         /// <param name="primaryKey">Primary key identifier</param>
         /// <returns>True whether the attempt to find a primary key succeeded</returns>
-        public override bool TryGetPrimaryKeyForTableAsync(ISqlTableIdentifier tableIdentifier, out string primaryKey)
+        public override bool TryGetPrimaryKeyForTable(ISqlTableIdentifier tableIdentifier, out string primaryKey)
         {
             primaryKey = GetPrimaryKeyForTableAsync(tableIdentifier);
             return primaryKey != null;
@@ -57,7 +57,7 @@
         /// </summary>
         /// <param name="tableIdentifier">Table identifier</param>
         /// <returns>Name of the first column</returns>
-        public override string GetFirstColumnNameAsync(ISqlTableIdentifier tableIdentifier)
+        public override string GetFirstColumnName(ISqlTableIdentifier tableIdentifier)
         {
             object[] parameters = new object[] { new { tableName = tableIdentifier.Table }, new { schema = tableIdentifier.Schema } };
             string query = @"SELECT TOP 1 COLUMN_NAME 

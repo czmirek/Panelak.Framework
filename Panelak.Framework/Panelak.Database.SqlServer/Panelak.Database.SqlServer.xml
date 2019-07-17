@@ -142,7 +142,7 @@
             Gets the SQL Server database type
             </summary>
         </member>
-        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.TryGetPrimaryKeyForTableAsync(Panelak.Sql.ISqlTableIdentifier,System.String@)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.TryGetPrimaryKeyForTable(Panelak.Sql.ISqlTableIdentifier,System.String@)">
             <summary>
             Attempts to return a primary key for given SQL Server table.
             </summary>
@@ -150,7 +150,7 @@
             <param name="primaryKey">Primary key identifier</param>
             <returns>True whether the attempt to find a primary key succeeded</returns>
         </member>
-        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.GetFirstColumnNameAsync(Panelak.Sql.ISqlTableIdentifier)">
+        <member name="M:Panelak.Database.SqlServer.SqlServerConnection.GetFirstColumnName(Panelak.Sql.ISqlTableIdentifier)">
             <summary>
             Returns the name of the first column in given SQL Server table
             </summary>

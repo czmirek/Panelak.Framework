@@ -11,6 +11,7 @@
     using System.Reflection;
     using System;
     using global::Oracle.ManagedDataAccess.Types;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Oracle specific connection driver
@@ -53,7 +54,7 @@
         /// <param name="table">Table identifier</param>
         /// <param name="primaryKey">Primary key identifier</param>
         /// <returns>True whether the attempt to find a primary key succeeded</returns>
-        public override bool TryGetPrimaryKeyForTableAsync(ISqlTableIdentifier table, out string primaryKey)
+        public override bool TryGetPrimaryKeyForTable(ISqlTableIdentifier table, out string primaryKey)
         {
             primaryKey = GetPrimaryKeyForTableAsync(table);
             return primaryKey != null;
@@ -64,7 +65,7 @@
         /// </summary>
         /// <param name="table">Table identifier</param>
         /// <returns>Name of the first column</returns>
-        public override string GetFirstColumnNameAsync(ISqlTableIdentifier table) 
+        public override string GetFirstColumnName(ISqlTableIdentifier table) 
                       => GetScalar<string>(@"SELECT column_name 
                                                FROM ALL_TAB_COLUMNS cols 
                                               WHERE UPPER(cols.table_name) = UPPER({tableName}) 
@@ -150,6 +151,31 @@
                 ProcessParams(outputParams, command, ParameterDirection.Output);
 
                 command.ExecuteNonQuery();
+
+                ProcessOutputParams(outputParams, command);
+            }
+        }
+
+        /// <summary>
+        /// Runs a procedure with given name, input and output params
+        /// </summary>
+        /// <param name="procedure">Name of procedure</param>
+        /// <param name="inputParams">Input parameters</param>
+        /// <param name="outputParams">Output parameters</param>
+        public async Task ExecuteProcedureAsync(string procedure, object inputParams, object outputParams)
+        {
+            Log.LogTrace($"Executing procedure {procedure}");
+
+            using (var db = GetConnection() as OracleSourceConnection)
+            {
+                OracleCommand command = db.CreateCommand();
+                command.CommandText = procedure;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                ProcessParams(inputParams, command, ParameterDirection.Input);
+                ProcessParams(outputParams, command, ParameterDirection.Output);
+
+                await command.ExecuteNonQueryAsync();
 
                 ProcessOutputParams(outputParams, command);
             }

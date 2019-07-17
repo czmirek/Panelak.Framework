@@ -21,7 +21,7 @@
         /// </summary>
         /// <param name="table">Table identifier</param>
         /// <returns>Name of the first column</returns>
-        string GetFirstColumnNameAsync(ISqlTableIdentifier table);
+        string GetFirstColumnName(ISqlTableIdentifier table);
 
         /// <summary>
         /// Gets a number of rows for given SQL query
@@ -36,7 +36,7 @@
         /// <param name="table">Table identifier</param>
         /// <param name="primaryKey">Name of the primary key</param>
         /// <returns>True if primary key was identified</returns>
-        bool TryGetPrimaryKeyForTableAsync(ISqlTableIdentifier table, out string primaryKey);
+        bool TryGetPrimaryKeyForTable(ISqlTableIdentifier table, out string primaryKey);
 
         /// <summary>
         /// Builds a driver-specific SQL query for determining the number of rows for given driver-independent SQL query

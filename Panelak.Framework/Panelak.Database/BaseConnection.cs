@@ -10,11 +10,12 @@
     using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
+    using System.Dynamic;
 
     /// <summary>
     /// Connection driver for basic database task.
     /// </summary>
-    public abstract class BaseConnection : IConnectionLink
+    public abstract partial class BaseConnection : IConnectionLink
     {
         /// <summary>
         /// Connection string used in this connection.
@@ -68,14 +69,14 @@
         /// <param name="table">Identification of the table where primary key is to be found</param>
         /// <param name="primaryKey">Primary key is returned in this out parameter.</param>
         /// <returns>True if primary key was identified, false if not.</returns>
-        public abstract bool TryGetPrimaryKeyForTableAsync(ISqlTableIdentifier table, out string primaryKey);
+        public abstract bool TryGetPrimaryKeyForTable(ISqlTableIdentifier table, out string primaryKey);
 
         /// <summary>
         /// Returns a first column in given table. Implementation is RDBMS specific.
         /// </summary>
         /// <param name="table">Table in which the first column is to be found</param>
         /// <returns>Name of the first column</returns>
-        public abstract string GetFirstColumnNameAsync(ISqlTableIdentifier table);
+        public abstract string GetFirstColumnName(ISqlTableIdentifier table);
 
         /// <summary>
         /// RDBMS specific check for table existence
@@ -390,18 +391,25 @@
         /// </summary>
         /// <param name="queryParams">Query parameters object</param>
         /// <param name="command">The command<see cref="DbCommand"/></param>
+        /// <param name="direction">Parameter direction</param>
         private void ProcessParams(object queryParams, DbCommand command, ParameterDirection direction = ParameterDirection.Input)
         {
             if (queryParams == null)
                 return;
 
-            if (queryParams is IEnumerable paramCollection)
+            if (queryParams is ExpandoObject keyValuePairs)
+            {
+                foreach (KeyValuePair<string, object> item in keyValuePairs)
+                    ProcessParam(item.Key, item.Value, command, direction);
+            }
+            else if (queryParams is IEnumerable paramCollection && !(queryParams is ExpandoObject))
             {
                 foreach (object param in paramCollection)
                     ProcessParam(param, command, direction);
             }
             else
                 ProcessParam(queryParams, command, direction);
+            
         }
 
         /// <summary>
@@ -410,22 +418,34 @@
         /// </summary>
         /// <param name="param">Anonymous object with Name and Value parameters</param>
         /// <param name="command">Command from which to create the parameter and to which to append it</param>
+        /// <param name="direction">Parameter direction</param>
         private void ProcessParam(object param, DbCommand command, ParameterDirection direction = ParameterDirection.Input)
         {
             PropertyInfo[] propInfos = param.GetType().GetProperties();
 
             foreach (PropertyInfo propInfo in propInfos)
-            {
-                System.Data.Common.DbParameter dbParam = command.CreateParameter();
-                dbParam.Direction = direction;
-                dbParam.ParameterName = propInfo.Name;
-                dbParam.Value = propInfo.GetValue(param);
+                ProcessParam(propInfo.Name, propInfo.GetValue(param), command, direction);
+            
+        }
 
-                command.Parameters.Add(dbParam);
+        /// <summary>
+        /// Adds a parameter to the command
+        /// </summary>
+        /// <param name="parameterName">Parameter name</param>
+        /// <param name="parameterValue">Parameter value</param>
+        /// <param name="command">Db command</param>
+        /// <param name="direction">Parameter direction</param>
+        private void ProcessParam(string parameterName, object parameterValue, DbCommand command, ParameterDirection direction = ParameterDirection.Input)
+        {
+            System.Data.Common.DbParameter dbParam = command.CreateParameter();
+            dbParam.Direction = direction;
+            dbParam.ParameterName = parameterName;
+            dbParam.Value = parameterValue;
 
-                string logDirection = direction.ToString();
-                Log.LogTrace($"({logDirection}): {dbParam.ParameterName} = {dbParam.Value.ToString()}");
-            }
+            command.Parameters.Add(dbParam);
+
+            string logDirection = direction.ToString();
+            Log.LogTrace($"({logDirection}): {dbParam.ParameterName} = {dbParam.Value.ToString()}");
         }
 
         /// <summary>

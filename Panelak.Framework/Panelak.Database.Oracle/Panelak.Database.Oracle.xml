@@ -116,7 +116,7 @@
             Gets the Oracle database type
             </summary>
         </member>
-        <member name="M:Panelak.Database.Oracle.OracleConnection.TryGetPrimaryKeyForTableAsync(Panelak.Sql.ISqlTableIdentifier,System.String@)">
+        <member name="M:Panelak.Database.Oracle.OracleConnection.TryGetPrimaryKeyForTable(Panelak.Sql.ISqlTableIdentifier,System.String@)">
             <summary>
             Attempts to return a primary key for given Oracle table.
             </summary>
@@ -124,7 +124,7 @@
             <param name="primaryKey">Primary key identifier</param>
             <returns>True whether the attempt to find a primary key succeeded</returns>
         </member>
-        <member name="M:Panelak.Database.Oracle.OracleConnection.GetFirstColumnNameAsync(Panelak.Sql.ISqlTableIdentifier)">
+        <member name="M:Panelak.Database.Oracle.OracleConnection.GetFirstColumnName(Panelak.Sql.ISqlTableIdentifier)">
             <summary>
             Returns the name of the first column in given oracle table
             </summary>
@@ -168,6 +168,14 @@
             <returns>Parameterized Oracle query</returns>
         </member>
         <member name="M:Panelak.Database.Oracle.OracleConnection.ExecuteProcedure(System.String,System.Object,System.Object)">
+            <summary>
+            Runs a procedure with given name, input and output params
+            </summary>
+            <param name="procedure">Name of procedure</param>
+            <param name="inputParams">Input parameters</param>
+            <param name="outputParams">Output parameters</param>
+        </member>
+        <member name="M:Panelak.Database.Oracle.OracleConnection.ExecuteProcedureAsync(System.String,System.Object,System.Object)">
             <summary>
             Runs a procedure with given name, input and output params
             </summary>

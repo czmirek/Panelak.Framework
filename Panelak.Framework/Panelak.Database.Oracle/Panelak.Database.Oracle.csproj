@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.5.0</Version>
+    <Version>5.1.0</Version>
     <Authors>Miroslav Bartl</Authors>
     <Description>ORM for Oracle database</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
@@ -10,14 +10,14 @@
     <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
-    <PackageReleaseNotes>Procedure execution support</PackageReleaseNotes>
+    <PackageReleaseNotes>async procedure execution support</PackageReleaseNotes>
     <Product>Panelak.Database.Oracle</Product>
     <PackageId>Panelak.Database.Oracle</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <FileVersion>4.5.0</FileVersion>
+    <FileVersion>5.1.0</FileVersion>
     <Company>Miroslav Bartl</Company>
-    <AssemblyVersion>4.5.0</AssemblyVersion>
+    <AssemblyVersion>5.1.0</AssemblyVersion>
     <Deterministic>False</Deterministic>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.Oracle.pfx</AssemblyOriginatorKeyFile>
@@ -32,12 +32,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.3" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.31" />
     <PackageReference Include="Panelak.Geometry" Version="5.0.0" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Database" Version="5.5.0" />
+    <PackageReference Include="Panelak.Database" Version="6.0.0" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Debug'">
