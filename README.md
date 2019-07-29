@@ -16,6 +16,8 @@ Current projects.
    - [Panelak.Geometry](https://www.nuget.org/packages/Panelak.Geometry/)
    - [Panelak.Drawing](https://www.nuget.org/packages/Panelak.Drawing/)
   
+4) Various utilities
+   - [Panelak.Utils]
 
 ## Database ORM with SQL parsing
 
