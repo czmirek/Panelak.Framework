@@ -202,6 +202,18 @@
         protected override string GetParameterToken() => ":$1";
 
         /// <summary>
+        /// Returns the OracleCommand with BindByName set to true.
+        /// </summary>
+        /// <param name="dbConnection">Database connection</param>
+        /// <returns>Db command</returns>
+        protected override DbCommand GetCommand(DbConnection dbConnection)
+        {
+            OracleCommand oracleCmd = (dbConnection as OracleSourceConnection).CreateCommand();
+            oracleCmd.BindByName = true;
+            return oracleCmd;
+        }
+
+        /// <summary>
         /// Returns the primary key for given table
         /// </summary>
         /// <param name="table">Table identifier</param>

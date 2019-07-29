@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>5.1.0</Version>
+    <Version>5.1.1</Version>
     <Authors>Miroslav Bartl</Authors>
     <Description>ORM for Oracle database</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
@@ -15,9 +15,9 @@
     <PackageId>Panelak.Database.Oracle</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <FileVersion>5.1.0</FileVersion>
+    <FileVersion>5.1.1</FileVersion>
     <Company>Miroslav Bartl</Company>
-    <AssemblyVersion>5.1.0</AssemblyVersion>
+    <AssemblyVersion>5.1.1</AssemblyVersion>
     <Deterministic>False</Deterministic>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.Oracle.pfx</AssemblyOriginatorKeyFile>

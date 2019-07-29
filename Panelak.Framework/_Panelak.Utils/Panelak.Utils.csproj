@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Description>Personal collection of utilities and extensions.</Description>
+    <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/czmirek/Panelak.Framework</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/czmirek/Panelak.Framework</RepositoryUrl>
+    <PackageReleaseNotes>Custom configuration support for proxy, comments, various fixes</PackageReleaseNotes>
+    <Product>Panelak.Utils</Product>
+    <PackageId>Panelak.Utils</PackageId>
+    <Version>2.0.0</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Panelak.Utils</Company>
+    <Authors>Panelak.Utils</Authors>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Utils\Panelak.Utils.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Panelak.Utils.targets" />
+    <None Remove="Panelak.Utils.ViewComponentBinding.js" />
+    <None Remove="Recaptcha\Panelak.Utils.Recaptcha.js" />
+    <None Remove="wwwroot\js\Panelak.Utils\Panelak.Utils.Recaptcha.js" />
+    <None Remove="wwwroot\js\Panelak.Utils\Panelak.Utils.ViewComponentBinding.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="build\Panelak.Utils.targets" PackagePath="build\Panelak.Utils.targets" />
+    <Content Include="wwwroot\js\Panelak.Utils\*.js">
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Recaptcha\Resources\Recaptcha.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Recaptcha.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Recaptcha\Resources\Recaptcha.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Recaptcha.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+  </Target>
+
+</Project>

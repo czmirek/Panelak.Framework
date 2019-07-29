@@ -42,7 +42,7 @@
             query = TranslateQueryParameters(query);
             using (DbConnection db = await GetConnectionAsync())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
                 IDataReader dataReader = await command.ExecuteReaderAsync();
                 return mapper.MapToDto<T>(dataReader, DatabaseType);
@@ -64,7 +64,7 @@
 
             using (DbConnection db = await GetConnectionAsync())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = queryText;
 
                 foreach (ISqlParameter param in query.SqlParameters)
@@ -96,7 +96,7 @@
 
             using (DbConnection db = await GetConnectionAsync())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
 
                 ProcessParams(queryParams, command);
@@ -131,7 +131,7 @@
 
             using (DbConnection db = await GetConnectionAsync())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
 
                 return (T)await command.ExecuteScalarAsync();
@@ -153,7 +153,7 @@
 
             using (DbConnection db = await GetConnectionAsync())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
                 ProcessParams(queryParams, command);
 
@@ -184,7 +184,7 @@
 
             using (DbConnection db = await GetConnectionAsync())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = queryText;
 
                 foreach (ISqlParameter param in query.SqlParameters)

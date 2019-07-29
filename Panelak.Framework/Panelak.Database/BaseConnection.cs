@@ -1,16 +1,16 @@
 ﻿namespace Panelak.Database
 {
-    using Panelak.Sql;
     using Microsoft.Extensions.Logging;
+    using Panelak.Sql;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
+    using System.Dynamic;
     using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
-    using System.Dynamic;
 
     /// <summary>
     /// Connection driver for basic database task.
@@ -121,9 +121,8 @@
 
             using (DbConnection db = GetConnection())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = queryText;
-
                 foreach (ISqlParameter param in query.SqlParameters)
                 {
                     System.Data.Common.DbParameter dbParam = command.CreateParameter();
@@ -152,7 +151,7 @@
             query = TranslateQueryParameters(query);
             using (DbConnection db = GetConnection())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
                 IDataReader dataReader = command.ExecuteReader();
                 return mapper.MapToDto<T>(dataReader, DatabaseType);
@@ -173,7 +172,7 @@
 
             using (DbConnection db = GetConnection())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = queryText;
 
                 foreach (ISqlParameter param in query.SqlParameters)
@@ -205,7 +204,7 @@
 
             using (DbConnection db = GetConnection())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
 
                 ProcessParams(queryParams, command);
@@ -239,7 +238,7 @@
 
             using (DbConnection db = GetConnection())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
 
                 return (T)command.ExecuteScalar();
@@ -261,7 +260,7 @@
 
             using (DbConnection db = GetConnection())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = query;
                 ProcessParams(queryParams, command);
 
@@ -292,7 +291,7 @@
 
             using (DbConnection db = GetConnection())
             {
-                DbCommand command = db.CreateCommand();
+                DbCommand command = GetCommand(db);
                 command.CommandText = queryText;
 
                 foreach (ISqlParameter param in query.SqlParameters)
@@ -374,6 +373,13 @@
         /// </summary>
         /// <returns>Parameter token</returns>
         protected abstract string GetParameterToken();
+
+        /// <summary>
+        /// Returns an DbCommand optionally configured by the RDBMS-specific connection
+        /// </summary>
+        /// <param name="dbConnection">Database connection</param>
+        /// <returns>Command</returns>
+        protected virtual DbCommand GetCommand(DbConnection dbConnection) => dbConnection.CreateCommand();
 
         /// <summary>
         /// Returns an opened connection which is considered prepared and ready for use for a given RDBMS.

@@ -9,7 +9,7 @@
 
     /// <summary>
     /// Service for obtaining proxy configuration either from configured options or from
-    /// the operating system with the OS being preferred.
+    /// window registry.
     /// </summary>
     public class ProxyService : IProxyService
     {
@@ -35,10 +35,8 @@
 
         /// <summary>
         /// Returns the proxy configured in the operating system.
-        /// If that proxy is not set, returns the proxy configuration from the
-        /// configuration throught the <see cref="IOptionsMonitor"/>.
         /// </summary>
-        /// <returns>Proxy configuration, null if no configuration was found.</returns>
+        /// <returns></returns>
         public IWebProxy GetProxy()
         {
             string proxyUrl = options?.CurrentValue?.ProxyUrl;
