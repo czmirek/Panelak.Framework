@@ -11,7 +11,9 @@ Usage:
 services.AddPageTree(typeof(Startup).Assembly);
 ```
 
-- Mark your actions with the `[Route]` attribute like in this example.
+
+## Building the page tree
+Mark your actions with the `[Route]` attribute like in this example.
 
 ```csharp
 [Route("/")]
@@ -52,9 +54,61 @@ method signatures are provided only for clarity.
 The `IPageTreeProvider` is in a singleton scope and you can 
 inject it anywhere where you need to render menus and such.
 
-- Use the `ICurrentPageProvider` from the scoped context 
-  to identify the current action or the current node of the
-  page tree to build breadcrumbs, "Go back" buttons or 
-  other navigational UI stuff.
+## Getting the current page
 
+Optionally mark your actions with either the `Display` 
+or the custom made `PageMetadataAttribute`.
 
+```csharp
+[Route("/")]
+[Display(ResourceType = typeof(Resources.Pages), Name = "HomeCaption")]
+public IActionResult Index() => View();
+```
+
+or
+
+```csharp
+[Route("/")]
+[PageMetadata(ResourceType = typeof(Resources.Pages), Caption = "HomeCaption", Header = "HomeHeader")]
+public IActionResult Index() => View();
+```
+
+Now use the `ICurrentPageProvider`...
+
+### ... to read the current page metadata.
+
+```html
+@inject ICurrentPageProvider currentPage
+
+<h1>@currentPage.CurrentPage?.Header</h1>
+```
+
+### ... to generate a "Go back" button
+
+```html
+@inject ICurrentPageProvider currentPage
+
+<a href="@currentPage.CurrentPageTree.Parent.Page.CurrentUrl">
+    Go back to @currentPage.CurrentPageTree.Parent.Page.Caption
+</a>
+```
+
+### ... to build breadcrumbs with automatically generated working links!
+```html
+@inject ICurrentPageProvider currentPage
+<nav>
+    <ol class="breadcrumb">
+        @for (int i = 0; i < currentPage.CurrentPagePath.Count; i++)
+        {
+            if(i == currentPage.CurrentPagePath.Count - 1)
+            {
+                <li class="breadcrumb-item active">@(currentPage.CurrentPagePath[i].Caption)</li>
+            }
+            else
+            {
+                <li class="breadcrumb-item"><a href="@(currentPage.CurrentPagePath[i].CurrentUrl)">@(currentPage.CurrentPagePath[i].Caption)</a></li>
+            }
+        }
+    </ol>
+</nav>
+```
