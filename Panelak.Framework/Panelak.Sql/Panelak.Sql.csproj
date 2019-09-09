@@ -15,14 +15,14 @@
     <Version>3.2.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Sql.pfx</AssemblyOriginatorKeyFile>
     <FileVersion>3.2.0</FileVersion>
     <AssemblyVersion>3.2.0</AssemblyVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Sql\Panelak.Sql.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   
     <ItemGroup Condition="'$(Configuration)'=='Release'">

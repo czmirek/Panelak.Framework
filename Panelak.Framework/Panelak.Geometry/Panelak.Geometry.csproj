@@ -17,7 +17,7 @@
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Geometry</Company>
     <Authors>Panelak.Geometry</Authors>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Geometry.pfx</AssemblyOriginatorKeyFile>
     <FileVersion>5.0.0</FileVersion>
     <AssemblyVersion>5.0.0</AssemblyVersion>

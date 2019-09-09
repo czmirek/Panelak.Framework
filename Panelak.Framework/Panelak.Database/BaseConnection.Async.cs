@@ -1,10 +1,13 @@
 ﻿namespace Panelak.Database
 {
+    using Microsoft.Extensions.Logging;
     using Panelak.Sql;
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
     using System.Linq;
+    using System.Reflection;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -79,7 +82,56 @@
                 return mapper.MapToDto<T>(dataReader, DatabaseType);
             }
         }
-        
+
+        /// <summary>
+        /// Executes the query without any result to return
+        /// </summary>
+        /// <param name="query">SQL query</param>
+        /// <param name="queryParams">Parameters</param>
+        public async Task ExecuteNonQueryAsync(string query, object queryParams)
+        {
+            LogQuery(query);
+
+            query = TranslateQueryParameters(query);
+
+            using (DbConnection db = await GetConnectionAsync())
+            {
+                DbCommand command = GetCommand(db);
+                command.CommandText = query;
+
+                ProcessParams(queryParams, command);
+
+                await command.ExecuteNonQueryAsync();
+
+                
+            }
+        }
+
+        /// <summary>
+        /// Executes the query without any result to return
+        /// </summary>
+        /// <param name="query">SQL query</param>
+        /// <param name="queryParams">Parameters</param>
+        public async Task ExecuteNonQueryAsync(string query, object queryParams, object outputParams)
+        {
+            LogQuery(query);
+
+            query = TranslateQueryParameters(query);
+
+            using (DbConnection db = await GetConnectionAsync())
+            {
+                DbCommand command = GetCommand(db);
+                command.CommandText = query;
+
+                ProcessParams(queryParams, command, ParameterDirection.Input);
+                ProcessParams(outputParams, command, ParameterDirection.Output);
+
+                await command.ExecuteNonQueryAsync();
+
+                ProcessOutputParams(command, outputParams);
+            }
+        }
+
         /// <summary>
         /// Returns a result enumeration from given <paramref name="query"/> into a list of a given DTO (<typeparamref name="T"/>)
         /// and mapping parameters into the query from <paramref name="queryParams"/>.
@@ -239,6 +291,23 @@
         {
             IParameterizedQuery countQuery = BuildCountQuery(sqlQuery);
             return await GetScalarAsync<int>(countQuery);
+        }
+
+        protected virtual void ProcessOutputParams(DbCommand command, object outputParams)
+        {
+            PropertyInfo[] propInfos = outputParams.GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+            foreach (DbParameter parameter in command.Parameters)
+            {
+                PropertyInfo prop = propInfos.FirstOrDefault(p => p.Name == parameter.Name);
+
+                Log.LogDebug($"DbConnection: Processing output param: {parameter.Name}");
+
+                if (prop != null)
+                    prop.SetValue(outputParams, parameter.Value);
+                else
+                    Log.LogWarning($"DbConnection: No property found for output param {parameter.Name}");
+            }
         }
     }
 }

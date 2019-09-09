@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>5.1.1</Version>
+    <Version>5.3.0</Version>
     <Authors>Miroslav Bartl</Authors>
     <Description>ORM for Oracle database</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
@@ -15,11 +15,11 @@
     <PackageId>Panelak.Database.Oracle</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <FileVersion>5.1.1</FileVersion>
+    <FileVersion>5.3.0</FileVersion>
     <Company>Miroslav Bartl</Company>
-    <AssemblyVersion>5.1.1</AssemblyVersion>
+    <AssemblyVersion>5.3.0</AssemblyVersion>
     <Deterministic>False</Deterministic>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.Oracle.pfx</AssemblyOriginatorKeyFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1701;1702;5125</NoWarn>
     <WarningLevel>0</WarningLevel>
-    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Database.Oracle\Panelak.Database.Oracle.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

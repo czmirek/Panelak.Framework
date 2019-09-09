@@ -13,19 +13,19 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Product>Panelak.Database</Product>
     <PackageId>Panelak.Database</PackageId>
-    <Version>6.1.2</Version>
+    <Version>6.4.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
-    <FileVersion>6.1.2</FileVersion>
-    <AssemblyVersion>6.1.2</AssemblyVersion>
-    <SignAssembly>true</SignAssembly>
+    <FileVersion>6.4.0</FileVersion>
+    <AssemblyVersion>6.4.0</AssemblyVersion>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.pfx</AssemblyOriginatorKeyFile>
     <Deterministic>False</Deterministic>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\miros\Source\Repos\czmotig\Panelak.Database\Panelak.Database\Panelak.Database.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

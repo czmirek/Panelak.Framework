@@ -159,6 +159,26 @@
         }
 
         /// <summary>
+        /// Executes the query without any result to return
+        /// </summary>
+        /// <param name="query">SQL query</param>
+        /// <param name="queryParams">Parameters</param>
+        public void ExecuteNonQuery(string query, object queryParams)
+        {
+            LogQuery(query);
+
+            query = TranslateQueryParameters(query);
+
+            using (DbConnection db = GetConnection())
+            {
+                DbCommand command = GetCommand(db);
+                command.CommandText = query;
+                ProcessParams(queryParams, command);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
         /// Returns a result enumeration from given parameterized query into a list of a given DTO.
         /// </summary>
         /// <typeparam name="T">Type of the DTO</typeparam>

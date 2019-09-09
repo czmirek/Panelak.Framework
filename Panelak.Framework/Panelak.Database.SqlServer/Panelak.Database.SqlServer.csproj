@@ -19,7 +19,7 @@
     <Deterministic>False</Deterministic>
     <Company>Miroslav Bartl</Company>
     <AssemblyVersion>8.0.0</AssemblyVersion>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.SqlServer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Database.SqlServer\Panelak.Database.SqlServer.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Release'">

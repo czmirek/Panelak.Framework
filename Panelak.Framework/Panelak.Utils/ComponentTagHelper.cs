@@ -1,6 +1,7 @@
 ﻿namespace Panelak.Utils
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using System.IO;

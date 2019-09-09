@@ -152,7 +152,7 @@
 
                 command.ExecuteNonQuery();
 
-                ProcessOutputParams(outputParams, command);
+                ProcessOracleOutputParams(outputParams, command);
             }
         }
 
@@ -177,7 +177,7 @@
 
                 await command.ExecuteNonQueryAsync();
 
-                ProcessOutputParams(outputParams, command);
+                ProcessOracleOutputParams(outputParams, command);
             }
         }
 
@@ -286,12 +286,17 @@
             }
         }
 
+        protected override void ProcessOutputParams(DbCommand command, object outputParams)
+        {
+            ProcessOracleOutputParams(outputParams, command as OracleCommand);
+        }
+
         /// <summary>
         /// Performs assigning of output parameters to the user defined object by reflection
         /// </summary>
         /// <param name="outputParams">Output parameters object</param>
         /// <param name="command">Executed command</param>
-        private void ProcessOutputParams(object outputParams, OracleCommand command)
+        private void ProcessOracleOutputParams(object outputParams, OracleCommand command)
         {
             PropertyInfo[] propInfos = outputParams.GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 

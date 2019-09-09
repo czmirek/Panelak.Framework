@@ -1,18 +1,14 @@
 ﻿namespace Panelak.Utils
 {
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using System;
-    using System.IO;
     using System.Reflection;
-    using System.Xml;
-    using System.Xml.Serialization;
 
     /// <summary>
     /// Service extensions
     /// </summary>
-    public static class Extensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds the proxy services
@@ -113,82 +109,6 @@
             services.AddSingleton<IPageTreeProvider>(provider);
             services.AddScoped<ICurrentPageProvider, CurrentPageProvider>();
             return services;
-        }
-
-        /// <summary>
-        /// Serializes the object to XML using <see cref="XmlSerializer"/>.
-        /// </summary>
-        /// <typeparam name="T">Type of object</typeparam>
-        /// <param name="value">Instance of object</param>
-        /// <returns>Serialized XML</returns>
-        public static string ToXml<T>(this T value)
-        {
-            if (value == null)
-                return String.Empty;
-            
-            var xmlserializer = new XmlSerializer(typeof(T));
-            var stringWriter = new StringWriter();
-            using (var writer = XmlWriter.Create(stringWriter))
-            {
-                xmlserializer.Serialize(writer, value);
-                return stringWriter.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Gets the service of the defined type parameter from the service provider
-        /// </summary>
-        /// <typeparam name="T">Type parameter</typeparam>
-        /// <param name="serviceProvider">Service provider</param>
-        /// <returns>Service</returns>
-        public static T GetService<T>(this IServiceProvider serviceProvider) where T : class
-            => serviceProvider.GetService(typeof(T)) as T;
-
-        /// <summary>
-        /// Gets the service of the defined type parameter from the service provider found in the view context.
-        /// </summary>
-        /// <typeparam name="T">Type parameter</typeparam>
-        /// <param name="viewContext">View context</param>
-        /// <returns>Service</returns>
-        public static T GetService<T>(this ViewContext viewContext) where T : class
-            => viewContext.HttpContext.RequestServices.GetService<T>();
-
-
-        /// <summary>
-        /// Tries to parse a string to a nullable enum value. If parsing fails,
-        /// returns the null value instead.
-        /// </summary>
-        /// <typeparam name="T">Type of enum</typeparam>
-        /// <param name="value">String to parse</param>
-        /// <param name="result">Nullable enum</param>
-        /// <returns>True if parsing succeeded, false otherwise.</returns>
-        public static bool TryParseNullableEnum<T>(this string value, out T? result) where T : struct, IConvertible
-        {
-            if (!typeof(T).IsEnum)
-                throw new Exception("This method is only for Enums");
-
-            if (Enum.TryParse(value, out T tempResult))
-            {
-                result = tempResult;
-                return true;
-            }
-
-            result = null;
-            return false;
-        }
-
-        /// <summary>
-        /// Attempts to parse the nullable enum. If the parsing fails, returns null instead.
-        /// </summary>
-        /// <typeparam name="T">Type of the enum</typeparam>
-        /// <param name="value">String to parse</param>
-        /// <returns>Enum if parsing succeeds, null otherwise.</returns>
-        public static T? ParseNullableEnum<T>(this string value) where T : struct, IConvertible
-        {
-            if (Enum.TryParse(value, out T tempResult))
-                return tempResult;
-
-            return null;
         }
     }
 }
