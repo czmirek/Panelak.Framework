@@ -45,6 +45,8 @@
             {
                 case ISqlConditionOverlaps overlaps:
                     return $"SDO_OVERLAPS({GetQuotedIdentifier(overlaps.Column)}, {geometryToOracle.GeometryToString(overlaps.Geometry)}) = 'TRUE'";
+                case ISqlConditionIntersects intersects:
+                    return $"SDO_ANYINTERACT({GetQuotedIdentifier(intersects.Column)}, {geometryToOracle.GeometryToString(intersects.Geometry)}) = 'TRUE'";
                 default:
                     throw new NotImplementedException($"{GetType().Name} cannot convert the spatial expression of type {spatialExpression.GetType().Name} to SQL string expression");
             }

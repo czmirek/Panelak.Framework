@@ -44,8 +44,9 @@
             switch (spatialExpression)
             {
                 case ISqlConditionOverlaps overlaps:
-                    return $"{GetQuotedIdentifier(overlaps.Column)}.STOverlaps(geometry::STGeomFromText('{geometryToSqlServer.GeometryToSqlServerString(overlaps.Geometry)}'))";
-
+                    return $"{GetQuotedIdentifier(overlaps.Column)}.STOverlaps(geometry::STGeomFromText('{geometryToSqlServer.GeometryToSqlServerString(overlaps.Geometry)}',0))=1";
+                case ISqlConditionIntersects intersects:
+                    return $"{GetQuotedIdentifier(intersects.Column)}.STIntersects(geometry::STGeomFromText('{geometryToSqlServer.GeometryToSqlServerString(intersects.Geometry)}',0))=1";
                 default:
                     throw new NotImplementedException($"{GetType().Name} cannot convert the spatial expression of type {spatialExpression.GetType().Name} to SQL string expression");
             }

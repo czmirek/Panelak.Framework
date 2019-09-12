@@ -12,13 +12,13 @@
     <PackageReleaseNotes>Added support for Overlaps spatial expressions</PackageReleaseNotes>
     <Product>Panelak.Sql</Product>
     <PackageId>Panelak.Sql</PackageId>
-    <Version>3.2.0</Version>
+    <Version>3.3.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Miroslav Bartl</Company>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Sql.pfx</AssemblyOriginatorKeyFile>
-    <FileVersion>3.2.0</FileVersion>
-    <AssemblyVersion>3.2.0</AssemblyVersion>
+    <FileVersion>3.3.0</FileVersion>
+    <AssemblyVersion>3.3.0</AssemblyVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

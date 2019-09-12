@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>8.0.0</Version>
+    <Version>8.1.0</Version>
     <Authors>Miroslav Bartl</Authors>
     <Description>ORM for Sql Server</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
@@ -15,10 +15,10 @@
     <Product>Panelak.Database.SqlServer</Product>
     <PackageId>Panelak.Database.SqlServer</PackageId>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <FileVersion>8.0.0</FileVersion>
+    <FileVersion>8.1.0</FileVersion>
     <Deterministic>False</Deterministic>
     <Company>Miroslav Bartl</Company>
-    <AssemblyVersion>8.0.0</AssemblyVersion>
+    <AssemblyVersion>8.1.0</AssemblyVersion>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.SqlServer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
