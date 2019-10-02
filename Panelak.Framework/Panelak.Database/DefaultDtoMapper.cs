@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using RegisteredProperties = System.Collections.Generic.Dictionary<string, System.Reflection.PropertyInfo>;
-    using RegisteredTypes = System.Collections.Generic.Dictionary<System.Type, System.Collections.Generic.Dictionary<string, System.Reflection.PropertyInfo>>;
+    using RegisteredTypes = System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, System.Reflection.PropertyInfo>>;
 
     /// <summary>
     /// Default implementation of the SQL results in the <see cref="IDataReader"/> to the DTO in a type parameter.
@@ -16,7 +16,9 @@
         /// <summary>
         /// Defines the registeredTypes
         /// </summary>
-        private RegisteredTypes registeredTypes = new RegisteredTypes();
+        private readonly RegisteredTypes registeredTypes = new RegisteredTypes();
+
+        private static readonly object lockObj = new object();
 
         /// <summary>
         /// Default implementation of TryCustomMap does not apply any custom mapping.
@@ -44,10 +46,21 @@
             var result = new List<T>();
             Type dtoType = typeof(T);
 
-            if (!registeredTypes.ContainsKey(dtoType))
-                registeredTypes.Add(dtoType, dtoType.GetProperties().ToDictionary(p => p.Name.ToLowerInvariant()));
+            lock (lockObj)
+            {
+                if (!registeredTypes.ContainsKey(dtoType.AssemblyQualifiedName))
+                {
+                    PropertyInfo[] dtoTypeProperties = dtoType.GetProperties();
+                    var dictionary = dtoTypeProperties.ToDictionary(p =>
+                    {
+                        return p.Name.ToLowerInvariant();
+                    });
+
+                    registeredTypes.Add(dtoType.AssemblyQualifiedName, dictionary);
+                }
+            }
             
-            RegisteredProperties properties = registeredTypes[dtoType];
+            RegisteredProperties properties = registeredTypes[dtoType.AssemblyQualifiedName];
 
             while (dataReader.Read())
             {
