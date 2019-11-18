@@ -56,10 +56,19 @@
             if (!String.IsNullOrEmpty(response.ErrorMessage))
                 logger.LogError("API ERROR MESSAGE:" + response.ErrorMessage);
 
+            string logContent = response.Content;
+
             if (response.StatusCode == HttpStatusCode.InternalServerError)
-                logger.LogError($"API ERROR HTTP 500 ({url}) RESPONSE CONTENT: {response.Content}");
+            {
+                logger.LogError($"API ERROR HTTP 500 ({url}) RESPONSE CONTENT: {logContent}");
+            }
             else
-                logger.LogInformation($"API Response content: {response.Content}");
+            {
+                if (logContent.Length > 100)
+                    logContent = logContent.Substring(0, 100) + " ... + " + (logContent.Length - 100).ToString() + " characters";
+
+                logger.LogInformation($"API Response content: {logContent}");
+            }
 
             if (accessToken != null)
             {

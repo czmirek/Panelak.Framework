@@ -40,4 +40,8 @@
     <ProjectReference Include="..\Panelak.Sql\Panelak.Sql.csproj" />
   </ItemGroup>
   
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+  </Target>
+  
 </Project>

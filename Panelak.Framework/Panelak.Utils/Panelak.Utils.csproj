@@ -12,12 +12,12 @@
     <PackageReleaseNotes>Custom configuration support for proxy, comments, various fixes, page tree support</PackageReleaseNotes>
     <Product>Panelak.Utils</Product>
     <PackageId>Panelak.Utils</PackageId>
-    <Version>2.11.1</Version>
+    <Version>2.11.3</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Utils</Company>
     <Authors>Panelak.Utils</Authors>
-    <AssemblyVersion>2.11.1.0</AssemblyVersion>
-    <FileVersion>2.11.1.0</FileVersion>
+    <AssemblyVersion>2.11.3.0</AssemblyVersion>
+    <FileVersion>2.11.3.0</FileVersion>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
