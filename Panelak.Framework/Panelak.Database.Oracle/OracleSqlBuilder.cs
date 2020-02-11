@@ -32,7 +32,7 @@
         {
             Logger.LogTrace("Building an Oracle SQL query");
 
-            string columns = GetColumns(sqlQuery);
+            (string innerQuery, string outerQuery) = GetColumns(sqlQuery);
             string table = QuoteIdentifier(sqlQuery.TableIdentifier.Table);
 
             string conditions;
@@ -60,8 +60,8 @@
 
             if (sqlQuery.NoPagination)
             {
-                string noPaginationQuery = $"SELECT {columns} FROM {table} WHERE({conditions})";
-                return new OracleDbQuery(noPaginationQuery, sqlQuery.Parameters);
+                string noPaginationQuery = $"SELECT {innerQuery} FROM {table} WHERE({conditions})";
+                return new OracleDbQuery(noPaginationQuery, parameters);
             }
 
             var orderByColumns = sqlQuery.Columns.Where(col => col.SortOrder != SortOrder.Unspecified)
@@ -87,8 +87,8 @@
                 limit = offset + sqlQuery.PageSize - 1;
             }
 
-            string query = $@"SELECT {columns} 
-                                FROM (SELECT {columns}, ROW_NUMBER() OVER (ORDER BY {orderby}) rn 
+            string query = $@"SELECT {outerQuery} 
+                                FROM (SELECT {innerQuery}, ROW_NUMBER() OVER (ORDER BY {orderby}) rn 
                                         FROM {table} 
                                        WHERE ({conditions}))
                                WHERE rn BETWEEN {offset} AND {limit} ORDER BY rn";
@@ -101,19 +101,35 @@
         /// </summary>
         /// <param name="sqlQuery">SQL query model</param>
         /// <returns>Joined string of SQL SELECT columns</returns>
-        private string GetColumns(ISqlSelectQuery sqlQuery)
+        private (string, string) GetColumns(ISqlSelectQuery sqlQuery)
         {
             IEnumerable<ISqlColumn> cols = sqlQuery.Columns.Where(col => col.Include);
-            string columns = String.Join(", ", cols.Select(col =>
-            {
-                string columnExpression = col.Unquoted ? col.Expression : QuoteIdentifier(col.Expression);
 
-                if (!sqlQuery.ExcludeAliases && !String.IsNullOrEmpty(col.ExpressionAlias))
-                    columnExpression += " " + QuoteIdentifier(col.ExpressionAlias);
+            string innerQuery = String.Join(", ", cols.Select(col =>
+            {
+                //string columnExpression = col.Unquoted ? col.Expression : QuoteIdentifier(col.Expression);
+                string columnExpression = col.Expression;
+
+                if (!sqlQuery.ExcludeAliases || !col.Visible) //probably it is a function, alias must be used
+                {
+                    columnExpression += " as " + QuoteIdentifier(String.IsNullOrEmpty(col.TrimmedAlias) ? col.Expression : col.TrimmedAlias);
+                }
 
                 return columnExpression;
             }));
-            return columns;
+
+            string outerQuery = String.Join(", ", cols.Select(col =>
+            {
+                //string columnExpression = col.Unquoted ? col.Expression : QuoteIdentifier(col.Expression);
+                string columnExpression = QuoteIdentifier(
+                    !sqlQuery.ExcludeAliases || !col.Visible
+                ? (String.IsNullOrEmpty(col.TrimmedAlias) ? col.Expression : col.TrimmedAlias)
+                : col.Expression
+                );
+
+                return columnExpression;
+            }));
+            return (innerQuery, outerQuery);
         }
     }
 }

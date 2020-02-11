@@ -12,23 +12,30 @@
     <PackageIconUrl>https://raw.githubusercontent.com/czmirek/Panelak.Framework/master/icon.png</PackageIconUrl>
     <Product>Panelak.Geometry</Product>
     <PackageId>Panelak.Geometry</PackageId>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>5.1.0</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>6.0.1</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Geometry</Company>
     <Authors>Panelak.Geometry</Authors>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Panelak.Geometry.pfx</AssemblyOriginatorKeyFile>
-    <FileVersion>5.1.0</FileVersion>
-    <AssemblyVersion>5.1.0</AssemblyVersion>
+    <AssemblyOriginatorKeyFile>Panelak.Geometry.pfx</AssemblyOriginatorKeyFile>    
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Configurations>Debug;Release;ReleaseNupkgLocal;ReleaseNuget</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\miros\source\repos\czmotig\Panelak.Framework\Panelak.Framework\Panelak.Geometry\Panelak.Geometry.xml</DocumentationFile>
+    <DocumentationFile>Panelak.Geometry.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseNuget|AnyCPU'">
+    <DocumentationFile>Panelak.Geometry.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseNupkgLocal|AnyCPU'">
+    <DocumentationFile>Panelak.Geometry.xml</DocumentationFile>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNupkgLocal&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -localPath &quot;%25USERPROFILE%25\source\repos\local_packages&quot; -projectPath $(ProjectPath) -publish 0&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNuget&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -projectPath $(ProjectPath) -publish 1&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;:endofprogram" />
   </Target>
 </Project>

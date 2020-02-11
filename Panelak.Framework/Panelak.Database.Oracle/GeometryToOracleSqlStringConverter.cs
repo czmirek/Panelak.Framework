@@ -51,7 +51,7 @@
         public string PathToOracleSqlString(Path path)
         {
             string points = String.Join(", ", path.Lines.Select(l => $"{PointString(l.GetStartPoint())}, {PointString(l.GetEndPoint())}"));
-            return $"SDO_GEOMETRY(2002, NULL, NULL, SDO_ELEM_INFO(1, 2, 1), SDO_ORDINATE_ARRAY({points}))";
+            return $"SDO_GEOMETRY(2002, NULL, NULL, SDO_ELEM_INFO_ARRAY(1, 2, 1), SDO_ORDINATE_ARRAY({points}))";
         }
 
         /// <summary>
@@ -62,7 +62,7 @@
         public string PolygonToOracleSqlString(Polygon polygon)
         {
             string points = String.Join(", ", polygon.Lines.Select(l => $"{PointString(l.GetStartPoint())}, {PointString(l.GetEndPoint())}"));
-            return $"SDO_GEOMETRY(2003, NULL, NULL, SDO_ELEM_INFO(1, 1003, 1), SDO_ORDINATE_ARRAY({points}))";
+            return $"SDO_GEOMETRY(2003, NULL, NULL, SDO_ELEM_INFO_ARRAY(1, 1003, 1), SDO_ORDINATE_ARRAY({points}))";
         }
 
         /// <summary>

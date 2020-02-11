@@ -13,18 +13,25 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Product>Panelak.Database</Product>
     <PackageId>Panelak.Database</PackageId>
-    <Version>6.5.3</Version>
+    <Version>7.0.2</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Company>Miroslav Bartl</Company>
-    <FileVersion>6.5.3</FileVersion>
-    <AssemblyVersion>6.5.3</AssemblyVersion>
+    <Company>Miroslav Bartl</Company>   
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Panelak.Database.pfx</AssemblyOriginatorKeyFile>
     <Deterministic>False</Deterministic>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Configurations>Debug;Release;ReleaseNupkgLocal;ReleaseNuget</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseNuget|AnyCPU'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseNupkgLocal|AnyCPU'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -35,18 +42,27 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Include="Panelak.Sql" Version="4.0.0" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Panelak.Sql" Version="3.2.0" />
+    <PackageReference Include="Panelak.Sql" Version="4.0.1" />
   </ItemGroup>
   
-  <ItemGroup>
-    <ProjectReference Include="..\Panelak.Sql\Panelak.Sql.csproj" />
+  <ItemGroup Condition="'$(Configuration)'=='ReleaseNuget'">
+    <PackageReference Include="Panelak.Sql">
+      <Version>4.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(Configuration)'=='ReleaseNupkgLocal'">
+    <PackageReference Include="Panelak.Sql">
+      <Version>3.2.0</Version>
+    </PackageReference>
   </ItemGroup>
   
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNupkgLocal&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -localPath &quot;%25USERPROFILE%25\source\repos\local_packages&quot; -projectPath $(ProjectPath) -publish 0&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNuget&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -projectPath $(ProjectPath) -publish 1&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;:endofprogram" />
   </Target>
 </Project>

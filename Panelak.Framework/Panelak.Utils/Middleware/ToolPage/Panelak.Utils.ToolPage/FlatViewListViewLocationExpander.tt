@@ -1,0 +1,121 @@
+﻿<#@ template hostspecific="true" debug="true" language="C#" compilerOptions="/langversion:7" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+// <generated />
+namespace MyNamespace
+{
+	using Microsoft.AspNetCore.Mvc;
+	using Microsoft.AspNetCore.Mvc.Razor;
+	using Microsoft.AspNetCore.Razor.TagHelpers;
+	using Panelak.Utils;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+	
+	/// <summary>
+	/// Allows loading of views by the filename only. This asssumes that all view names are unique.
+	/// </summary>
+	public class FlatViewListViewLocationExpander : IViewLocationExpander
+	{
+		public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
+		{
+			switch (context.ViewName)
+			{
+<# 
+				string mainDir = this.Host.ResolvePath("..\\"); 
+				string[] files = Directory.GetFiles(mainDir, "*.cshtml", SearchOption.AllDirectories);
+				List<string> viewPaths = new List<string>();
+				foreach(string file in files) {
+					string[] fullViewPathArr = file.Split(new string[] {"..\\"}, StringSplitOptions.None);
+					string vp = fullViewPathArr[1];
+					
+
+					string fileName = Path.GetFileName(vp);
+
+					if(fileName == "_ViewImports.cshtml" || fileName == "_ViewStart.cshtml")
+							continue;
+
+					
+
+					
+					
+					if(!viewPaths.Contains(vp))
+						viewPaths.Add(vp);
+				}
+
+				foreach(string vp in viewPaths) {
+					string fileName = Path.GetFileNameWithoutExtension(vp);
+					string path = vp.Replace("\\", "/");
+#>
+				case ViewIdentifiers.View_<#=fileName#>: 
+					return new string[] { "<#=path#>" };
+
+<#
+				}
+				
+			#>
+				default: return viewLocations;
+			}
+		}
+
+		public void PopulateValues(ViewLocationExpanderContext context) { }
+	}
+
+
+	public static class ViewIdentifiers
+	{
+#pragma warning disable IDE1006 // Naming Styles
+
+<#
+	foreach(string vp in viewPaths) {
+		string fileName = Path.GetFileNameWithoutExtension(vp);
+		string path = vp.Replace("\\", "/");
+#>
+		public static ViewResult <#=fileName#>(this ViewResultFacade viewResultFacade, object model = null)
+			=> viewResultFacade.Controller.View(View_<#=fileName#>, model);
+<#
+	}
+#>
+#pragma warning restore IDE1006 // Naming Styles
+
+<#
+	foreach(string vp in viewPaths) {
+		string fileName = Path.GetFileNameWithoutExtension(vp);
+		string path = vp.Replace("\\", "/");
+#>
+		public const string View_<#=fileName#> = "<#=fileName#>";
+<#
+	}
+#>
+
+	}
+
+<#
+	foreach(string vp in viewPaths) {
+		string fileName = Path.GetFileNameWithoutExtension(vp);
+		string path = vp.Replace("\\", "/");
+		if(!fileName.StartsWith("_"))
+			continue;
+
+		if(fileName == "_Layout")
+			continue;
+
+		if(fileName == "_ViewImports")
+			continue;
+
+		if(fileName == "_ViewStart")
+			continue;
+
+		string tagHelperName = fileName.Substring(1, fileName.Length - 1);
+#>
+	[HtmlTargetElement("<#=tagHelperName#>", TagStructure = TagStructure.NormalOrSelfClosing)]
+	public class <#=tagHelperName#> : ComponentTagHelper
+	{
+		protected override string GetView() => ViewIdentifiers.View_<#=fileName#>;
+		protected override Task<object> GetViewModelAsync() => Task.FromResult((object)null);
+	}
+<#
+	}
+#>
+
+}

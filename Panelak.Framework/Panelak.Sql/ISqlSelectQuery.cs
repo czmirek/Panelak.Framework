@@ -62,8 +62,9 @@
         /// <param name="name">Column identifier</param>
         /// <param name="include">Whether the column must to be included in the query</param>
         /// <param name="sortOrder">Column sort order</param>
-        /// <param name="alias">Alias of the column</param>
-        void InsertColumn(string name, bool include, SortOrder sortOrder, string alias = null);
+        /// <param name="visible">If the column will be visible in the result set</param>
+        void InsertColumn(string name, bool include, SortOrder sortOrder, string alias = null, bool visible = true);
+
 
         /// <summary>
         /// Removes a column by name from the list

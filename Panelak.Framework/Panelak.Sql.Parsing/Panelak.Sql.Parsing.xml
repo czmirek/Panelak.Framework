@@ -340,11 +340,11 @@
             Gets the alias trimmed of apostrophes and spaces
             </summary>
         </member>
-        <member name="P:Panelak.Sql.Parsing.SqlColumn.Unquoted">
+        <!--<member name="P:Panelak.Sql.Parsing.SqlColumn.Unquoted">
             <summary>
             Gets a value indicating whether expression is not to be quoted in the resulting query
             </summary>
-        </member>
+        </member>-->
         <member name="P:Panelak.Sql.Parsing.SqlColumn.Include">
             <summary>
             Gets or sets a value indicating whether the column is to be included in the result

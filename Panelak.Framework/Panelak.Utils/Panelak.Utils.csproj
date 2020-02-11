@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-	<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Description>Personal collection of utilities and extensions.</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -12,26 +12,53 @@
     <PackageReleaseNotes>Custom configuration support for proxy, comments, various fixes, page tree support</PackageReleaseNotes>
     <Product>Panelak.Utils</Product>
     <PackageId>Panelak.Utils</PackageId>
-    <Version>2.11.3</Version>
+    <Version>5.0.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Utils</Company>
     <Authors>Panelak.Utils</Authors>
-    <AssemblyVersion>2.11.3.0</AssemblyVersion>
-    <FileVersion>2.11.3.0</FileVersion>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <FileVersion>5.0.0.0</FileVersion>
     <LangVersion>latest</LangVersion>
+    <Configurations>Debug;Release;ReleaseNupkgLocal;ReleaseNuget</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNupkgLocal&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -localPath &quot;%25USERPROFILE%25\source\repos\local_packages&quot; -projectPath $(ProjectPath) -publish 0&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNuget&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -projectPath $(ProjectPath) -publish 1&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;:endofprogram" />
   </Target>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+    <Compile Remove="Middleware\ToolPage\Panelak.Utils.ToolPage\Program_3.1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <None Include="Middleware\ToolPage\Panelak.Utils.ToolPage\Program_3.1.cs" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="RestSharp" Version="106.6.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Middleware\ToolPage\Panelak.Utils.ToolPage\FlatViewListViewLocationExpander.tt">
+      <Generator></Generator>
+    </None>
   </ItemGroup>
 
 </Project>

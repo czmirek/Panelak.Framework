@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <IsPackable>false</IsPackable>
-    <Configurations>Debug</Configurations>
+    <Configurations>Debug;ReleaseNupkgLocal;ReleaseNuget</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

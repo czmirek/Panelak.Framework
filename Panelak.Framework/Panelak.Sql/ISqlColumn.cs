@@ -28,11 +28,16 @@
         /// <summary>
         /// Gets a value indicating whether expression is not to be quoted in the resulting query
         /// </summary>
-        bool Unquoted { get; }
+        //bool Unquoted { get; }
 
         /// <summary>
         /// Gets or sets the sort order of the column
         /// </summary>
         new SortOrder SortOrder { get; set; }
+
+        /// <summary>
+        /// Detects if the column should be queried id DB but not attached to the result set
+        /// </summary>
+        bool Visible { get; set; }
     }
 }

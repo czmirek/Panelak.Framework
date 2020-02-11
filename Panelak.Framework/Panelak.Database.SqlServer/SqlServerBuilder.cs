@@ -105,10 +105,10 @@
 
             string columns = String.Join(", ", cols.Select(col =>
             {
-                string columnExpression = QuoteIdentifier(col.Expression);
+                string columnExpression = col.Expression;
 
-                if (!sqlQuery.ExcludeAliases && !String.IsNullOrEmpty(col.ExpressionAlias))
-                    columnExpression += " " + col.ExpressionAlias;
+                if (!sqlQuery.ExcludeAliases || !col.Visible)
+                    columnExpression += " as " + QuoteIdentifier(String.IsNullOrEmpty(col.TrimmedAlias) ? col.Expression : col.TrimmedAlias);
 
                 return columnExpression;
             }));
@@ -117,8 +117,8 @@
             {
                 string columnExpression = QuoteIdentifier("tbl") + "." + QuoteIdentifier(col.Expression);
 
-                if (!sqlQuery.ExcludeAliases && col.ExpressionAlias != null)
-                    columnExpression = QuoteIdentifier("tbl") + "." + QuoteIdentifier(col.ExpressionAlias);
+                if (!sqlQuery.ExcludeAliases || !col.Visible)
+                    columnExpression = QuoteIdentifier("tbl") + "." + QuoteIdentifier(String.IsNullOrEmpty(col.TrimmedAlias) ? col.Expression : col.TrimmedAlias);
 
                 return columnExpression;
             }));

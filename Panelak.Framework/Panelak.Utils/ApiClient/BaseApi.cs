@@ -1,7 +1,7 @@
 ﻿namespace Panelak.Utils
 {
     using Microsoft.Extensions.Logging;
-    using Newtonsoft.Json;
+    using System.Text.Json;
     using RestSharp;
     using System;
     using System.Net;
@@ -21,7 +21,7 @@
             where T : class
         {
             IRestResponse response = await GetRestResponseAsync(path, method, append);
-            T responseModel = JsonConvert.DeserializeObject<T>(response.Content);
+            T responseModel = JsonSerializer.Deserialize<T>(response.Content);
             return responseModel;
         }
 
@@ -42,10 +42,13 @@
             if (accessToken != null)
                 request.AddHeader("Authorization", "Bearer " + accessToken);
 
-
             append?.Invoke(request);
 
             var client = new RestClient();
+
+            if(GetIgnoreSslErrors())
+                client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
             IRestResponse response = await client.ExecuteTaskAsync(request, new CancellationTokenSource().Token);
 
             logger.LogInformation($"API Response Status Code: {response.StatusCode}");
@@ -60,10 +63,12 @@
 
             if (response.StatusCode == HttpStatusCode.InternalServerError)
             {
-                logger.LogError($"API ERROR HTTP 500 ({url}) RESPONSE CONTENT: {logContent}");
+                logger.LogError($"API ERROR HTTP 500 ({url}) RESPONSE CONTENT: {response.Content}");
             }
             else
             {
+                logger.LogInformation($"API Response content: {response.Content}");
+
                 if (logContent.Length > 100)
                     logContent = logContent.Substring(0, 100) + " ... + " + (logContent.Length - 100).ToString() + " characters";
 
@@ -84,5 +89,7 @@
 
         protected abstract string GetBasePath();
         protected virtual string GetAccessToken() => null;
+
+        protected virtual bool GetIgnoreSslErrors() => false;
     }
 }

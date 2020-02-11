@@ -1,0 +1,37 @@
+﻿{
+  "index.html": {
+    "ResourceName": "Index",
+    "ContentType": "text/html",
+    "Description": "This page"
+  },
+  "FlatViewListViewLocationExpander.tt": {
+    "ResourceName": "FlatViewListViewLocationExpander",
+    "ContentType": "text/plain",
+    "Description": "T4 template source code for generating a flat list of all of your views in your project in a generated view location expander"
+  },
+  "nlog.config": {
+    "ResourceName": "nlog",
+    "ContentType": "application/xml",
+    "Description": "Default NLog configuration"
+  },
+  "Program_3.1.cs": {
+    "ResourceName": "Program_3_1",
+    "ContentType": "text/plain",
+    "Description": "Default Program.cs with NLog support"
+  },
+  "bundleconfig.json": {
+    "ResourceName": "bundleconfig",
+    "ContentType": "application/json",
+    "Description": "For bundling all javascripts"
+  },
+  "Panelak.Utils.Recaptcha.js": {
+    "ResourceName": "Panelak_Utils_Recaptcha",
+    "ContentType": "text/javascript",
+    "Description": "jQuery javascript code for handling the <code>RecaptchaTagHelper</code>"
+  },
+  "Panelak.Utils.PartialViewAjaxTagHelper.js": {
+    "ResourceName": "Panelak_Utils_PartialViewAjaxTagHelper",
+    "ContentType": "text/javascript",
+    "Description": "jQuery javascript code for the <code>PartialViewAjaxTagHelper</code>"
+  }
+}

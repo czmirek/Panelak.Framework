@@ -10,14 +10,16 @@
         /// </summary>
         /// <param name="expression">Column identifier</param>
         /// <param name="alias">Optional alias of the column</param>
-        public SqlColumn(string expression, string alias = null)
+        /// <param name="visible">If the column should be visible in the result DataSet</param>
+        public SqlColumn(string expression, string alias = null, bool visible = true)
         {
             Expression = expression;
             ExpressionAlias = alias;
             TrimmedAlias = alias?.Trim('\'', '"', ' ');
+            Visible = visible;
 
-            if (expression.Contains("rownum") || expression.Contains("||rownum"))
-                Unquoted = true;
+            //if (expression.Contains("rownum") || expression.Contains("||rownum") || !System.String.IsNullOrEmpty( alias))
+            //    Unquoted = true;
         }
 
         /// <summary>
@@ -43,7 +45,7 @@
         /// <summary>
         /// Gets a value indicating whether expression is not to be quoted in the resulting query
         /// </summary>
-        public bool Unquoted { get; }
+        //public bool Unquoted { get; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the column is to be included in the result
@@ -55,5 +57,11 @@
         /// Gets or sets whether the column is used for sorting
         /// </summary>
         public SortOrder SortOrder { get; set; } = SortOrder.Unspecified;
+
+
+        /// <summary>
+        /// Detects if the column should be queried id DB but not attached to the result set
+        /// </summary>
+        public bool Visible { get; set; }
     }
 }

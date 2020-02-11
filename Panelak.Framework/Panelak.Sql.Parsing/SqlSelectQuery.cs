@@ -185,11 +185,12 @@
         /// <param name="include">Whether the column has to be included in the SELECT clause</param>
         /// <param name="sortOrder">Sorting of the column</param>
         /// <param name="alias">Optional column alias</param>
-        public void InsertColumn(string name, bool include, SortOrder sortOrder, string alias = null) => columns.Insert(0, new SqlColumn(name, alias)
-        {
-            Include = include,
-            SortOrder = sortOrder
-        });
+        public void InsertColumn
+            (string name, bool include, SortOrder sortOrder, string alias = null, bool visible = true) => columns.Insert(0, new SqlColumn(name, alias, visible)
+            {
+                Include = include,
+                SortOrder = sortOrder
+            });
 
         /// <summary>
         /// Removes a column by name

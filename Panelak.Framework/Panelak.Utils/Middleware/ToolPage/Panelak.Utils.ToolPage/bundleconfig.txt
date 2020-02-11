@@ -1,0 +1,15 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/js/site.js",
+    "inputFiles": [
+      "wwwroot/js_components/*.js",
+      "Components/**/*.js",
+      "Views/**/*.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": false
+    },
+    "sourceMap": false
+  }
+]
