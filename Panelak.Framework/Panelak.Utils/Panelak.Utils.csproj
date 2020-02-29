@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-	  <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Personal collection of utilities and extensions.</Description>
     <Copyright>Copyright (c) 2019 Miroslav Bartl</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -12,28 +12,26 @@
     <PackageReleaseNotes>Custom configuration support for proxy, comments, various fixes, page tree support</PackageReleaseNotes>
     <Product>Panelak.Utils</Product>
     <PackageId>Panelak.Utils</PackageId>
-    <Version>5.0.0</Version>
+    <Version>5.3.2</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Panelak.Utils</Company>
     <Authors>Panelak.Utils</Authors>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
-    <FileVersion>5.0.0.0</FileVersion>
+    <AssemblyVersion>5.3.2.0</AssemblyVersion>
+    <FileVersion>5.3.2.0</FileVersion>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release;ReleaseNupkgLocal;ReleaseNuget</Configurations>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNupkgLocal&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -localPath &quot;%25USERPROFILE%25\source\repos\local_packages&quot; -projectPath $(ProjectPath) -publish 0&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;ReleaseNuget&quot; (&#xD;&#xA;powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -file ..\PublishNuget.ps1 -targetDir $(TargetDir) -targetName $(TargetName) -configurationName $(ConfigurationName) -projectPath $(ProjectPath) -publish 1&#xD;&#xA;goto endofprogram&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;:endofprogram" />
-  </Target>
   <ItemGroup>
     <Compile Remove="Middleware\ToolPage\Panelak.Utils.ToolPage\Program_3.1.cs" />
   </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <None Include="Middleware\ToolPage\Panelak.Utils.ToolPage\Program_3.1.cs" />
+    <None Include="Middleware\ToolPage\Panelak.Utils.ToolPage\Program_3.1.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -60,5 +58,8 @@
       <Generator></Generator>
     </None>
   </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="nuget pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects&#xD;&#xA;xcopy &quot;$(ProjectDir)*.nupkg&quot; &quot;%25USERPROFILE%25\source\repos\local_packages&quot; /C /Y&#xD;&#xA;del *.nupkg" />
+  </Target>
 
 </Project>
